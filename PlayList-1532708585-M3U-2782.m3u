@@ -1,0 +1,1355 @@
+#EXTM3U
+
+#EXTINF:-1 group-title="Testador IPTV", Gerado por Testador IPTV(PlayStore)
+http://bit.ly/TestadorIPTVVideoApresentacao
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/Jotugf0.png" group-title="CANAL ABERTO", SBT GO HD
+http://tvsd2.zoeweb.tv:1935/tvsd2/smil:tvsd2.smil/chunklist_w1473487700_b796000.m3u8?EDSONSOUSALIST
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/Jotugf0.png" group-title="CANAL ABERTO", SBT GO HD
+http://tvsd2.zoeweb.tv:1935/tvsd2/smil:tvsd2.smil/chunklist_w1285729810_b796000.m3u8?EDSONSOUSALIST
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/Jotugf0.png" group-title="CANAL ABERTO", SBT GO SD
+http://tvsd2.zoeweb.tv:1935/tvsd2/smil:tvsd2.smil/playlist.m3u8?EDSONSOUSALIST
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/Jotugf0.png" group-title="CANAL ABERTO", SBT - CENTRO OESTE MT
+http://streamingbr.engelhosting.com.br:1935/tvcentro/ngrp:tvcentro_all/chunklist_w1194166640_b899072.m3u8
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/Jotugf0.png" group-title="CANAL ABERTO", SBT PI HD
+http://192.99.46.182:1935/pioneira-tv3/pioneira-tv3/playlist.m3u8?EDSONSOUSALIST
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/Jotugf0.png" group-title="CANAL ABERTO", SBT PE SD
+http://evpp.mm.uol.com.br/ne10/ne10.smil/playlist.m3u8?EDSONSOUSALIST
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/Jotugf0.png" group-title="CANAL ABERTO", SBT - PE | CARUARÚ
+http://evpp.mm.uol.com.br:1935/ne10/ne10-tvjornal-caruaru-video-web.sdp/live.m3u8?EDSONSOUSALIST
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/Jotugf0.png" group-title="CANAL ABERTO", SBT MA HD
+http://srv3.zoeweb.tv:1935/z437-live/stream/livestream.m3u8
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/Jotugf0.png" group-title="CANAL ABERTO", SBT MA
+http://difusorama.zoeweb.tv:1935/z437-live/stream/chunklist_w1260675550.m3u8?EDSONSOUSALIST
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/Jotugf0.png" group-title="CANAL ABERTO", SBT - MA | IMPERATRIZ
+http://difusorama.zoeweb.tv:1935/z438-live/stream/chunklist_w264526402.m3u8?EDSONSOUSALIST
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/yHryW3l.png?1" group-title="CANAL ABERTO", BAND SP
+http://evpp.mm.uol.com.br/geob_band/bandapp/chunklist_w622979429.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/MEBQV6z.png group-title=" group-title="CANAL ABERTO", REDE TV SP
+http://evpp.mm.uol.com.br/redetv1/redetv1/chunklist_w304668891.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/MEBQV6z.png" group-title="CANAL ABERTO", REDE TV SP
+http://evpp.mm.uol.com.br/redetv1/redetv1/chunklist_w1537397908.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/MEBQV6z.png" group-title="CANAL ABERTO", Rede TV
+http://evpp.mm.uol.com.br:1935/redetv1/redetv1/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/MEBQV6z.png" group-title="CANAL ABERTO", REDE TV RJ
+http://evpp.mm.uol.com.br:1935/redetv2/redetv2/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/Ws1QHgq.png?1" group-title="CANAL ABERTO", REDE TV PB
+https://v5.ciclano.io:1443/8064/8064/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/Ws1QHgq.png?1" group-title="CANAL ABERTO", REDE TV PB
+https://v5.ciclano.io:1443/8064/8064/chunklist_w1831324492.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/MEBQV6z.png" group-title="CANAL ABERTO", REDE TV! - RONDÔNIA
+http://173.236.10.10:1935/tvonline/tvonline/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/5UeQAk9.png" group-title="CANAL ABERTO", RECORD TV ÁGUA BOA
+http://painelvj.com.br:1935/tvaguaboa/tvaguaboa.sdp/live.m3u8?LISTASGLAU
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/5UeQAk9.png" group-title="CANAL ABERTO", TV ACRITICA - RECORD AM
+https://slbps-sambatech.akamaized.net/live/3256%2C7930%2C679f501d2054fc8514ea1fc28fe5f167%3Bbase64np%3BS52I5Up2XHDMC-c%21/amlst%3AS51w_Fc9WXHTS2s2/chunklist_b2146304.m3u8
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/5UeQAk9.png" group-title="CANAL ABERTO", RECORD GO
+http://srv3.zoeweb.tv:1935/zw315/zw315tvs/chunklist_w1106684646.m3u8
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/5UeQAk9.png" group-title="CANAL ABERTO", RECORD GO
+http://srv3.zoeweb.tv:1935/zw315/zw315tvs/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/5UeQAk9.png" group-title="CANAL ABERTO", RECORD MT
+http://wz3.dnip.com.br:1935/tvgazetamt/tvgazetamt.sdp/playlist.m3u8?PEDROJUNIORTUTORIAIS
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/5UeQAk9.png" group-title="CANAL ABERTO", TV VITORIA - RECORD
+http://tvvitoria2.viacast.tv/livepl/tvvitoria_3_original.m3u8
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="CANAL ABERTO", REDE FAMÍLIA HD
+http://srv9.zoeweb.tv:1935/zw901/smil:zw901.smil/chunklist_w70546248_b900000.m3u8
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/sQwm6Cl.png" group-title="CANAL ABERTO", REDE FAMÍLIA HD
+http://srv9.zoeweb.tv:1935/zw901/zw901.smil/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/QbosxSO.png" group-title="CANAL ABERTO", TV DIARIO
+http://slrp.sambavideos.sambatech.com/liveevent/tvdiario_7a683b067e5eee5c8d45e1e1883f69b9/livestream/chunklist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/oNpqaxy.png?1" group-title="CANAL ABERTO", TVE BRASIL
+http://streaming.procergs.com.br:1935/tve/stve/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/oNpqaxy.png?1" group-title="CANAL ABERTO", TVE BA HD
+http://stream2.ba.gov.br/hls-live/livepkgr/_definst_/irdeb/pgm-2.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/aV1cIAf.png?1" group-title="CANAL ABERTO", REDE BRASIL®
+http://173.236.10.10:1935/rbtv/rbtv/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/aV1cIAf.png?1" group-title="CANAL ABERTO", REDE BRASIL®
+http://tv01.logicahost.com.br:1935/rbtv/rbtv/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/Agw8tsJ.png" group-title="CANAL ABERTO", TV EDUCATIVA
+http://rbc.directradios.com:1935/rbc/smil:rbc.smil/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/Agw8tsJ.png" group-title="CANAL ABERTO", TV EDUCATIVA
+http://rbc.directradios.com:1935/rbc/rbc_720p/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/tGXSPjO.png" group-title="CANAL ABERTO", TV CULTURA PARAÍBA
+http://177.73.84.49:80/hls/live/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/tGXSPjO.png" group-title="CANAL ABERTO", TV CULTURA PARAÍBA
+http://ftp.tvitarare.com.br:80/hls/live/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/4DOaSQC.png" group-title="CANAL ABERTO", TV CULTURA HD
+http://177.73.84.49/hls/live/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/4DOaSQC.png" group-title="CANAL ABERTO", TV CULTURA MG
+http://173.236.10.10:1935/redeatividade/redeatividade/playlist.m3u8?EDSONSOUSALIST
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/4DOaSQC.png" group-title="CANAL ABERTO", TV CULTURA PA
+http://177.74.1.38/funtelpa/tv_funtelpa/playlist.m3u8?EDSONSOUSALIST
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/4DOaSQC.png" group-title="CANAL ABERTO", TV CULTURA BAHIA HD
+http://cdn2.comets.com.br/tvbaianahd/aovivo/chunklist.m3u8?EDSONSOUSALIST
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/4LILIHo.png?1" group-title="CANAL ABERTO", TVU RECIFE
+http://150.161.93.173/hls/720/index.m3u8?EDSONSOUSALIST
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/VlHeBLa.png?1" group-title="CANAL ABERTO", CAT TVE
+http://wowza4.catve.com.br:1935/live/livestream/chunklist_w708731897.m3u8?EDSONSOUSALIST
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/EAufOuD.png?1" group-title="CANAL ABERTO", TV UP HD
+http://caikron.com.br:1935/unipar/tvup/chunklist_w737489399.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/EAufOuD.png?1" group-title="CANAL ABERTO", TV UP HD
+http://caikron.com.br:1935/unipar/tvup/playlist.m3u8?PEDROJUNIORTUTORIAIS
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/l0djS0R.png?1" group-title="CANAL ABERTO", TV ESCOLA
+http://slrp.sambavideos.sambatech.com/liveevent/acerpTvEscolaABR_1f9a5d00db56b3c3020b6ac3dd693e12/livestream3/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/l0djS0R.png?1" group-title="CANAL ABERTO", TV ESCOLA
+http://slrp.sambavideos.sambatech.com/liveevent/acerpTvEscolaABR_1f9a5d00db56b3c3020b6ac3dd693e12/livestream2/chunklist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/kESeqRG.png" group-title="CANAL ABERTO", TV AMAZON SAT
+http://slrp.sambavideos.sambatech.com/liveevent/amazonsatabr1_3e9c859611a5e7fbedc785bd33c418b5/livestream3/chunklist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/ojWfXDH.png" group-title="CANAL ABERTO", 1001 NOITES
+http://streaming63.sitehosting.com.br:1935/abdalla/_definst_/abdalla/chunklist.m3u8
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/if82162.png" group-title="CANAL ABERTO", NBR
+http://ebctveventual01-live.hls.adaptive.level3.net/hls-live/ebcremuxlive-ebctveventual01/_definst_/live/stream1.m3u8
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/if82162.png" group-title="CANAL ABERTO", NBR
+http://ebctveventual01-live.hls.adaptive.level3.net/hls-live/ebcremuxlive-ebctveventual01/_definst_/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/l5NOPFp.png" group-title="CANAL ABERTO", TV CÂMARA
+http://stream2.camara.leg.br:80/camara-hls-live/tv2/camaraevent/TV2.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/l5NOPFp.png" group-title="CANAL ABERTO", TV CÂMARA
+http://stream2.camara.leg.br:8134/tv1/manifest.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/l5NOPFp.png" group-title="CANAL ABERTO", TV CÂMARA
+http://stream2.camara.leg.br:8134/tv2/manifest.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/6MSLLIa.png" group-title="Sem Categoria", TERRA VIVA
+http://evpp.mm.uol.com.br:1935/band/terraviva/chunklist_w1724458897.m3u8
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/xGYSOgE.png" group-title="CANAL ABERTO", AGRO BRASIL
+http://177.54.152.243:1935/agrobrasiltv/agrobrasiltv/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/FdKHLtc.png?1" group-title="CANAL ABERTO", CANAL RURAL X
+http://77149o.ha.azioncdn.net/hlsverylow/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/jtiMetX.png" group-title="CANAL ABERTO", CANAL RURAL
+http://67149o.ha.azioncdn.net/hlsmedium/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/gg2IWHw.png?1" group-title="CANAL ABERTO", CANAL DA GENTE
+https://dcunilive28-lh.akamaihd.net/i/dclive_1@533316/index_150_av-p.m3u8?sd=6&rebase=on
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/m7MQIPJ.png" group-title="RELIGIOSO", REDE SÉCULO 21
+http://tvseculo21-lh.akamaihd.net/i/tvseculo_1@16110/master.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/CSoMkJU.png?1" group-title="RELIGIOSO", CANÇÃO NOVA
+http://cancaonova-push-live.hls.adaptive.level3.net:80/hls-live/cancaonova-channel01/_definst_/live/stream1.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/CSoMkJU.png?1" group-title="RELIGIOSO", CANÇÃO NOVA HD
+http://tvajuhls-lh.akamaihd.net:80/i/tvdesk_1@147040/index_1080_av-p.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/achrE0z.png?1" group-title="RELIGIOSO", TV APARECIDA
+http://caikron.com.br:1935/tvaparecida/tvaparecida.stream/playlist.m3u8?
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/pH6htYz.png?1" group-title="RELIGIOSO", TV EVANGELIZAR
+http://tvevangelizar20.crossdigital.com.br:1935/evangelizar/tv/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/BSliq5S.png" group-title="RELIGIOSO", TV NOVO TEMPO
+http://stream.novotempo.com/tv/smil:tvnovotempo.smil/chunklist_w86202803_b2128000_slpor.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/GoVTIwb.png?1" group-title="RELIGIOSO", TV VERDADE
+http://ocatv.mcgi.me:1935/public/247_br/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/8yQgglm.png" group-title="RELIGIOSO", VEM & VÊ TV 1
+http://srv-vvtv.sisdera.com:1935/live/mp4:vvtv2/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/8yQgglm.png" group-title="RELIGIOSO", VEM & VÊ TV 2
+http://srv-vvtv.sisdera.com:1935/live/mp4:vvtv022/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/8yQgglm.png" group-title="RELIGIOSO", VEM & VÊ TV 3
+http://srv-vvtv.sisdera.com:1935/live/mp4:vvtv032/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/P65xCOI.jpg" group-title="RELIGIOSO", IMPD TV
+https://58a4464faef53.streamlock.net/impd/ngrp:impd_all/playlist.m3u8?
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/EKG0eeb.png" group-title="RELIGIOSO", RIT
+http://rtmp.9c2c.upx.net.br:1935/9c2c/myStream_all/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/yYTyfqQ.png?1" group-title="RELIGIOSO", PORTAL GOSPEL
+http://s1.wsepanel.com:1935/lukfilm/lukfilm/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/yYTyfqQ.png?1" group-title="RELIGIOSO", PORTAL GOSPEL 2
+http://s1.wsepanel.com:1935/lukfilm/lukfilm/playlist.m3u8?ValterHD
+
+#EXTINF:-1 tvg-logo="http://apktv.com.br/images/tv-renacer-gospel.png" group-title="RELIGIOSO", TV RENACER GOSPEL
+http://stmv3.euroti.com.br:1935/izaias5272/izaias5272/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://thumbs.buscape.com.br/T200x200/__2.65-eb19a22.jpg" group-title="RELIGIOSO", WEB TV LEÃO DE JUDÁ
+http://streaming63.sitehosting.com.br:1935/juda/juda/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/7XzgB5z.png" group-title="RELIGIOSO", WEB TV NOVA PARAÍBA
+http://stmv1.euroti.com.br:1935/tv487/tv487/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/ADwqx42.png?1" group-title="RELIGIOSO", ADINET TV
+http://45.43.208.2:1935/adinet/adinet/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/7XzgB5z.png" group-title="RELIGIOSO", TV GIDEÕES HD
+http://streaming02.zas.media:1935/gideoes/programacao/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/qYqLZqW.png" group-title="RELIGIOSO", TV AD BELÉM
+http://streaming60.sitehosting.com.br:1935/tvadbras/tvadbras/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/0TPiYq8.jpg?1" group-title="RELIGIOSO", TV ADC PAZ
+http://45.43.208.2:1935/tvadcpaz/tvadcpaz/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/hdhtT5B.png?1" group-title="RELIGIOSO", TV ÁGAPE
+http://streaming63.sitehosting.com.br:1935/prwalla/prwalla/live.m3u8
+
+#EXTINF:-1 tvg-logo="http://www.tvmagazine.com.br/imagens/icones/600/mtvb.png" group-title="VARIEDADES", MTV CLIPES 1
+http://rtmp.one.by:1200
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/rvbIfDo.png" group-title="VARIEDADES", YEEAH! TEEN
+http://stmv2.srvstm.com/yeeahteen/yeeahteen/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/Mhumyod.png" group-title="VARIEDADES", REDE RC
+http://tv02.logicahost.com.br:1935/rederc/rederc/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/npQRmwG.png?1" group-title="VARIEDADES", HEART TV
+http://ooyalahd2-f.akamaihd.net/i/globalradio02_delivery@156522/index_656_av-p.m3u8?sd=10&rebase=on
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/Ni5insG.jpg?1" group-title="VARIEDADES", TV SIM VITÓRIA
+http://stmv4.euroti.com.br:1935/tvsimvitoria/tvsimvitoria/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/sXccLs4.png" group-title="VARIEDADES", TV UNIÃO - CE
+http://stmv1.srvstm.com/tvuniao/tvuniao/playlist.m3u8?wowzasessionid=1843050145
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/FCp72c6.png" group-title="VARIEDADES", CENTRAL TV - CURITIBA
+http://tv02.logicahost.com.br:1935/rbt01/rbt01/live.m3u8?LISTASGLAU
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/FCp72c6.png" group-title="VARIEDADES", CENTRAL TV - CURITIBA
+https://59f2354c05961.streamlock.net:1443/rbt01/_definst_/rbt01/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/8BCGkxt.png?1" group-title="VARIEDADES", VH1 MEGAHITS
+http://stream.1music.hu/stream/1music.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/GpdqTfb.png?1" group-title="VARIEDADES", FOX HITS
+http://live.streams.ovh:1935/foxtv/foxtv/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/612953408899805184/OrrISiSH.png" group-title="VARIEDADES", TV CIDADE OESTE RN
+http://hls.cadena.com.br/live/df9e135c-df44-4fbc-8e95-d128ab1db00c/index.m3u8
+
+#EXTINF:-1 tvg-logo="http://www.cxtv.com.br/img/Tvs/Logo/850e6dd3d2750e126feff1e5d342ed15.png" group-title="VARIEDADES", LIVRE TV - RN
+http://tv02.logicahost.com.br:1935/livretv/livretv/live.m3u8
+
+#EXTINF:-1 tvg-logo="http://www.cxtv.com.br/img/Tvs/Logo/850e6dd3d2750e126feff1e5d342ed15.png" group-title="VARIEDADES", LIVRE TV - RN
+http://wse01.logicahost.com.br:1935/livretv/livretv/chunklist_w565915239.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/Z7ObVfW.png" group-title="VARIEDADES", MASTER TV
+http://wowza4.catve.com.br:1935/mastertv/livestream/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/6xXUoAB.png?1" group-title="VARIEDADES", TOP TV
+http://stmv3.euroti.com.br:1935/toptv/toptv/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/6xXUoAB.png?1" group-title="VARIEDADES", TOP TV
+http://173.236.10.10:1935/toptv/toptv/chunklist_w233160029.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/wnfxr8p.png" group-title="VARIEDADES", TV CLIMA
+http://stmv1.srvstm.com:1935/tvcadm/tvcadm/playlist.m3u8?PEDROJUNIORTUTORIAIS
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/vc1IvPe.png" group-title="VARIEDADES", TV DIÁRIO DO SERTÃO - PARAÍBA
+http://painelvj.com.br/pdsertaotv/pdsertaotv.sdp/chunklist_w980633800.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/vc1IvPe.png" group-title="VARIEDADES", TV DIÁRIO DO SERTÃO - PB
+http://painelvj.com.br:1935/pdsertaotv/pdsertaotv.sdp/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/uuVDEio.jpg?1" group-title="VARIEDADES", TV PORTAL MÍDIA - PB
+http://video02.kshost.com.br/tvportalmidia/tvportalmidia/chunklist_w1056149778.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/3NgKE7i.png" group-title="VARIEDADES", TV MASTER PB
+http://stmv2.paraibahost.com.br/tvmaster/tvmaster/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/3NgKE7i.png" group-title="VARIEDADES", TV MASTER PB
+http://stmv2.paraibahost.com.br/tvmaster/tvmaster/playlist.m3u8?wowzasessionid=1338233153
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/jdGPkcC.png?1" group-title="VARIEDADES", TV CREATIVE PB
+http://streaming63.sitehosting.com.br:1935/jandy/_definst_/jandy/chunklist_w91606170.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/CS8He7i.png" group-title="VARIEDADES", TV NOVA PARAIBA
+http://stmv1.sejaguia.com.br/tv487/tv487/playlist.m3u8?wowzasessionid=1451503404
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/YNPsWQl.png" group-title="VARIEDADES", TV ALSOL
+http://paineltv.alsol.com.br:1935/tvalsol/myStream/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/CSzcjqd.png" group-title="VARIEDADES", TV SOL PB
+http://tv02.logicahost.com.br:1935/tvsol/tvsol/live.m3u8
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="VARIEDADES", SB4
+http://media.az-mediaserver.com:1935/7120/7120/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="http://s20.postimg.org/eqtcpanjh/TV_Geral.png" group-title="VARIEDADES", TV GERAL
+http://fms1.tacitus.com.br:1935/tvgeral/tvgeral/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="http://www.sectv.com.br/gallery_gen/9f0d92a1af7a4569b02778769704e6e7_180x180.png" group-title="VARIEDADES", SEC TV
+http://hd4.com.br:1935/sectv2/sectv2/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="http://www.cxtv.com.br/img/Tvs/Logo/d2d642aa058bd63380ec39ecdef51b2e.jpg" group-title="VARIEDADES", TV CINEC
+https://59f1cbe63db89.streamlock.net:1443/tvcinec/tvcinec/chunklist_w323615480.m3u8
+
+#EXTINF:-1 tvg-logo="http://www.cxtv.com.br/img/Tvs/Logo/98f2c63bd8626875fa4b533767d074ff.png" group-title="VARIEDADES", TV CARUARU
+http://m2otv-lh.akamaihd.net/i/m2oTv_1@186074/index_600_av-b.m3u8
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/WWOTXQp.png" group-title="VARIEDADES", TV MACEIÓ
+http://173.236.10.10:1935/toptv/toptv/playlist.m3u8?PEDROJUNIORTUTORIAIS
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/aclkXoB.png?1" group-title="VARIEDADES", TV FLORIPA
+http://11.fm5.com.br:1935/tvfloripa/tvfloripa/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/lTWC1dE.png?1" group-title="VARIEDADES", TV GERAES
+http://stmv1.euroti.com.br:1935/tv465/tv465/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/UsbkIBl.png?1" group-title="VARIEDADES", TV INES
+http://slrp.sambavideos.sambatech.com/liveevent/acerpTvINESABR_d360fbbfbf3e5e59a31cf89ec45eb3dc/livestream2/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/UsbkIBl.png?1" group-title="VARIEDADES", TV INES HD
+http://slrp.sambavideos.sambatech.com/liveevent/acerpTvINESABR_d360fbbfbf3e5e59a31cf89ec45eb3dc/livestream3/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/KnKMS2J.png" group-title="VARIEDADES", ALPHA CHANNEL
+http://streamingbr.com:1935/st87-live/st87-live/livestream.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/7XzgB5z.png" group-title="VARIEDADES", DOURADOS WEB TV
+http://srv3.zoeweb.tv:1935/zw320/stream/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/7XzgB5z.png" group-title="VARIEDADES", DTTV
+http://streaming63.sitehosting.com.br:1935/tvneponu/tvneponu/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/1no2stT.jpg" group-title="VARIEDADES", RETRO MUSIC HD
+http://stream.mediawork.cz/retrotv//retrotvHQ1/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/oi2akWf.png" group-title="CANAIS PORTUGUAL", PT: TVI INTERNACIONAL
+http://video-auth8.iol.pt:80/live_tvi_internacional_ww/live_tvi_internacional_ww-3/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/MeMBexV.png?1" group-title="CANAIS PORTUGUAL", PT: TVI
+http://video-auth8.iol.pt:80/live_tvi/live_tvi/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/oXF5WTv.png" group-title="CANAIS PORTUGUAL", PT: TVI 24
+http://video-auth8.iol.pt:80/live_tvi24/live_tvi24/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/oXF5WTv.png" group-title="CANAIS PORTUGUAL", PT: TVI 24
+http://noscdne.entrprise.tv:1935/cvo/tvi24.stream/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/DYymREY.png?1" group-title="CANAIS PORTUGUAL", PT: TVI REALITY
+http://video-auth8.iol.pt:80/live_tvi_direct/live_tvi_direct-3/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/gYXyZEF.png?1" group-title="CANAIS PORTUGUAL", PT: PORTO CANAL
+http://213.13.26.11:1935/live/portocanal/magellan.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/gYXyZEF.png?1" group-title="CANAIS PORTUGUAL", PT: PORTO CANAL
+http://213.13.26.11:1935/live/portocanal/KodiPortugal.pt.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/q0weOxZ.png?1" group-title="CANAIS INTERNACIONAIS", ARG: CANAL 26 HD
+http://200.115.193.177/live/26hd-720/.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/8nCB06w.png" group-title="CANAIS INTERNACIONAIS", ARG: TELFIN CANAL 2 HD
+http://201.219.100.30:1935/telpintv/ttv.stream_720p/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/8nCB06w.png" group-title="CANAIS INTERNACIONAIS", ARG: TELPIN CANAL 2 SD
+http://201.219.100.30:1935/telpintv/ttv.stream_360p/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/qmFK5y8.gif" group-title="CANAIS INTERNACIONAIS", ARG:CANAL PROVINCIAL SD
+http://www.trimi.com.ar/provincial/streaming/mystream.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/rZuWrF8.png" group-title="CANAIS INTERNACIONAIS", ARG: POWER HD
+http://wowza.telpin.com.ar:1935/live-powerTV/power.stream/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/nD9TVZg.jpg" group-title="CANAIS INTERNACIONAIS", ARG: CANAL 9 COMODORO RIVADAVIA SD
+http://live.canalnueve.tv:8082/hls/canal.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/XHauFcA.png" group-title="CANAIS INTERNACIONAIS", ARG: CANAL 5 TELESOL HD
+http://149.56.98.124:9090/hls/telesol_mid.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/bsrVp3u.png" group-title="CANAIS INTERNACIONAIS", CHI: NIU TV HD
+http://cl.origin.grupoz.cl/niutv/smil:live.smil/chunklist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/2HGma9m.png" group-title="CANAIS INTERNACIONAIS", CHI: CDO SD
+http://edge1.cl.grupoz.cl/cdofree/live/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/ozCnnDg.png" group-title="CANAIS INTERNACIONAIS", CHI: TV SENADO HD
+http://janus-tv-ply.senado.cl/playlist/stream.m3u8?s=tvsenado-hd
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/KO9XhLU.png" group-title="CANAIS INTERNACIONAIS", CHI: TELETRAKHD
+http://edge1.cl.grupoz.cl/teletrak//live/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PJFFPAL.png" group-title="CANAIS INTERNACIONAIS", COL: CALI TV SD
+http://video.cehis.net/live-calitv/calitv1/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/StkPNjx.png" group-title="CANAIS INTERNACIONAIS", COL: CANAL 14 SD
+http://181.143.238.252/live/livestream/index.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/FUh9igN.png" group-title="CANAIS INTERNACIONAIS", COL: RCN SD
+https://mdstrm.com/live-stream-playlist/58a36704896500b908cf1abe.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/dmHjzfS.png" group-title="CANAIS INTERNACIONAIS", COL: TELE ISLAS SD
+http://vbox2.cehis.net/live-teleislas/smil:teleislas.smil/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/any5MCR.png" group-title="CANAIS INTERNACIONAIS", COL: CANAL CNC MEDELLIN SD
+http://streaming.canalcncmedellin.com/hls-live/livepkgr/_definst_/liveevent/canalcnc.m3u8
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="CANAIS INTERNACIONAIS", MEX: TV MÁS
+http://50.7.98.234:1935/rtv/videortv/playlist.m3u
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="CANAIS INTERNACIONAIS", MEX: CANAL 10
+http://stream2.dynalias.com:1935/live/tvlive1/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="CANAIS INTERNACIONAIS", MEX: RTQ
+http://wms.tecnoxia.com:1935/rytqrolive/rytqrolive/master.m3u8
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="CANAIS INTERNACIONAIS", MEX: OCHO TV
+http://bcliveuniv-lh.akamaihd.net/i/Live_1@170324/master.m3u8
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="CANAIS INTERNACIONAIS", MEX: RCG 3 TV
+http://wowzacontrol.com:1936/stream56/stream56/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/4JeqvDc.png" group-title="CANAIS INTERNACIONAIS", PER: CAPITAL TV SD
+http://streaming.video.webrpp-live.hls.adaptive.level3.net/hls-live/videoremux-videoCAPTV/_definst_/live/stream1.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/oaxSwdU.png" group-title="CANAIS INTERNACIONAIS", PER:  TV PERU SD
+http://cdnh4.iblups.com/hls/irtp.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/Xwbpj7i.jpg" group-title="CANAIS INTERNACIONAIS", PER: OVACION SD
+http://cdn2.ujjina.com:1935/iptvovacion1/liveovacion1tv/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/6UuFzgM.jpg" group-title="CANAIS INTERNACIONAIS", PER: TV DIGITAL PERU HD
+http://uvodscp-lh.akamaihd.net/i/ped001rtmp_1@460473/index_1_av-p.m3u8?sd=10&rebase=on
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/6euqurz.png?1" group-title="CANAIS INTERNACIONAIS", VEN: TV TELESUR
+https://d2ajt1gpdtnw25.cloudfront.net/mbliveMain/480p/chunklist.m3u8
+
+#EXTINF:-1 tvg-logo="hhttp://www.cxtv.com.br/img/Tvs/Logo/b141e293ab2a3165a38ecfc3116068b8.png" group-title="CANAIS INTERNACIONAIS", VEN: PROMAR TV
+http://edge.wms28.lorini.net/promar/promar/chunklist_w590746241.m3u8
+
+#EXTINF:-1 tvg-logo="http://www.cxtv.com.br/img/Tvs/Logo/c06d3e22af5947c59f50cc54fdf828d3.png" group-title="CANAIS INTERNACIONAIS", VEN: TELEARAGUA
+http://enc-fwt.lorini.net/telearagua/telearagua/tracks-v1a1/index.m3u8
+
+#EXTINF:-1 tvg-logo="https://mitvstatic.com/channels/br_record-news_m.png" group-title="NOTÍCIAS", RECORD NEWS
+http://stmv4.srvstm.com/recordnewses/recordnewses/playlist.m3u8?wowzasessionid=991964873
+
+#EXTINF:-1 tvg-logo="https://mitvstatic.com/channels/br_record-news_m.png" group-title="NOTÍCIAS", RECORD NEWS
+http://sm.fabricahost.com.br:1935/tvguara/tvguara/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/BNnI4QW.png?1" group-title="NOTÍCIAS", REDE NEWS
+http://srv3.zoeweb.tv:1935/z474-live/aovivo/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/SoizuC9.png?1" group-title="NOTÍCIAS", REDE NEWS
+http://srv3.zoeweb.tv:1935/z474-live/aovivo/livestream.m3u8?TECHNOID
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/SoizuC9.png?1" group-title="Sem Categoria", REDE NEWS HD
+http://srv3.zoeweb.tv:1935/z474-live/aovivo/livestream.m3u8?ISAQUE
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/AT6UDUq.jpg?1" group-title="NOTÍCIAS", REDE MINAS
+http://rtmp.cdn.upx.net.br/00084/myStream.sdp/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/AT6UDUq.jpg?1" group-title="NOTÍCIAS", REDE MINAS
+http://rtmp.cdn.upx.net.br/00084/myStream.sdp/chunklist_w1068978935.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/SpCFAn2.png" group-title="NOTÍCIAS", CNN CHILE
+http://unlimited1-us.dps.live/cnn/cnn.smil/cnn/livestream2/chunks.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/SpCFAn2.png" group-title="NOTÍCIAS", CNN CHILE
+http://unlimited1-us.dps.live/cnn/cnn.smil/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/SxKpPos.png?1" group-title="NOTÍCIAS", CNN USA
+http://playlist.onlybest.tv/ru/channel/262f9cb9e35b2e64d0571c3e9c1cd4fa/102/index.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/Kk4qLga.png?1" group-title="NOTÍCIAS", ABC 7 - USA
+https://www.mytvonline.org/fra/frpx/frprx.php/Z2VwOGV8fGh0dHA6Ly9sZWdvYmVsaW5yb3VnZS5jb20vZHJvcC93d3cvaW5kZXgucGhwP3E9/live.field59.com/wwsb/ngrp:wwsb1_all/chunklist_b3203072.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/07QG2DA.jpg?1" group-title="NOTÍCIAS", BLOOMBERG TV  - USA
+https://liveproduseast.akamaized.net/us/Channel-USTV-AWS-virginia-1/Source-USTV-700-1_live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/07QG2DA.jpg?1" group-title="NOTÍCIAS", BLOOMBERG TV  HD- USA
+https://liveproduseast.akamaized.net/us/Channel-USTV-AWS-virginia-1/Source-USTV-1000-1_live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/KRrvPGC.png?1" group-title="NOTÍCIAS", CBS 47 - USA
+https://svc-lvanvato-cxtv-wjax.cmgvideo.com/wjax/564k/index.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/TpLxo0I.png?1" group-title="NOTÍCIAS", CBSN NEWS - USA
+http://cbsnewshd-lh.akamaihd.net:80/i/CBSNHD_7@199302/index_1200_av-b.m3u8
+
+#EXTINF:-1 tvg-logo="http://www.cxtv.com.br/img/Tvs/Logo/f24169065abbca5112493217775b6172.jpg" group-title="NOTÍCIAS", CBTV INTERNACIONAL BR
+https://sa-all22.secdn.net/cbtv-channel/play/mp4:stream/chunklist_w1352920024.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/ERwKrPf.png?1" group-title="NOTÍCIAS", FOX NEWS - USA
+https://fnurtmp-f.akamaihd.net/i/FNCPREV_1@143121/index_300_av-b.m3u8?sd=10&rebase=on
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/XR3C9Nd.png?1" group-title="NOTÍCIAS", FOX 25 - USA
+https://svc-lvanvato-cxtv-wfxt.cmgvideo.com/wfxt/2564k/index.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/SC1aanZ.jpg?1" group-title="NOTÍCIAS", FOX 30 - USA
+https://svc-lvanvato-cxtv-wjax.cmgvideo.com/wjax/2564k/czGvvtdhhw7/153039/segment_153039281.ts
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/vMnInGs.png" group-title="NOTÍCIAS", REDBULL TV - USA
+https://rbtvdiglinear-i.akamaihd.net/hls/live/241719/ATfallback/master_3360.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/XHAEU6h.png?2" group-title="NOTÍCIAS", WGN AMERICA - USA
+https://wgntribune-lh.akamaihd.net/i/WGNPrimary_1@304622/index_2500_av-p.m3u8?sd=10&rebase=on
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/qx7c5nO.png?1" group-title="NOTÍCIAS", WGN NEWS CHICAGO - USA
+http://wgntribune-lh.akamaihd.net/i/WGNPrimary_1@304622/master.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/7EQ5u6O.png?1" group-title="NOTÍCIAS", SKY LIFE TG24 - USA
+http://skyianywhere2-i.akamaihd.net:80/hls/live/200275/tg24/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/ySm0J4N.png" group-title="NOTÍCIAS", TVW
+http://d3ktuc8v2sjk6m.cloudfront.net/livetv/ngrp:TVWAIR_all/chucklist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/ySm0J4N.png" group-title="NOTÍCIAS", TVW-2 HD
+http://d3ktuc8v2sjk6m.cloudfront.net/livetv/ngrp:TVW2_all/master.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/cQeVTFk.png?1" group-title="NOTÍCIAS", TV 538.
+https://talparadiohls-i.akamaihd.net/hls/live/624107/VR-Radio538-1/Radio538Stream-Q1.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/6zwHGPE.png?1" group-title="NOTÍCIAS", CANAL ONCE
+http://live.canaloncelive.tv:1935/livepkgr2/smil:internacional.smil/chunklist_w776573390_b1300000_slesp.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/ANRpSvd.png?1" group-title="NOTÍCIAS", FRANCE 24 HD - EN
+http://f24hls-i.akamaihd.net/hls/live/221193/F24_EN_LO_HLS/master_900.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/ANRpSvd.png?1" group-title="NOTÍCIAS", FRANCE 24 HD - FR
+http://f24hls-i.akamaihd.net/hls/live/221192/F24_FR_LO_HLS/master.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/ykBVpXn.png?1" group-title="NOTÍCIAS", NHK WORLD
+https://nhkwtvglobal-i.akamaihd.net/hls/live/263941/nhkwtvglobal/index_1180.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/ykBVpXn.png?1" group-title="NOTÍCIAS", NHK WORLD
+https://nhkworld.webcdn.stream.ne.jp/www11/nhkworld-tv/global/263941/live_wa_s.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/7P4HYx8.png?1" group-title="NOTÍCIAS", ESP: C-SPAN
+http://cspan1-lh.akamaihd.net/i/cspan1_1@304727/master.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/P0htFva.png?1" group-title="NOTÍCIAS", ESP: C-SPAN 2
+http://cspan2-lh.akamaihd.net/i/cspan2_1@304728/master.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/VYgUS8N.png?1" group-title="NOTÍCIAS", ESP: C-SPAN 3
+http://cspan3-lh.akamaihd.net/i/cspan3_1@304729/master.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/QMsNJug.png" group-title="NOTÍCIAS", ESP: EXTREMADURA
+http://hlstv.canalextremadura.es/livetv/smil:multistream.smil/chunklist_b664000_DVR.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/cWDqdL4.png" group-title="NOTÍCIAS", ADN 40 - CANAIS INTERNACIONAIS
+http://aztecalive-lh.akamaihd.net/i/0kus659k5_1@501884/master.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/WT4JBeY.png" group-title="ESPORTES", ALL SPORTS HD
+https://59f1cbe63db89.streamlock.net:1443/dgrau/_definst_/dgrau/chunklist_w1192655349.m3u8
+
+#EXTINF:-1 tvg-logo="http://www.cxtv.com.br/img/Tvs/Logo/332ea6dc766b917d508ab4df2885f4c2.png" group-title="ESPORTES", ONE TV
+http://wse8.player.tv.br:1935/ontv/ontv/chunklist_w1744843364.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/A7mDYhR.png?1" group-title="ESPORTES", ESPORTE INTERATIVO BR SD
+https://vrzn-ei-ee.cdn.mdstrm.com/live-stream-secure/58121908685da2dd08de7ec5/publish/media_800.m3u8?VRQtpAFXeNzNFtld2tf9yeN1vyU5-lJGp-xRb4rmThesW92zv__GN1EIRJsFcos96xKG&dnt=true&access_token=OZo0Cf114fBAQJMd9p7wp9jvtlEvCwwqMmgMv2s6QgtpdAxjqgLc9CFw0NwxaYM5XbNKoVgdvnC&ref=https://eiplus.com.br/canal/47/no-ar-com-andre-henning/&es=vrzn-ei-ee.cdn.mdstrm.com&proto=https&pz=BR
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/A7mDYhR.png?1" group-title="ESPORTES", ESPORTE INTERATIVO BR HD
+https://vrzn-ei-ee.cdn.mdstrm.com/live-stream-secure/58121908685da2dd08de7ec5/publish/media_2500.m3u8?VRQtpAFXeNzNFtld2tf9yeN1vyU5-lJGp-xRb4rmThesW92zv__GN1EIRJsFcos96xKG&dnt=true&access_token=OZo0Cf114fBAQJMd9p7wp9jvtlEvCwwqMmgMv2s6QgtpdAxjqgLc9CFw0NwxaYM5XbNKoVgdvnC&ref=https://eiplus.com.br/canal/47/no-ar-com-andre-henning/&es=vrzn-ei-ee.cdn.mdstrm.com&proto=https&pz=BR
+
+#EXTINF:-1 tvg-logo="https://i0.wp.com/s20.postimg.org/gzjgnysgd/esporte_interativo.png" group-title="ESPORTES", EI MAXX SD
+https://vrzn-ei-ee.cdn.mdstrm.com/live-stream-secure/5801255b39c38e1109ddfabd/publish/media_800.m3u8?VRQtpAFXeNzNFtld2tf9yeN1vyU5-lJGp-xRb4rmThesW92zv__GN1EIRJsFcos96xKG&dnt=true&access_token=OZo0Cf114fBAQJMd9p7wp9jvtlEvCwwqMmgMv2s6QgtpdAxjqgLc9CFw0NwxaYM5XbNKoVgdvnC&ref=https://eiplus.com.br/canal/47/no-ar-com-andre-henning/&es=vrzn-ei-ee.cdn.mdstrm.com&proto=https&pz=BR
+
+#EXTINF:-1 tvg-logo="https://i0.wp.com/s20.postimg.org/gzjgnysgd/esporte_interativo.png" group-title="ESPORTES", EI MAXX HD
+https://vrzn-ei-ee.cdn.mdstrm.com/live-stream-secure/5801255b39c38e1109ddfabd/publish/media_2500.m3u8?VRQtpAFXeNzNFtld2tf9yeN1vyU5-lJGp-xRb4rmThesW92zv__GN1EIRJsFcos96xKG&dnt=true&access_token=OZo0Cf114fBAQJMd9p7wp9jvtlEvCwwqMmgMv2s6QgtpdAxjqgLc9CFw0NwxaYM5XbNKoVgdvnC&ref=https://eiplus.com.br/canal/47/no-ar-com-andre-henning/&es=vrzn-ei-ee.cdn.mdstrm.com&proto=https&pz=BR
+
+#EXTINF:-1 tvg-logo="http://images.mi.tv/channels/br_esporte-interativo-2_m.png" group-title="ESPORTES", EI MAXX 2 SD
+https://vrzn-ei-ee.cdn.mdstrm.com/live-stream-secure/5801261189b415d108f9603c/publish/media_800.m3u8?VRQtpAFXeNzNFtld2tf9yeN1vyU5-lJGp-xRb4rmThesW92zv__GN1EIRJsFcos96xKG&dnt=true&access_token=OZo0Cf114fBAQJMd9p7wp9jvtlEvCwwqMmgMv2s6QgtpdAxjqgLc9CFw0NwxaYM5XbNKoVgdvnC&ref=https://eiplus.com.br/canal/47/no-ar-com-andre-henning/&es=vrzn-ei-ee.cdn.mdstrm.com&proto=https&pz=BR
+
+#EXTINF:-1 tvg-logo="http://images.mi.tv/channels/br_esporte-interativo-2_m.png" group-title="ESPORTES", EI MAXX 2 HD
+https://vrzn-ei-ee.cdn.mdstrm.com/live-stream-secure/5801261189b415d108f9603c/publish/media_2500.m3u8?VRQtpAFXeNzNFtld2tf9yeN1vyU5-lJGp-xRb4rmThesW92zv__GN1EIRJsFcos96xKG&dnt=true&access_token=OZo0Cf114fBAQJMd9p7wp9jvtlEvCwwqMmgMv2s6QgtpdAxjqgLc9CFw0NwxaYM5XbNKoVgdvnC&ref=https://eiplus.com.br/canal/47/no-ar-com-andre-henning/&es=vrzn-ei-ee.cdn.mdstrm.com&proto=https&pz=BR
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/OYFEmVN.jpg?1" group-title="ESPORTES INTERNACIONAIS", UEFA TV
+http://uefaliveshow-lh.akamaihd.net/i/20150827_1@64648/index_2000_av-p.m3u8?sd=10&rebase=on
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/DFyvPGJ.png" group-title="ESPORTES INTERNACIONAIS", REAL MADRID TV
+https://rmtv24hweblive-lh.akamaihd.net/i/rmtv24hwebes_1@300661/index_3_av-p.m3u8?sd=10&rebase=on
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/uGLEbll.png?2" group-title="ESPORTES INTERNACIONAIS", SEVILLA TV
+http://sevillafc_live-lh.akamaihd.net/i/video_0@354142/index_0700_av-p.m3u8?sd=10&rebase=on
+
+#EXTINF:-1 tvg-logo="http://s3.vefire.ru/l/250x150/ru/100AutoMoto.png" group-title="ESPORTES INTERNACIONAIS", 100AUTOMOTO TV
+http://100automoto.tv:1935/bgtv1/autotv/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/RQCB1Rb.png?1" group-title="ESPORTES INTERNACIONAIS", AUTOMOTO TV
+http://178.22.187.253:1935/streaming-tv/mp4:myStream3/playlist.m3u8]
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/fyPVld9.png?1" group-title="ESPORTES INTERNACIONAIS", TUFF TV
+http://cdn-live-egress.campfyre.tv/rightbrainmedia-live-604/mp4:Tufftv_all/rightbrainmedia-live-604/Tufftv2/chunks.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/jPW4CkF.png" group-title="ESPORTES INTERNACIONAIS", EUROSPORT 1 HD
+http://65.254.55.10:4000/live/197/197.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/syYVNay.png?1" group-title="ESPORTES INTERNACIONAIS", EUROSPORT 2 HD
+http://195.206.253.157:8001/eurosport2hd
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/JC2uAK9.jpg?1" group-title="ESPORTES INTERNACIONAIS", MOTORSPORT TV
+http://82.79.218.142:8089/motors-
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/2Ldh7BG.png?1" group-title="ESPORTES INTERNACIONAIS", MOVISTAR F1
+http://playlist.onlybest.tv/ru/channel/6c53126176d7d597cbe6ffbb0c5fbf49/612/index.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/ZYs9pKg.png?1" group-title="ESPORTES INTERNACIONAIS", MOVISTAR FUTBOL HD
+http://playlist.onlybest.tv/ru/channel/d0f21a70397d3659fe259aa5e2a62107/575/index.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/ZYs9pKg.png?1" group-title="ESPORTES INTERNACIONAIS", MOVISTAR FUTBOL HD
+http://live.tvplayerlatino.com/usuarios/src5/MoviFutbol/Saul.Rangel/MiT.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/8puopgY.png?1" group-title="ESPORTES INTERNACIONAIS", BEIN SPORTS LALIGA HD
+http://86.82.79.91:9420/play/a013
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/a94eJEK.jpg?1" group-title="ESPORTES INTERNACIONAIS", SKY SPORTS 1 HD DE
+http://playlist.onlybest.tv/ru/channel/f772b8505cfea04b38985616da5f973f/453/index.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/VVWwiIA.jpg?1" group-title="ESPORTES INTERNACIONAIS", SKY SPORTS NEWS HD
+http://playlist.onlybest.tv/ru/channel/f772b8505cfea04b38985616da5f973f/460/index.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/07muOvn.png" group-title="ESPORTES INTERNACIONAIS", SKY SPORTS ARENA
+http://62.210.99.158:80/live?channelId=121&uid=4486&deviceSn=12cd5a8b567fd9c1
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/OMc9ZNT.png?1" group-title="ESPORTES INTERNACIONAIS", RAI SPORT 1 HD
+http://playlist.onlybest.tv/ru/channel/f772b8505cfea04b38985616da5f973f/528/index.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/ItO7bSh.png?1" group-title="ESPORTES INTERNACIONAIS", ARENA SPORT 1 HD
+http://46.40.5.99:8000/arena_1_high
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/ItO7bSh.png?1" group-title="ESPORTES INTERNACIONAIS", ARENA SPORT 1
+http://46.40.5.99:8000/arena_1_low
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/Ncv6vRz.png?1" group-title="ESPORTES INTERNACIONAIS", ARENA SPORT 2 HD
+http://46.40.5.99:8000/arena_2_high
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/Ncv6vRz.png?1" group-title="ESPORTES INTERNACIONAIS", ARENA SPORT 2
+http://46.40.5.99:8000/arena_2_low
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/RExJn0H.png?1" group-title="ESPORTES INTERNACIONAIS", ARENA SPORT 3 HD
+http://46.40.5.99:8000/arena_3_high
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/RExJn0H.png?1" group-title="ESPORTES INTERNACIONAIS", ARENA SPORT 3
+http://46.40.5.99:8000/arena_3_low
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/koG9nd5.png?1" group-title="ESPORTES INTERNACIONAIS", ARENA SPORT 4 HD
+http://46.40.5.99:8000/arena_4_high
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/koG9nd5.png?1" group-title="ESPORTES INTERNACIONAIS", ARENA SPORT 4
+http://46.40.5.99:8000/arena_4_low
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/z6zBJj0.png?1" group-title="ESPORTES INTERNACIONAIS", PT: SPORT TV 1 HD
+http://77.54.248.94:9981/stream/channelid/2135667?ticket=4728F57616F4DF9E11BFCBB9626ACC40EA0217FB&profile=pass
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/R1fh3wd.png?1" group-title="ESPORTES INTERNACIONAIS", PT: SPORT TV 2 HD
+http://82.79.218.142:8089/sport_tv_2-
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/8Gga8Uc.png?1" group-title="ESPORTES INTERNACIONAIS", PT: SPORT TV 3  HD
+http://82.79.218.142:8089/sport_tv_3-
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/xIcPQJC.png?1" group-title="ESPORTES INTERNACIONAIS", PT: SPORT TV 4  HD
+http://82.79.218.142:8091/sport_tv_4-
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/yiWqMgR.png?1" group-title="ESPORTES INTERNACIONAIS", TODO DESPORTES
+https://www.mytvonline.org/hls/stream.php/http://hondurtmp.tulix.tv:1935/tododeportes/to-do-deportes/media_296.ts?wowzasessionid=1301484991
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/dUXmJf2.png?2" group-title="ESPORTES INTERNACIONAIS", DEPORT TV ARG
+http://186.33.227.198/DXTV/smil:DXTV.smil/chunklist_w1243136775_b800000_slesp.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/dUXmJf2.png?2" group-title="ESPORTES INTERNACIONAIS", DEPORTV ARG
+http://186.33.227.200/DXTV/smil:DXTV.smil/chunklist_w222748973_b800000_slesp.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/sKXFpL7.png" group-title="ESPORTES INTERNACIONAIS", ABU DABI SPORT 1
+http://adtv.ercdn.net/adsport1/adsport1.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/sKXFpL7.png" group-title="ESPORTES INTERNACIONAIS", ABU DABI SPORT HD
+http://adtv.ercdn.net/adsport1/adsport1_720p.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/hq7uqDe.png?1" group-title="ESPORTES INTERNACIONAIS", ABU DABI SPORT 2
+http://adtv.ercdn.net/adsport2/adsport2.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/hq7uqDe.png?1" group-title="ESPORTES INTERNACIONAIS", ABU DABI SPORT 2 HD
+http://adtv.ercdn.net/adsport2/adsport2_720p.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/sKXFpL7.png" group-title="ESPORTES INTERNACIONAIS", ABU DABI SPORT EXTRA HD
+http://adtv.ercdn.net/adsportextra/adsportextra_720p.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/D6ISx7c.png?1" group-title="ESPORTES INTERNACIONAIS", ALL KASS SPORTS
+http://www.elahmad.com/tv/m3u8/alkass.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/D6ISx7c.png?1" group-title="ESPORTES INTERNACIONAIS", ALL KASS SPORTS 1
+http://www.elahmad.com/tv/m3u8/alkass.m3u8?id=alkass1
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/D6ISx7c.png?1" group-title="ESPORTES INTERNACIONAIS", ALL KASS SPORTS 2
+http://www.elahmad.com/tv/m3u8/alkass.m3u8?id=alkass2
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/D6ISx7c.png?1" group-title="ESPORTES INTERNACIONAIS", ALL KASS SPORTS 3
+http://www.elahmad.com/tv/m3u8/alkass.m3u8?id=alkass3
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/D6ISx7c.png?1" group-title="ESPORTES INTERNACIONAIS", ALL KASS SPORTS 4
+http://www.elahmad.com/tv/m3u8/alkass.m3u8?id=alkass4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/D6ISx7c.png?1" group-title="ESPORTES INTERNACIONAIS", ALL KASS SPORTS 5
+http://www.elahmad.com/tv/m3u8/alkass.m3u8?id=alkass5
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/hOYnTVm.png" group-title="ESPORTES INTERNACIONAIS", OLYMPIC CHANNEL | FHD
+https://live.olympicchannel.com/ocs/channel01b/master.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/yeDvDjR.png" group-title="ESPORTES INTERNACIONAIS", NFL HD - USA
+https://svglive3-event.level3.nfl.com/nflent3/live/nfl_now/NFLNOW_1200k.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/bpGQUNy.png" group-title="ESPORTES INTERNACIONAIS", NFL NOW | HD
+https://svglive3-event.level3.nfl.com/nflent3/live/nfl_now/NFLNOW_4500k.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/x5jNF2N.png" group-title="ESPORTES INTERNACIONAIS", MLB | HD
+http://mlblive-akc.mlb.com/ls01/mlbam/mlb_network/NETWORK_LINEAR_1/master_wired.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/MA9c6WG.png" group-title="ESPORTES INTERNACIONAIS", PAC-12 ARIZONA | FHD
+http://p12a-lh.akamaihd.net/i/arizona_delivery@199730/master.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/MA9c6WG.png" group-title="ESPORTES INTERNACIONAIS", PAC-12 BAY AREA | FHD
+http://p12b-lh.akamaihd.net/i/bayarea_delivery@429334/master.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/MA9c6WG.png" group-title="ESPORTES INTERNACIONAIS", PAC-12 LOS ANGELES | FHD
+http://p12l-lh.akamaihd.net/i/la_delivery@425541/master.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/MA9c6WG.png" group-title="ESPORTES INTERNACIONAIS", PAC-12 MOUNTAIN | FHD
+http://p12m-lh.akamaihd.net/i/mountain_delivery@428912/master.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/MA9c6WG.png" group-title="ESPORTES INTERNACIONAIS", PAC-12 OREGON | FHD
+http://p12o-lh.akamaihd.net/i/oregon_delivery@103261/master.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/MA9c6WG.png" group-title="ESPORTES INTERNACIONAIS", PAC-12 WOSHINGTON | FHD
+http://p12w-lh.akamaihd.net/i/washington_delivery@426584/master.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/GpkdMMK.png?1" group-title="CANAIS INFANTIL", GOSPEL CARTOON
+http://stmv1.srvstm.com/gospelcartoon/gospelcartoon/playlist.m3u8?wowzasessionid=495096105
+
+#EXTINF:-1 tvg-logo="https://media.cdnandroid.com/40/89/b3/9b/imagen-kids-tv-0thumb.jpg" group-title="CANAIS INFANTIL", TV KID MAIS
+http://tv01.logicahost.com.br:1935/tvkidmais01/tvkidmais01/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/ClkvlmW.png?1" group-title="FILMES E SÉRIES", 24 HORAS
+http://stream02.canal24horastv.com:1935/live/Canal24Horas/livestream.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/uhujdoE.jpg?1" group-title="FILMES E SÉRIES", TV DIGITAL BIRIGUI
+http://tv02.logicahost.com.br:1935/tvdigitalbirigui/tvdigitalbirigui/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/Q9fQ7U6.jpg?1" group-title="FILMES E SÉRIES", TV NA ILHA
+http://video01.tvdigitalhd.org/jovani23984/jovani23984/chunklist_w1634368575.m3u8
+
+#EXTINF:-1 tvg-logo="https://s16.postimg.org/z4yd0upsl/cine_sky.png" group-title="FILMES E SÉRIES", CINE SKY
+http://stmv2.srvstm.com:1935/tvjsid/tvjsid/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/SZoI0eV.png" group-title="FILMES E SÉRIES", CINE FILMES 2
+http://stmv2.srvstm.com/tvjsid/tvjsid/playlist.m3u8?wowzasessionid=525649341
+
+#EXTINF:-1 tvg-logo="http://i.imgur.com/EdTZ0ba.png" group-title="FILMES E SÉRIES", CLASSIQUE TV
+http://stmv2.euroti.com.br:1935/classique/classique/live.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/aq5mOpF.png?1" group-title="FILMES E SÉRIES", GOSPEL TV - FILMES
+http://stmv2.srvstm.com/gospelf/gospelf/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/gCyDgxN.png?1" group-title="FILMES E SÉRIES", SÓ FILMES
+http://stmv2.srvstm.com/tvjsid/tvjsid/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="FILMES E SÉRIES", CAPITAL777
+http://wse01.logicahost.com.br:1935/tvcapital/_definst_/tvcapital/chunklist_w1247683792.m3u8
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E1 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/w/j6/azulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E2 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/w/j6/9yulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E3 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/d/j6/2zulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E4 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/w/j6/8yulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E5 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/v/j6/7yulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E6 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/v/j6/6yulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E7 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/v/j6/5yulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E8 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/v/j6/4yulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E9 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/u/j6/3yulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E10 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/u/j6/2yulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E11 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/u/j6/1yulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E12 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/u/j6/0yulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E13 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/t/j6/zyulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E14 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/z/j6/m2ulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E15 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/c/n6/a4ulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E16 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/p/j6/f1ulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E17 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/s/z6/3uvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E18 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/t/z6/4uvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E19 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/r/j6/m1ulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E20 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/q/j6/l1ulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E21 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/j/n6/44ulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E22 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/s/r6/fdvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E23 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/r/r6/ddvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E24 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/s/r6/edvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E24 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/r/r6/cdvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E26 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/p/j6/g1ulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E27 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/q/n6/v5ulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E28 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/z/j6/l2ulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E29 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/q/n6/u5ulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E30 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/j/n6/34ulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E31 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/j/n6/24ulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E32 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/z/j6/k2ulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E33 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/z/j6/j2ulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E34 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/y/j6/i2ulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E35 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/y/j6/h2ulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E36 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/y/j6/g2ulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E37 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/y/j6/f2ulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E38 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/x/j6/e2ulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S2-E39 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/x/j6/d2ulf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S3-E1 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/z/r6/8dvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S3-E2 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/z/r6/7dvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S3-E3 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/y/r6/6dvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S3-E4 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/y/r6/5dvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S3-E5 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/g/r6/0evlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S3-E6 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/a/r6/devlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S3-E7 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/a/r6/cevlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S3-E8 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/a/r6/bevlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S3-E9 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/z/r6/aevlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S3-E10 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/z/r6/9dvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S3-E11 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/f/r6/zevlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S3-E14 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/f/r6/vevlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S3-E15 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/e/r6/uevlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S3-E16 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/e/r6/tevlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S3-E17 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/e/r6/sevlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S4-E1 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/e/r6/revlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S4-E2 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/d/r6/qevlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S4-E3 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/d/r6/pevlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S4-E4 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/d/r6/oevlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S4-E5 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/d/r6/nevlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S4-E6 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/c/r6/mevlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S4-E7 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/c/r6/levlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S4-E8 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/c/r6/kevlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S4-E9 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/c/r6/jevlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S4-E10 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/b/r6/ievlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S4-E11 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/b/r6/hevlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S4-E12 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/b/r6/gevlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S4-E13 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/b/r6/fevlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S5-E1 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/n/r6/sfvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S5-E2 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/m/r6/rfvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S5-E3 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/m/r6/qfvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S5-E4 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/m/r6/pfvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S5-E5 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/m/r6/ofvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S5-E6 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/l/r6/nfvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S5-E7 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/l/r6/mfvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S5-E8 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/l/r6/lfvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S5-E9 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/l/r6/kfvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S5-E10 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/k/r6/jfvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S5-E11 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/k/r6/ifvlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S5-E12 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/f/r6/yevlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="http://www.tvsinopse.kinghost.net/a/aventuras%20de%20jack%20chan_arquivos/ScreenShot014.jpg" group-title="As Aventuras de Jackie Chan", S5-E13 As Aventuras de Jackie Chan - Dublado
+http://media-br-am.crackle.com/1/f/r6/wevlf_480p.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP01
+https://ia800605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E01%20-%20Piloto.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP02
+https://ia600605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E02%20-%20Cabelo%20Ruivo%20e%20Fita%20Prateada%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP03
+https://ia800605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E03%20-%20Mar%C3%A9%20Vermelha%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP04
+https://ia800605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E04%20-%20Trai%C3%A7%C3%A3o%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP05
+https://ia600605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E05%20-%20Lobo%20em%20Pele%20de%20Cordeiro%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP06
+https://ia800605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E06%20-%20Tudo%20por%20Dinheiro%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP07
+https://ia600605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E07%20-%20Contatos%20do%20Al%C3%A9m%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP08
+https://ia600605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E08%20-%20Os%20Suspeitos%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP09
+https://ia800605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E09%20-%20Vingan%C3%A7a%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP10
+https://ia800605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E10%20-%20Assassinato%20no%20Campus%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP11
+https://ia600605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E11%20-%20Um%20Caso%20Pessoal%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP13
+https://ia800605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E13%20-%20O%20Quadro%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP14
+https://ia600605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E14%20-%20Casanova%20Escarlate%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP15
+https://ia800605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E15%20-%20Veneno%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP16
+https://ia800605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E16%20-%20O%20Troco%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP17
+https://ia600605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E17%20-%20O%20Embuste%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP18
+https://ia600605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E18%20-%20Em%20Transe%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP19
+https://ia600605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E19%20-%20Uma%20D%C3%BAzia%20de%20Rosas%20Vermelhas%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP20
+https://ia600605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E20%20-%20Molho%20De%20Tomate%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP21
+https://ia800605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E21%20-%20A%20Vigarista%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP22
+https://ia800605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E22%20-%20Irm%C3%A3os%20de%20Sangue%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PhGxSW7.jpg" group-title="O MENTALISTA - 1ª TEMPORADA", O MENTALISTA T01|EP23
+https://ia800605.us.archive.org/23/items/omtalis/O%20Mentalista%20S01E23%20-%20As%20Pegadas%20De%20Red%20John%20720p%20-%20By-LuanHarper.mp4
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", CBN - CAMPINA GRANDE
+http://audio.cabobranco.tv.br:8000/cbncg
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", CORREIO 98 FM - CAMPINA GRANDE
+http://ice11.crossradio.com.br:8026/;*.mp3
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", RADIO 101 FM - CAMPINA GRANDE
+http://radioapp.agenciaellis.com.br/Cariri1160
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", RADIO CIDADE AM - CAMPINA GRANDE
+http://69.64.33.233:8000/redeesperanca
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", ARAPUAN - JOÂO PESSOA
+http://centova6.ciclanohost.com.br:9104/;stream.nsv
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", CORREIO - JOÃO PESSOA
+http://ice11.crossradio.com.br:8022/;*.mp3
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", CORREIO 98 FM - JOÃO PESSOA
+http://ice11.crossradio.com.br:8014/;*.mp3
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", MIX FM - JOÃO PESSOA
+http://158.69.117.161:8016/live
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", CABO BRANCO FM - JOÃO PESSOA
+http://audio.cabobranco.tv.br:8000/cbfm
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", CPAD - JOÃO PESSOA
+http://server3.webradios.com.br:9404/;
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", JOVEN PAM FM - JOÃO PESSOA
+http://67.205.160.166:8000/live
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", 104 FM SOUSA
+http://stream.7br.com.br:10018/;
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", LIDER 97 FM - SOUSA
+http://wz3.dnip.com.br/lider97/lider97.stream/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", MAX CORREIO FM - SOUSA
+http://stm3.paraibahost.com.br:23558/;
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", LIBERDADE FM - POMBAL
+http://centova14.ciclanohost.com.br:8180/;
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", MARINGÁ 98.7 FM - POMBAL
+http://whmsonic9.ipstm.net:9304/shoutcast?ver=901507
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", OPÇÃO 104 FM - POMBAL
+http://45.43.200.42:12374/;
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", ESTAÇÃO JC - POMBAL
+http://streaming15.hstbr.net:8224/live
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", WEB RÁDIO NO TOQUE DA BOLA - POMBAL
+http://server01.ouvir.radio.br:8060/stream
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", ARAPUAN - CAJAZEIRAS
+http://centova6.ciclanohost.com.br:9346/stream/1/
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", RADIO OESTE AM - CAJAZEIRAS
+http://streaming06.maxcast.com.br:8120/live
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", ARAPUAN - CAMPINA GRANDE
+http://centova6.ciclanohost.com.br:9518/;stream.nsv
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", ARAPUAN - PATOS
+http://centova6.ciclanohost.com.br:9312/;stream.nsv
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", ESPINHARAS AM - PATOS
+http://stm45.srvstm.com:26924/stream/1/
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", ITATIUNGA FM - PATOS
+http://stm5.srvstm.com:12908/;
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", ANOS 70
+http://192.99.150.31:8241/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", ANOS 80
+http://192.99.150.31:8697/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", ANOS 90
+http://192.99.150.31:8056/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", ANOS 2000
+http://6d9a.webradio.upx.net.br:9940/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", AXÉ
+http://192.99.150.31:8305/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", BOSSA NOVA
+http://6d9a.webradio.upx.net.br:9974/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", BREGA
+http://192.99.150.31:9007/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", ELETRÔNICA
+http://192.99.150.31:9095/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", FESTA
+http://6d9a.webradio.upx.net.br:9070/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", FORRÓ
+http://192.99.150.31:9019/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", FUNK
+http://192.99.150.31:9089/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", GOSPEL
+http://192.99.150.31:9101/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", HIP HOP
+http://192.99.150.31:8721/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", HISTORINHA INFANTIL
+http://192.99.150.31:8371/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", KIDS
+http://192.99.150.31:9431/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", JAZZ
+http://192.99.150.31:8042/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", LOUNGE
+http://6d9a.webradio.upx.net.br:9064/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", METAL
+http://6d9a.webradio.upx.net.br:9898/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", MPB
+http://192.99.150.31:8775/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", MÚSICA CLÁSSICA
+http://6d9a.webradio.upx.net.br:9970/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", NEW ROCK
+http://6d9a.webradio.upx.net.br:8028/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", PAGODE
+http://6d9a.webradio.upx.net.br:9061/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", POP RITS
+http://6d9a.webradio.upx.net.br:9046/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", POP ROCK
+http://6d9a.webradio.upx.net.br:8016/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", SERTANEJO UNIVERSITÁRIO
+http://192.99.150.31:9191/stream?
+
+#EXTINF:-1 tvg-logo="https://pbs.twimg.com/profile_images/550137433547747328/_3JibG9G.jpeg" group-title="SOUND!", TRILHAS SONORAS
+http://6d9a.webradio.upx.net.br:9896/stream?
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", SERTANEJO RAIZES
+http://192.99.150.31:9155/stream
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", BOSSA NOVA
+http://6d9a.webradio.upx.net.br:9974/stream
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", RAP NACIONAL
+http://192.99.150.31:8377/stream
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", REGGAE
+http://192.99.150.31:8715/stream
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", ROBERTO CARLOS
+http://192.99.150.31:9137/stream
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", ROCK CLASSICO
+http://192.99.150.31:9125/stream
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", RODEIO
+http://192.99.150.31:9473/stream
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", SERTANEJO
+http://192.99.150.31:9485/stream
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", SMOOTH JAZZ
+http://192.99.150.31:8042/stream
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", TECNO BREGA
+http://192.99.150.31:8989/stream
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", GR6 EXPLODE FM
+http://216.245.204.227:8054/live
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", METROPOLETANA FM - SERTANEJO
+http://m.paineldj6.com.br:8504/stream
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", METROPOLETANA FM - POP
+http://paineldj4.com.br:8510/stream
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", METROPOLETANA FM - FUNK
+http://paineldj4.com.br:8306/stream
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", METROPOLETANA FM - LIGHT
+http://paineldj4.com.br:8594/stream
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", RÁDIO ATLÂNTIDA FM
+http://42747t.lp.azioncdn.net/2747t/a/mp4:access_options/rtmp-live/atl_poa.sdp/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", RÁDIO FARROUPILHA FM/AM
+http://92747t.lp.azioncdn.net/2747t/a/mp4:access_options/rtmp-live/far_poa.sdp/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", RÁDIO GAÚCHA FM/AM
+http://542747t.ls.azioncdn.net/2747t/a/mp4:access_options/rtmp-live/gaucha_rbs.sdp/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", RÁDIO HISTORINHA INFANTIL
+http://192.99.150.31:8371/stream
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", RÁDIO ITAPEMA FM
+http://82747t.lp.azioncdn.net/2747t/a/mp4:access_options/rtmp-live/ita_poa.sdp/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", RÁDIO MIX FM
+http://mixaac.crossradio.com.br:1100/live
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", RÁDIO PRINCESA FM
+http://noasrv.caster.fm:10124/stream
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", RÁDIO ROBERTO CARLOS
+http://192.99.150.31:9137/stream
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", RÁDIO STUDIO DO AMOR
+http://192.99.150.31:8962/stream
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", RÁDIO GAZETA 88.1 FM
+http://gazetafm.crossradio.com.br:8000/stream/2/
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", GLOBO SP FM 92.5*
+http://sh1.upx.com.br:8098/;
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", BAND VALE FM
+http://evpp.mm.uol.com.br/band/bandvale/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", BAND NATIVA FM
+http://evpp.mm.uol.com.br/band/nativa_sp/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", BAND AM-FM SP*
+http://evpp.mm.uol.com.br/band/radiobandeirantes_sp/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", BAND FM SP*
+http://evpp.mm.uol.com.br/band/bandfm_sp/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", BAND NEWS SP*
+http://evpp.mm.uol.com.br/band/bandnewsfm_sp/playlist.m3u8
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", JOVEN PAN SP 100.9*
+http://14103.live.streamtheworld.com/JP_SP_FMAAC.aac
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", MIX 106.3 SP
+http://mixmp3.crossradio.com.br:1102/live
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", GOSPEL FM 89
+http://209.126.127.123:8885/live?1522866827534
+
+#EXTINF:-1 tvg-logo="http://127.0.0.1/" group-title="Sem Categoria", NATIVA SP*
+http://cast.hoost.com.br:8554/stream
+
