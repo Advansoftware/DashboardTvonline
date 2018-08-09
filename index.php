@@ -14,6 +14,7 @@
 <head>
 	<title>Teste streaming</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/animate.css" rel="stylesheet">
 	<link href="videojs/video-js.css" rel="stylesheet">
 	<script src="videojs/jquery.min.js"></script>
 	<script src="js/popper.min.js"></script>
@@ -76,7 +77,7 @@
 		
 		<div class="wrapper" style="z-index: 50;">
 			<div class="videocontent">
-				<video id="video-player" width="600" height="500" class="video-js vjs-default-skin" data-setup='{"fluid": true}'>
+				<video id="video-player"width="600" height="500" class="video-js vjs-default-skin" data-setup='{"fluid": true}'>
 				  <source src="<?= $pegaCanal[0]['link']; ?>"
 				     type="application/x-mpegURL">
 				</video>
@@ -84,7 +85,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-4 my-3">
-				<div class="card navegacao infos">
+				<div id="menu" class="card navegacao infos animated slideInLeft">
 					<div class="card-header text-center text-white">
 						<h5>Todos os Canais</h5>
 					</div>
@@ -111,7 +112,7 @@
 		<footer class="fixed-bottom">
 			<div class="row no-gutters ">
 				<div class="col-12">
-					<div class="card infos">
+					<div class="card infos animated bounceInUp delay-1s">
 						<div class="card-body">
 							<div class="container-fluid">
 								<div class="row no-gutters">
@@ -137,7 +138,6 @@
 
 			player.play();
 			$(".wrapper").css("display","block");
-		
 	</script>
 </body>
 </html>
