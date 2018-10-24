@@ -26,7 +26,7 @@
 </head>
 <body oncontextmenu="return false">
 	<div class="container-fluid">
-		
+
 		<div class="wrapper" style="z-index: 50;">
 			<div class="videocontent">
 				<video id="video-player"width="600" height="500" class="video-js vjs-default-skin" data-setup='{"fluid": true}'>
@@ -64,7 +64,7 @@
 						<div class="card-body">
 							<div class="container-fluid">
 								<div class="row no-gutters">
-									
+
 									<div class="col-3">
 										<div class="imagem-infos d-flex align-items-center">
 										<?php if(isset($pegaCanal[0]['logo'])): ?>
