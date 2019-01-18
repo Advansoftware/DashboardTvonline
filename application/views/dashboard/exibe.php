@@ -2,7 +2,7 @@
 
 	<div class="row  mt-5">
 		<div class="col-md-11 text-right">
-			<button class="btn btn-dark">Adicionar Canal</button>
+			<button class="btn btn-success">Adicionar Canal</button>
 		</div>
 	</div>
 	<div class="row mt-3">
@@ -21,13 +21,17 @@
 			      				<div class="container">
 			      					<div class="row">
 			      						<div class="col-md-7">
-			      							Nome: <?= $canais[$i]['nome'];?>
+			      							Nome: <?= $canais[$i]['nome']?>
 			      						</div>
 			      						<div class="col-md-3 text-right">
 			      							Status
 			      						</div>
 			      						<div class="col-md-2 text-left">
-			      							li
+					                            <input id="someSwitchOptionSuccess<?=$i?>"  name="status" type="checkbox" 
+					                            <?php
+						                             if($canais[$i]['status'] == 1) echo "checked";
+					                            ?> />
+					                            <label for="someSwitchOptionSuccess<?=$i?>"></label>
 			      						</div>
 			      					</div>
 			      					<div class="row">
@@ -41,11 +45,11 @@
 			      					</div>
 			      				</div>
 			      			</div>
-			      			<div class="col-md-1 col-sm-5">
-			      				ed
+			      			<div class="col-md-1 col-sm-5 text-center">
+			      				<i class="fas fa-pen-square fa-1x" alt="Editar" title="Editar"></i>
 			      			</div>
-			      			<div class="col-md-1 col-sm-5">
-			      				De
+			      			<div class="col-md-1 col-sm-5 text-center">
+			      				<i class="fas fa-trash fa-1x" alt="Excluir" title="Excluir"></i>
 			      			</div>		
 			      		</div>
 			      	</div>
@@ -53,7 +57,7 @@
 
 			    </div>
 
-			    <div id="collapseOne<?=$i?>" class="collapse <?php if($i==0) echo "show"; ?>" aria-labelledby="headingOne<?=$i?>" data-parent="#accordionExample">
+			    <div id="collapseOne<?=$i?>" class="collapse" aria-labelledby="headingOne<?=$i?>" data-parent="#accordionExample">
 			      <div class="card-body">
 			       <video id='hls-video<?=$i?>'>
 					    <source src='<?= $canais[$i]['link'];?>' type='application/x-mpegURL'/>
