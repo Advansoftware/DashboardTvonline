@@ -17,7 +17,23 @@
 			$this->load->view('dashboard/menu');
 			$this->load->view('dashboard/exibe');
 		}
+		public function carrega_registro($id){
+			$data['registro'] = $this->Home_model->get_registroById($id);
+			$carga = $this->load->view('dashboard/add', $data, TRUE);
 
+			$arr = array('response' => $carga);
 
+				header('Content-Type: application/json');
+				echo json_encode($arr);
+		}
+
+		public function player($id){
+			$data['registro'] = $this->Home_model->get_registroById($id);
+			$player = $this->load->view('dashboard/player', $data,TRUE);
+
+			$arr = array('response' => $player);
+			header('Content-Type: application/json');
+			echo json_encode($arr);
+		}
 	}
 ?>

@@ -10,6 +10,10 @@
 			$this->db->select('*');
 			return $this->db->get('canais')->result_Array();
 		}
-
+		public function get_registroById($id){
+			$this->db->select('*');
+			$this->db->where("id", $id);
+			return $this->db->get('canais')->row_Array();
+		}
 	}
 ?>

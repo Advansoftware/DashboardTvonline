@@ -11,6 +11,7 @@
 	<link href="<?php echo base_url();?>assets/videojs/video-js.css" rel="stylesheet">
 	<script src="<?php echo base_url();?>assets/videojs/jquery.min.js"></script>
 	<script src="<?php echo base_url();?>assets/js/popper.min.js"></script>
+	<script src="<?php echo base_url();?>assets/js/js.js"></script>
   	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
   	<script src="<?php echo base_url();?>assets/videojs/video.js"></script>
 	<script src="<?php echo base_url();?>assets/videojs/videojs-contrib-hls.js"></script>
