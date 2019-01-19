@@ -8,7 +8,6 @@
 			parent::__construct();
 			$this->load->helper('url_helper');
 			$this->load->helper('url');
-			$this->load->helper('menu_lateral');
 			$this->load->helper('html');
 			$this->load->helper('form');
 			$this->load->library('session');
