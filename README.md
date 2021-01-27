@@ -1,7 +1,5 @@
 <h1>Tvonline</h1>
-
-Sera necessario a correção do codigo base, adição de frameworks mvc como codegniter
-esse projeto vai funcionar uma tv online para qualquer dispositivo, seja movel ou desktop.
+Criação de um pequeno projeto web onde o usuario possa assistir sua vc online e gerenciar seus canais iptv tanto em dispositivos moveis quanto em Tvs e computadores.
 
 
 Esse projeto esta sendo desenvolvido para aprendizado.
