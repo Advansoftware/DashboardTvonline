@@ -48,19 +48,11 @@
         url,
         maxRedirects: 1,
         timeout: 0,
+
       });
-      if (data.status === 302) {
-        // Faz uma nova requisição para o URL redirecionado
-        const newData = await axios.request({
-          method: "GET",
-          url: data.request.responseURL,
-          maxRedirects: 1,
-          timeout: 0,
-        });
-        return getJsonList(newData.data);
-      } else {
+     
         return getJsonList(data.data);
-      }
+      
     } catch (e : any) {
       return e;
     }
