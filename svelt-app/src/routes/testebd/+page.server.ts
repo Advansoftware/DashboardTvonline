@@ -7,9 +7,9 @@ export async function load() {
       .query("SELECT * FROM canais;")
       .then(function ([rows, fields]) {
         //        console.log(rows);
+        
         return rows;
       });
-
     return {
       data: results,
     };
