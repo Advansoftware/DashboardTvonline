@@ -6,15 +6,12 @@ import { readFileSync } from 'fs';
 export default defineConfig({
   plugins: [sveltekit()],
   server: {
-    https: {
-      key: readFileSync('./cert/localhost-key.pem'),
-      cert: readFileSync('./cert/localhost.pem')
-    },
+   
     proxy: {
-      '/api': {
-        target: 'http://atmosbr.online',
+      '/atmosiptv': {
+        target: 'http://atmosbr.online:80',
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/api/, '') // Reescreve as rotas para remover o prefixo "/api"
+        rewrite: path => path.replace(/^\/atmosiptv/, '') // Reescreve as rotas para remover o prefixo "/api"
       }
     }
   }

@@ -2,9 +2,11 @@
 	import { prelistIndexDb } from "$lib/db/prelistIndexDb";
   import { getJsonListFromUrlAsync } from "../helpers/M38uToJson";
   import { v4 as uuidv4 } from "uuid";
+  let loading = false;
 async function getData() {
 		 try {
-      let data = await getJsonListFromUrlAsync("/api/get.php?username=16272011&password=40062316&type=m3u_plus&output=mpegts");
+      loading = true;
+      let data = await getJsonListFromUrlAsync("/atmosiptv/get.php?username=16272011&password=40062316&type=m3u_plus&output=mpegts");
       await prelistIndexDb.prelist.bulkAdd(
         data.map(list => ({
           id: uuidv4(),
@@ -14,6 +16,7 @@ async function getData() {
           url: list.link,
         }))
       );
+      loading = false;
       return data;
     }
     catch (e) {
@@ -22,6 +25,7 @@ async function getData() {
 	}
 
 </script>
+<p>{loading}</p>
 <div class="flex items-center p-4 justify-center text-center h-screen">
  <a href="/sendfile">enviar <span class="material-symbols-outlined">
 send
