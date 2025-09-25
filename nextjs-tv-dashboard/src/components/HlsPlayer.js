@@ -228,29 +228,20 @@ const HlsPlayer = ({
         position: 'relative',
         width,
         height,
-        backgroundColor: theme.palette.background.paper,
-        borderRadius: 2,
-        overflow: 'hidden',
-        boxShadow: theme.shadows[3]
+        backgroundColor: '#000',
+        overflow: 'hidden'
       }}
     >
-      {/* Título do vídeo */}
-      {title && (
-        <Box sx={{ p: 2, borderBottom: `1px solid ${theme.palette.divider}` }}>
-          <Typography variant="h6" component="h2">
-            {title}
-          </Typography>
-        </Box>
-      )}
+      {/* Título removido para experiência fullscreen */}
 
       {/* Container do vídeo */}
-      <Box sx={{ position: 'relative', width: '100%', height: height === 'auto' ? '56.25vw' : height, maxHeight: '70vh' }}>
+      <Box sx={{ position: 'relative', width: '100%', height: height === 'auto' ? '100vh' : height }}>
         <video
           ref={videoRef}
           style={{
             width: '100%',
             height: '100%',
-            objectFit: 'contain',
+            objectFit: 'cover',
             backgroundColor: '#000'
           }}
           poster={poster}

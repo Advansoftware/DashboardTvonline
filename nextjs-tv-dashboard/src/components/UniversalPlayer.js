@@ -75,7 +75,7 @@ const NativeVideoPlayer = ({
   };
 
   return (
-    <Box sx={{ position: 'relative', width, height }}>
+    <Box sx={{ position: 'relative', width, height, margin: 0, padding: 0 }}>
       {isLoading && (
         <Box
           sx={{
@@ -110,7 +110,7 @@ const NativeVideoPlayer = ({
           style={{
             width: '100%',
             height: height === 'auto' ? 'auto' : height,
-            objectFit: 'contain',
+            objectFit: 'cover',
             backgroundColor: '#000'
           }}
           playsInline
