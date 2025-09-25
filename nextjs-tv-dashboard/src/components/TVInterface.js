@@ -24,7 +24,9 @@ import {
   KeyboardArrowDown,
   ArrowBack,
   Dashboard,
-  List
+  List,
+  Fullscreen,
+  FullscreenExit
 } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import UniversalPlayer from './UniversalPlayer';
@@ -46,6 +48,7 @@ const TVInterface = ({ channels = [], initialChannel = null, onBack = null }) =>
   const [showChannelSelector, setShowChannelSelector] = useState(false);
   const [favorites, setFavorites] = useState([]);
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const controlsTimeoutRef = useRef(null);
   const channelBarTimeoutRef = useRef(null);
@@ -172,6 +175,29 @@ const TVInterface = ({ channels = [], initialChannel = null, onBack = null }) =>
     }, 1000);
   }, [channels, currentChannelIndex, isReady, addToHistory, showChannelBarTemporarily]);
 
+  // Toggle fullscreen
+  const toggleFullscreen = useCallback(() => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen()
+        .then(() => setIsFullscreen(true))
+        .catch((err) => console.error('Erro ao entrar em fullscreen:', err));
+    } else {
+      document.exitFullscreen()
+        .then(() => setIsFullscreen(false))
+        .catch((err) => console.error('Erro ao sair do fullscreen:', err));
+    }
+  }, []);
+
+  // Listener para mudanças de fullscreen
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
+
   // Iniciar reprodução manual
   const handlePlayClick = useCallback(() => {
     if (playerRef.current) {
@@ -246,6 +272,10 @@ const TVInterface = ({ channels = [], initialChannel = null, onBack = null }) =>
         case 'l':
         case 'L':
           setShowChannelSelector(true);
+          break;
+        case 'f':
+        case 'F':
+          toggleFullscreen();
           break;
         case 'h':
         case 'H':
@@ -553,6 +583,13 @@ const TVInterface = ({ channels = [], initialChannel = null, onBack = null }) =>
                   sx={{ color: 'white' }}
                 >
                   <Menu />
+                </IconButton>
+                <IconButton
+                  onClick={toggleFullscreen}
+                  sx={{ color: 'white' }}
+                  title={isFullscreen ? 'Sair do modo tela cheia' : 'Entrar em modo tela cheia'}
+                >
+                  {isFullscreen ? <FullscreenExit /> : <Fullscreen />}
                 </IconButton>
                 <IconButton
                   onClick={() => router.push('/dashboard')}
