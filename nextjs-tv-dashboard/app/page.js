@@ -5,6 +5,7 @@ import { Box, CircularProgress, ThemeProvider, CssBaseline } from '@mui/material
 import { useRouter } from 'next/navigation';
 import TVHomeInterface from '../src/components/TVHomeInterface';
 import OptimizedTVHomeInterface from '../src/components/OptimizedTVHomeInterface';
+import StreamingHomeInterface from '../src/components/StreamingHomeInterface';
 import { useOptimizedIndexedDB } from '../src/hooks/useOptimizedIndexedDB';
 import { darkTheme } from '../src/theme/theme';
 
@@ -96,23 +97,15 @@ export default function Home() {
   // Decidir qual interface usar baseado na quantidade de canais
   const useOptimizedInterface = channels.length >= OPTIMIZATION_THRESHOLD;
 
-  // Show Home Interface (Netflix/Globo Play style)
+  // Show Home Interface (Streaming style like Globoplay)
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      {useOptimizedInterface ? (
-        <OptimizedTVHomeInterface
-          channels={channels}
-          onChannelSelect={handleChannelSelect}
-          onStartTV={handleStartTV}
-        />
-      ) : (
-        <TVHomeInterface
-          channels={channels}
-          onChannelSelect={handleChannelSelect}
-          onStartTV={handleStartTV}
-        />
-      )}
+      <StreamingHomeInterface
+        channels={channels}
+        onChannelSelect={handleChannelSelect}
+        onNavigateToDashboard={() => router.push('/dashboard')}
+      />
     </ThemeProvider>
   );
 }
