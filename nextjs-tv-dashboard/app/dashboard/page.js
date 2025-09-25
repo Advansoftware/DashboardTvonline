@@ -61,7 +61,7 @@ import { useRouter } from 'next/navigation';
 
 import MainLayout from '../../src/components/MainLayout';
 import ChannelGrid from '../../src/components/ChannelGrid';
-import HlsPlayer from '../../src/components/HlsPlayer';
+import UniversalPlayer from '../../src/components/UniversalPlayer';
 import UploadModal from '../../src/components/UploadModal';
 import { useIndexedDB } from '../../src/hooks/useIndexedDB';
 import { parseM3U8List, updatePlaylistIntelligently, reclassifyChannels } from '../../src/utils/m3u8Utils';
@@ -115,6 +115,8 @@ export default function Dashboard() {
   }, [isReady, getChannels, getPlaylists]);
 
   const handleChannelSelect = (channel) => {
+    console.log('Canal selecionado:', channel);
+    console.log('URL do canal:', channel.url || channel.link);
     setSelectedChannel(channel);
     setIsPlayerOpen(true);
   };
@@ -822,21 +824,20 @@ export default function Dashboard() {
           }}
         >
           <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1 }}>
-            <Typography variant="h6">
-              {selectedChannel?.name}
-            </Typography>
+            {selectedChannel?.name}
             <IconButton onClick={handleClosePlayer}>
               <Close />
             </IconButton>
           </DialogTitle>
           <DialogContent sx={{ p: 0 }}>
             {selectedChannel && (
-              <HlsPlayer
-                url={selectedChannel.url}
+              <UniversalPlayer
+                url={selectedChannel.url || selectedChannel.link}
                 title={selectedChannel.name}
-                poster={selectedChannel.logo}
+                poster={selectedChannel.logo || selectedChannel.image}
                 autoPlay={true}
                 height="500px"
+                contentType={selectedChannel.type === 'vod' ? 'vod' : null}
               />
             )}
           </DialogContent>

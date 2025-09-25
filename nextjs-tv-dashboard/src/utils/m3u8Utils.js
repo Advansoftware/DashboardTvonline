@@ -128,6 +128,9 @@ export const parseM3U8List = (content) => {
       if (nome && link) {
         // Identificar tipo de conteúdo usando URL para análise mais precisa
         const type = identifyContentType(nome, grupo, link);
+        
+        // Detectar formato do arquivo para auxiliar o player
+        const format = detectStreamFormat(link);
 
         channels.push({
           name: nome.trim(),
@@ -136,6 +139,7 @@ export const parseM3U8List = (content) => {
           link: link,
           url: link, // Alias para compatibilidade
           type: type, // 'live' para canais de TV, 'vod' para filmes/séries
+          format: format, // 'hls', 'vod', 'dash', 'unknown'
           id: `${nome.trim()}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
           addedAt: new Date().toISOString()
         });
@@ -369,4 +373,45 @@ export const validateCategorization = (channels) => {
   });
 
   return validation;
+};
+
+// Detectar formato de streaming baseado na URL
+export const detectStreamFormat = (url) => {
+  if (!url) return 'unknown';
+  
+  const urlLower = url.toLowerCase();
+  
+  // Extensões de arquivo VOD (arquivos diretos)
+  const vodExtensions = [
+    '.mp4', '.mkv', '.avi', '.mov', '.wmv', '.flv', '.webm', '.m4v',
+    '.3gp', '.ts', '.mpg', '.mpeg', '.f4v', '.asf', '.divx', '.xvid'
+  ];
+  
+  // Indicadores de streaming HLS
+  const hlsIndicators = [
+    '.m3u8', '/playlist.m3u8', '/live/', '/stream/'
+  ];
+  
+  // Indicadores de streaming DASH
+  const dashIndicators = [
+    '.mpd', '/manifest.mpd'
+  ];
+  
+  // Verificar HLS primeiro (mais comum em IPTV)
+  if (hlsIndicators.some(indicator => urlLower.includes(indicator))) {
+    return 'hls';
+  }
+  
+  // Verificar DASH
+  if (dashIndicators.some(indicator => urlLower.includes(indicator))) {
+    return 'dash';
+  }
+  
+  // Verificar VOD por extensão
+  if (vodExtensions.some(ext => urlLower.includes(ext))) {
+    return 'vod';
+  }
+  
+  // Se não detectar, assumir HLS por padrão (comum em IPTV)
+  return 'hls';
 };

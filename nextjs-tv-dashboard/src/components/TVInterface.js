@@ -27,7 +27,7 @@ import {
   List
 } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
-import HlsPlayer from './HlsPlayer';
+import UniversalPlayer from './UniversalPlayer';
 import TVChannelSelector from './TVChannelSelector';
 import { useIndexedDB } from '../hooks/useIndexedDB';
 
@@ -322,7 +322,7 @@ const TVInterface = ({ channels = [], initialChannel = null, onBack = null }) =>
         onMouseEnter={showControlsTemporarily}
       >
         {/* Player de vídeo */}
-        <HlsPlayer
+        <UniversalPlayer
           ref={playerRef}
           url={currentChannel.url}
           title={currentChannel.name}
@@ -330,6 +330,7 @@ const TVInterface = ({ channels = [], initialChannel = null, onBack = null }) =>
           controls={false}
           width="100%"
           height="100vh"
+          contentType={currentChannel.type === 'vod' ? 'vod' : null}
         />
 
         {/* Barra de canais */}

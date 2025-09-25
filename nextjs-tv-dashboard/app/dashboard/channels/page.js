@@ -62,7 +62,7 @@ import {
 import { useRouter } from 'next/navigation';
 import MainLayout from '../../../src/components/MainLayout';
 import ChannelGrid from '../../../src/components/ChannelGrid';
-import HlsPlayer from '../../../src/components/HlsPlayer';
+import UniversalPlayer from '../../../src/components/UniversalPlayer';
 import { useIndexedDB } from '../../../src/hooks/useIndexedDB';
 
 export default function ChannelsPage() {
@@ -521,19 +521,20 @@ export default function ChannelsPage() {
           fullWidth
         >
           <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Typography variant="h6">{selectedChannel?.name}</Typography>
+            {selectedChannel?.name}
             <IconButton onClick={() => setIsPlayerOpen(false)}>
               <Close />
             </IconButton>
           </DialogTitle>
-          <DialogContent sx={{ p: 0 }}>
+                    <DialogContent sx={{ p: 0 }}>
             {selectedChannel && (
-              <HlsPlayer
-                url={selectedChannel.url}
+              <UniversalPlayer
+                url={selectedChannel.url || selectedChannel.link}
                 title={selectedChannel.name}
-                poster={selectedChannel.logo}
+                poster={selectedChannel.logo || selectedChannel.image}
                 autoPlay={true}
                 height="500px"
+                contentType={selectedChannel.type === 'vod' ? 'vod' : null}
               />
             )}
           </DialogContent>
