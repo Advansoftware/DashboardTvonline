@@ -57,6 +57,7 @@ import { useRouter } from 'next/navigation';
 import MainLayout from '../../src/components/MainLayout';
 import ChannelGrid from '../../src/components/ChannelGrid';
 import HlsPlayer from '../../src/components/HlsPlayer';
+import UploadModal from '../../src/components/UploadModal';
 import { useIndexedDB } from '../../src/hooks/useIndexedDB';
 import { parseM3U8List } from '../../src/utils/m3u8Utils';
 
@@ -70,10 +71,6 @@ export default function Dashboard() {
   const [selectedChannel, setSelectedChannel] = useState(null);
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
   const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false);
-  const [m3u8Content, setM3u8Content] = useState('');
-  const [playlistName, setPlaylistName] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [uploadError, setUploadError] = useState('');
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
 
   // Carregar dados
@@ -113,70 +110,9 @@ export default function Dashboard() {
     setSelectedChannel(null);
   };
 
-  const handleUploadM3U8 = async () => {
-    if (!m3u8Content.trim()) {
-      setUploadError('Por favor, cole o conteúdo M3U8');
-      return;
-    }
-
-    if (!playlistName.trim()) {
-      setUploadError('Por favor, insira um nome para a playlist');
-      return;
-    }
-
-    setIsLoading(true);
-    setUploadError('');
-
-    try {
-      const parsedChannels = parseM3U8List(m3u8Content);
-      if (parsedChannels.length === 0) {
-        setUploadError('Nenhum canal encontrado no conteúdo M3U8');
-        return;
-      }
-
-      // Adicionar IDs únicos e timestamp
-      const channelsWithIds = parsedChannels.map((channel, index) => ({
-        ...channel,
-        id: `channel_${Date.now()}_${index}`,
-        playlistId: `playlist_${Date.now()}`,
-        addedAt: new Date().toISOString()
-      }));
-
-      // Salvar playlist info
-      const playlistInfo = {
-        id: `playlist_${Date.now()}`,
-        name: playlistName,
-        channelCount: channelsWithIds.length,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        status: 'active'
-      };
-
-      // Salvar canais e playlist
-      const updatedChannels = [...channels, ...channelsWithIds];
-      const updatedPlaylists = [...playlists, playlistInfo];
-
-      await saveChannels(channelsWithIds);
-      await savePlaylist(playlistInfo);
-
-      setChannels(updatedChannels);
-      setPlaylists(updatedPlaylists);
-
-      setIsUploadDialogOpen(false);
-      setM3u8Content('');
-      setPlaylistName('');
-      setUploadError('');
-
-      setSnackbar({
-        open: true,
-        message: 'Playlist adicionada com sucesso!',
-        severity: 'success'
-      });
-    } catch (error) {
-      setUploadError('Erro ao processar M3U8: ' + error.message);
-    } finally {
-      setIsLoading(false);
-    }
+  const handlePlaylistAdded = (newPlaylist) => {
+    // Recarregar dados quando nova playlist for adicionada
+    refreshData();
   };
 
   const handleDeletePlaylist = async (playlistId) => {
@@ -468,17 +404,10 @@ export default function Dashboard() {
         {/* Channels Section */}
         <Card sx={{ mb: 4 }}>
           <CardContent>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+            <Box sx={{ mb: 3 }}>
               <Typography variant="h5" component="h2" sx={{ fontWeight: 600 }}>
                 Canais IPTV ({channels.length})
               </Typography>
-              <Button
-                variant="outlined"
-                startIcon={<Add />}
-                onClick={() => setIsUploadDialogOpen(true)}
-              >
-                Adicionar Lista
-              </Button>
             </Box>
 
             <ChannelGrid
@@ -578,73 +507,12 @@ export default function Dashboard() {
           <Add />
         </Fab>
 
-        {/* Upload Dialog */}
-        <Dialog
+        {/* Upload Modal */}
+        <UploadModal
           open={isUploadDialogOpen}
-          onClose={() => {
-            setIsUploadDialogOpen(false);
-            setUploadError('');
-            setM3u8Content('');
-            setPlaylistName('');
-          }}
-          maxWidth="md"
-          fullWidth
-        >
-          <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            Adicionar Playlist M3U8
-            <IconButton onClick={() => {
-              setIsUploadDialogOpen(false);
-              setUploadError('');
-            }}>
-              <Close />
-            </IconButton>
-          </DialogTitle>
-          <DialogContent>
-            <TextField
-              margin="dense"
-              label="Nome da Playlist"
-              fullWidth
-              variant="outlined"
-              value={playlistName}
-              onChange={(e) => setPlaylistName(e.target.value)}
-              placeholder="Ex: Canais Nacionais"
-              sx={{ mb: 2 }}
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              label="Conteúdo M3U8"
-              multiline
-              rows={10}
-              fullWidth
-              variant="outlined"
-              value={m3u8Content}
-              onChange={(e) => setM3u8Content(e.target.value)}
-              placeholder="Cole aqui o conteúdo da sua playlist M3U8..."
-              helperText="Cole o conteúdo completo do arquivo M3U8 ou M3U"
-            />
-            {uploadError && (
-              <Typography color="error" variant="body2" sx={{ mt: 1 }}>
-                {uploadError}
-              </Typography>
-            )}
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={() => {
-              setIsUploadDialogOpen(false);
-              setUploadError('');
-            }}>
-              Cancelar
-            </Button>
-            <Button
-              onClick={handleUploadM3U8}
-              variant="contained"
-              disabled={!m3u8Content.trim() || !playlistName.trim() || isLoading}
-            >
-              {isLoading ? 'Processando...' : 'Adicionar Canais'}
-            </Button>
-          </DialogActions>
-        </Dialog>
+          onClose={() => setIsUploadDialogOpen(false)}
+          onPlaylistAdded={handlePlaylistAdded}
+        />
 
         {/* Player Dialog */}
         <Dialog
