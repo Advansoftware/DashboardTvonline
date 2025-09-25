@@ -8,7 +8,19 @@ import {
   CardContent,
   Typography,
   Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+  Fab,
+  useTheme,
+  alpha,
   IconButton,
+  Tooltip,
+  Stack,
+  Chip,
+  Avatar,
   Table,
   TableBody,
   TableCell,
@@ -16,134 +28,203 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Chip,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
   Alert,
-  Snackbar,
-  useTheme,
-  alpha
+  Snackbar
 } from '@mui/material';
 import {
-  Dashboard as DashboardIcon,
-  Tv,
-  PlaylistPlay,
-  CloudUpload,
-  Delete,
-  Edit,
-  Visibility,
+  PlayArrow,
   Add,
-  Download,
-  Upload,
+  CloudUpload,
+  Tv,
+  Favorite,
   Analytics,
   TrendingUp,
   People,
   Schedule,
-  Storage
+  Close,
+  Edit,
+  Delete,
+  Home,
+  Refresh,
+  PlaylistPlay,
+  Storage,
+  Visibility,
+  Download,
+  Upload
 } from '@mui/icons-material';
+import { useRouter } from 'next/navigation';
 
 import MainLayout from '../../src/components/MainLayout';
+import ChannelGrid from '../../src/components/ChannelGrid';
+import HlsPlayer from '../../src/components/HlsPlayer';
+import { useIndexedDB } from '../../src/hooks/useIndexedDB';
+import { parseM3U8List } from '../../src/utils/m3u8Utils';
 
 export default function Dashboard() {
   const theme = useTheme();
+  const router = useRouter();
+  const { isReady, getChannels, saveChannels, getPlaylists, savePlaylist, deletePlaylist } = useIndexedDB();
+
   const [channels, setChannels] = useState([]);
   const [playlists, setPlaylists] = useState([]);
-  const [isAddPlaylistOpen, setIsAddPlaylistOpen] = useState(false);
-  const [newPlaylistName, setNewPlaylistName] = useState('');
-  const [newPlaylistUrl, setNewPlaylistUrl] = useState('');
+  const [selectedChannel, setSelectedChannel] = useState(null);
+  const [isPlayerOpen, setIsPlayerOpen] = useState(false);
+  const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false);
+  const [m3u8Content, setM3u8Content] = useState('');
+  const [playlistName, setPlaylistName] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
 
+  // Carregar dados
   useEffect(() => {
-    // Carregar dados do localStorage
-    const savedChannels = localStorage.getItem('tv-dashboard-channels');
-    const savedPlaylists = localStorage.getItem('tv-dashboard-playlists');
+    const loadData = async () => {
+      if (!isReady) return;
 
-    if (savedChannels) {
-      setChannels(JSON.parse(savedChannels));
-    }
+      try {
+        const [savedChannels, savedPlaylists] = await Promise.all([
+          getChannels(),
+          getPlaylists()
+        ]);
 
-    if (savedPlaylists) {
-      setPlaylists(JSON.parse(savedPlaylists));
-    } else {
-      // Dados de exemplo para playlists
-      const samplePlaylists = [
-        {
-          id: 'playlist-1',
-          name: 'Canais Nacionais',
-          url: 'https://exemplo.com/nacionais.m3u8',
-          channelCount: 45,
-          lastUpdated: new Date().toISOString(),
-          status: 'active'
-        },
-        {
-          id: 'playlist-2',
-          name: 'Esportes Premium',
-          url: 'https://exemplo.com/esportes.m3u8',
-          channelCount: 23,
-          lastUpdated: new Date(Date.now() - 86400000).toISOString(),
-          status: 'active'
-        }
-      ];
-      setPlaylists(samplePlaylists);
-      localStorage.setItem('tv-dashboard-playlists', JSON.stringify(samplePlaylists));
-    }
-  }, []);
+        setChannels(savedChannels);
+        setPlaylists(savedPlaylists);
+      } catch (error) {
+        console.error('Erro ao carregar dados:', error);
+        // Fallback para localStorage
+        const localChannels = localStorage.getItem('tv-dashboard-channels');
+        const localPlaylists = localStorage.getItem('tv-dashboard-playlists');
 
-  const handleAddPlaylist = () => {
-    if (!newPlaylistName.trim() || !newPlaylistUrl.trim()) {
-      setSnackbar({
-        open: true,
-        message: 'Por favor, preencha todos os campos',
-        severity: 'error'
-      });
+        if (localChannels) setChannels(JSON.parse(localChannels));
+        if (localPlaylists) setPlaylists(JSON.parse(localPlaylists));
+      }
+    };
+
+    loadData();
+  }, [isReady, getChannels, getPlaylists]);
+
+  const handleChannelSelect = (channel) => {
+    setSelectedChannel(channel);
+    setIsPlayerOpen(true);
+  };
+
+  const handleClosePlayer = () => {
+    setIsPlayerOpen(false);
+    setSelectedChannel(null);
+  };
+
+  const handleUploadM3U8 = async () => {
+    if (!m3u8Content.trim()) {
+      setUploadError('Por favor, cole o conteúdo M3U8');
       return;
     }
 
-    const newPlaylist = {
-      id: `playlist-${Date.now()}`,
-      name: newPlaylistName,
-      url: newPlaylistUrl,
-      channelCount: 0,
-      lastUpdated: new Date().toISOString(),
-      status: 'active'
-    };
+    if (!playlistName.trim()) {
+      setUploadError('Por favor, insira um nome para a playlist');
+      return;
+    }
 
-    const updatedPlaylists = [...playlists, newPlaylist];
-    setPlaylists(updatedPlaylists);
-    localStorage.setItem('tv-dashboard-playlists', JSON.stringify(updatedPlaylists));
+    setIsLoading(true);
+    setUploadError('');
 
-    setNewPlaylistName('');
-    setNewPlaylistUrl('');
-    setIsAddPlaylistOpen(false);
-    setSnackbar({
-      open: true,
-      message: 'Playlist adicionada com sucesso!',
-      severity: 'success'
-    });
+    try {
+      const parsedChannels = parseM3U8List(m3u8Content);
+      if (parsedChannels.length === 0) {
+        setUploadError('Nenhum canal encontrado no conteúdo M3U8');
+        return;
+      }
+
+      // Adicionar IDs únicos e timestamp
+      const channelsWithIds = parsedChannels.map((channel, index) => ({
+        ...channel,
+        id: `channel_${Date.now()}_${index}`,
+        playlistId: `playlist_${Date.now()}`,
+        addedAt: new Date().toISOString()
+      }));
+
+      // Salvar playlist info
+      const playlistInfo = {
+        id: `playlist_${Date.now()}`,
+        name: playlistName,
+        channelCount: channelsWithIds.length,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        status: 'active'
+      };
+
+      // Salvar canais e playlist
+      const updatedChannels = [...channels, ...channelsWithIds];
+      const updatedPlaylists = [...playlists, playlistInfo];
+
+      await saveChannels(channelsWithIds);
+      await savePlaylist(playlistInfo);
+
+      setChannels(updatedChannels);
+      setPlaylists(updatedPlaylists);
+
+      setIsUploadDialogOpen(false);
+      setM3u8Content('');
+      setPlaylistName('');
+      setUploadError('');
+
+      setSnackbar({
+        open: true,
+        message: 'Playlist adicionada com sucesso!',
+        severity: 'success'
+      });
+    } catch (error) {
+      setUploadError('Erro ao processar M3U8: ' + error.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleDeletePlaylist = (playlistId) => {
-    const updatedPlaylists = playlists.filter(p => p.id !== playlistId);
-    setPlaylists(updatedPlaylists);
-    localStorage.setItem('tv-dashboard-playlists', JSON.stringify(updatedPlaylists));
-    setSnackbar({
-      open: true,
-      message: 'Playlist removida com sucesso!',
-      severity: 'success'
-    });
+  const handleDeletePlaylist = async (playlistId) => {
+    try {
+      await deletePlaylist(playlistId);
+      const updatedPlaylists = playlists.filter(p => p.id !== playlistId);
+      setPlaylists(updatedPlaylists);
+
+      setSnackbar({
+        open: true,
+        message: 'Playlist removida com sucesso!',
+        severity: 'success'
+      });
+    } catch (error) {
+      setSnackbar({
+        open: true,
+        message: 'Erro ao remover playlist',
+        severity: 'error'
+      });
+    }
+  };
+
+  const refreshData = async () => {
+    if (!isReady) return;
+
+    try {
+      const [savedChannels, savedPlaylists] = await Promise.all([
+        getChannels(),
+        getPlaylists()
+      ]);
+
+      setChannels(savedChannels);
+      setPlaylists(savedPlaylists);
+
+      setSnackbar({
+        open: true,
+        message: 'Dados atualizados!',
+        severity: 'success'
+      });
+    } catch (error) {
+      console.error('Erro ao atualizar dados:', error);
+    }
   };
 
   // Estatísticas
   const totalChannels = channels.length;
   const totalPlaylists = playlists.length;
-  const activeChannels = channels.filter(ch => ch.link).length;
+  const activeChannels = channels.filter(ch => ch.url).length;
   const groupCount = new Set(channels.map(ch => ch.group).filter(Boolean)).size;
 
   const statsCards = [
@@ -155,25 +236,25 @@ export default function Dashboard() {
       change: '+12%'
     },
     {
-      title: 'Playlists Ativas',
+      title: 'Playlists',
       value: totalPlaylists,
       icon: <PlaylistPlay />,
       color: theme.palette.secondary.main,
       change: '+3'
     },
     {
-      title: 'Canais Ativos',
-      value: activeChannels,
-      icon: <Analytics />,
-      color: theme.palette.success.main,
-      change: '98%'
+      title: 'Favoritos',
+      value: Math.floor(totalChannels * 0.15),
+      icon: <Favorite />,
+      color: theme.palette.error.main,
+      change: '+5%'
     },
     {
-      title: 'Categorias',
+      title: 'Grupos',
       value: groupCount,
-      icon: <Storage />,
+      icon: <People />,
       color: theme.palette.warning.main,
-      change: `+${groupCount}`
+      change: '+2'
     }
   ];
 
@@ -181,13 +262,38 @@ export default function Dashboard() {
     <MainLayout currentPage="dashboard">
       <Box sx={{ width: '100%' }}>
         {/* Header */}
-        <Box sx={{ mb: 4 }}>
-          <Typography variant="h4" component="h1" gutterBottom sx={{ fontWeight: 700 }}>
-            Dashboard Administrativo
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary">
-            Gerencie suas playlists IPTV e monitore estatísticas
-          </Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
+          <Box>
+            <Typography variant="h3" component="h1" gutterBottom sx={{ fontWeight: 700 }}>
+              Dashboard IPTV
+            </Typography>
+            <Typography variant="h6" color="text.secondary">
+              Gerencie suas playlists e canais
+            </Typography>
+          </Box>
+          <Stack direction="row" spacing={2}>
+            <Button
+              variant="outlined"
+              startIcon={<Home />}
+              onClick={() => router.push('/')}
+            >
+              Ver TV
+            </Button>
+            <Button
+              variant="outlined"
+              startIcon={<Refresh />}
+              onClick={refreshData}
+            >
+              Atualizar
+            </Button>
+            <Button
+              variant="contained"
+              startIcon={<CloudUpload />}
+              onClick={() => setIsUploadDialogOpen(true)}
+            >
+              Adicionar Playlist
+            </Button>
+          </Stack>
         </Box>
 
         {/* Stats Cards */}
@@ -239,6 +345,39 @@ export default function Dashboard() {
           ))}
         </Grid>
 
+        {/* Playlists Section */}
+        {playlists.length > 0 && (
+          <Card sx={{ mb: 4 }}>
+            <CardContent>
+              <Typography variant="h5" component="h2" sx={{ fontWeight: 600, mb: 3 }}>
+                Playlists
+              </Typography>
+              <Stack direction="row" spacing={2} sx={{ flexWrap: 'wrap', gap: 2 }}>
+                {playlists.map((playlist) => (
+                  <Chip
+                    key={playlist.id}
+                    avatar={<Avatar>{playlist.channelCount}</Avatar>}
+                    label={playlist.name}
+                    variant="outlined"
+                    onDelete={() => {
+                      if (confirm(`Deseja excluir a playlist "${playlist.name}"?`)) {
+                        handleDeletePlaylist(playlist.id);
+                      }
+                    }}
+                    deleteIcon={<Delete />}
+                    sx={{
+                      '& .MuiChip-avatar': {
+                        bgcolor: theme.palette.primary.main,
+                        color: 'white'
+                      }
+                    }}
+                  />
+                ))}
+              </Stack>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Playlists Management */}
         <Card sx={{ mb: 4 }}>
           <CardContent>
@@ -249,7 +388,7 @@ export default function Dashboard() {
               <Button
                 variant="contained"
                 startIcon={<Add />}
-                onClick={() => setIsAddPlaylistOpen(true)}
+                onClick={() => setIsUploadDialogOpen(true)}
               >
                 Nova Playlist
               </Button>
@@ -315,7 +454,11 @@ export default function Dashboard() {
                           <IconButton
                             size="small"
                             color="error"
-                            onClick={() => handleDeletePlaylist(playlist.id)}
+                            onClick={() => {
+                              if (confirm(`Deseja excluir a playlist "${playlist.name}"?`)) {
+                                handleDeletePlaylist(playlist.id);
+                              }
+                            }}
                           >
                             <Delete />
                           </IconButton>
@@ -326,6 +469,43 @@ export default function Dashboard() {
                 </TableBody>
               </Table>
             </TableContainer>
+          </CardContent>
+        </Card>
+
+        {/* Channels Section */}
+        <Card sx={{ mb: 4 }}>
+          <CardContent>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+              <Typography variant="h5" component="h2" sx={{ fontWeight: 600 }}>
+                Canais IPTV ({channels.length})
+              </Typography>
+              <Button
+                variant="outlined"
+                startIcon={<Add />}
+                onClick={() => setIsUploadDialogOpen(true)}
+              >
+                Adicionar Lista
+              </Button>
+            </Box>
+
+            <ChannelGrid
+              channels={channels}
+              onChannelSelect={handleChannelSelect}
+              showOptions={true}
+              onChannelOptions={(channel, action) => {
+                console.log('Channel action:', action, channel);
+                if (action === 'edit') {
+                  // Implementar edição
+                } else if (action === 'delete') {
+                  // Implementar exclusão
+                  if (confirm(`Deseja excluir o canal "${channel.name}"?`)) {
+                    const updatedChannels = channels.filter(ch => ch.id !== channel.id);
+                    setChannels(updatedChannels);
+                    saveChannels(updatedChannels);
+                  }
+                }
+              }}
+            />
           </CardContent>
         </Card>
 
@@ -390,41 +570,118 @@ export default function Dashboard() {
           </Grid>
         </Grid>
 
-        {/* Add Playlist Dialog */}
+        {/* Floating Action Button */}
+        <Fab
+          color="primary"
+          aria-label="add"
+          onClick={() => setIsUploadDialogOpen(true)}
+          sx={{
+            position: 'fixed',
+            bottom: 24,
+            right: 24,
+            zIndex: 1000
+          }}
+        >
+          <Add />
+        </Fab>
+
+        {/* Upload Dialog */}
         <Dialog
-          open={isAddPlaylistOpen}
-          onClose={() => setIsAddPlaylistOpen(false)}
-          maxWidth="sm"
+          open={isUploadDialogOpen}
+          onClose={() => {
+            setIsUploadDialogOpen(false);
+            setUploadError('');
+            setM3u8Content('');
+            setPlaylistName('');
+          }}
+          maxWidth="md"
           fullWidth
         >
-          <DialogTitle>Adicionar Nova Playlist</DialogTitle>
+          <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            Adicionar Playlist M3U8
+            <IconButton onClick={() => {
+              setIsUploadDialogOpen(false);
+              setUploadError('');
+            }}>
+              <Close />
+            </IconButton>
+          </DialogTitle>
           <DialogContent>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: 1 }}>
-              <TextField
-                label="Nome da Playlist"
-                fullWidth
-                value={newPlaylistName}
-                onChange={(e) => setNewPlaylistName(e.target.value)}
-                placeholder="Ex: Canais Nacionais"
-              />
-              <TextField
-                label="URL da Playlist M3U8"
-                fullWidth
-                value={newPlaylistUrl}
-                onChange={(e) => setNewPlaylistUrl(e.target.value)}
-                placeholder="https://exemplo.com/playlist.m3u8"
-                type="url"
-              />
-            </Box>
+            <TextField
+              margin="dense"
+              label="Nome da Playlist"
+              fullWidth
+              variant="outlined"
+              value={playlistName}
+              onChange={(e) => setPlaylistName(e.target.value)}
+              placeholder="Ex: Canais Nacionais"
+              sx={{ mb: 2 }}
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              label="Conteúdo M3U8"
+              multiline
+              rows={10}
+              fullWidth
+              variant="outlined"
+              value={m3u8Content}
+              onChange={(e) => setM3u8Content(e.target.value)}
+              placeholder="Cole aqui o conteúdo da sua playlist M3U8..."
+              helperText="Cole o conteúdo completo do arquivo M3U8 ou M3U"
+            />
+            {uploadError && (
+              <Typography color="error" variant="body2" sx={{ mt: 1 }}>
+                {uploadError}
+              </Typography>
+            )}
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => setIsAddPlaylistOpen(false)}>
+            <Button onClick={() => {
+              setIsUploadDialogOpen(false);
+              setUploadError('');
+            }}>
               Cancelar
             </Button>
-            <Button onClick={handleAddPlaylist} variant="contained">
-              Adicionar
+            <Button
+              onClick={handleUploadM3U8}
+              variant="contained"
+              disabled={!m3u8Content.trim() || !playlistName.trim() || isLoading}
+            >
+              {isLoading ? 'Processando...' : 'Adicionar Canais'}
             </Button>
           </DialogActions>
+        </Dialog>
+
+        {/* Player Dialog */}
+        <Dialog
+          open={isPlayerOpen}
+          onClose={handleClosePlayer}
+          maxWidth="lg"
+          fullWidth
+          PaperProps={{
+            sx: { borderRadius: 3 }
+          }}
+        >
+          <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1 }}>
+            <Typography variant="h6">
+              {selectedChannel?.name}
+            </Typography>
+            <IconButton onClick={handleClosePlayer}>
+              <Close />
+            </IconButton>
+          </DialogTitle>
+          <DialogContent sx={{ p: 0 }}>
+            {selectedChannel && (
+              <HlsPlayer
+                url={selectedChannel.url}
+                title={selectedChannel.name}
+                poster={selectedChannel.logo}
+                autoPlay={true}
+                height="500px"
+              />
+            )}
+          </DialogContent>
         </Dialog>
 
         {/* Snackbar */}

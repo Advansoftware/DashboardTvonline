@@ -161,7 +161,7 @@ const ChannelGrid = ({ channels, onChannelSelect, onChannelOptions }) => {
               <Box sx={{ position: 'relative', paddingTop: '56.25%' }}>
                 <CardMedia
                   component="img"
-                  image={channel.image || '/api/placeholder/320/180'}
+                  image={channel.image || channel.logo || 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDMyMCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIiBmaWxsPSIjM0Y0MDQ2Ii8+Cjx0ZXh0IHg9IjE2MCIgeT0iOTAiIGZpbGw9IiNGRkZGRkYiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+Q2FuYWw8L3RleHQ+Cjwvc3ZnPg=='}
                   alt={channel.name}
                   sx={{
                     position: 'absolute',
@@ -172,7 +172,9 @@ const ChannelGrid = ({ channels, onChannelSelect, onChannelOptions }) => {
                     objectFit: 'cover',
                   }}
                   onError={(e) => {
-                    e.target.src = '/api/placeholder/320/180';
+                    if (!e.target.src.includes('data:image/svg+xml')) {
+                      e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDMyMCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIiBmaWxsPSIjM0Y0MDQ2Ii8+Cjx0ZXh0IHg9IjE2MCIgeT0iOTAiIGZpbGw9IiNGRkZGRkYiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+Q2FuYWw8L3RleHQ+Cjwvc3ZnPg==';
+                    }
                   }}
                 />
 

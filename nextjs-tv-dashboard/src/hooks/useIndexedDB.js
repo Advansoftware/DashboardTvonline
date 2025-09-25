@@ -58,7 +58,7 @@ class IndexedDBManager {
 
   async getAllFromStore(storeName) {
     if (!this.db) await this.init();
-    
+
     return new Promise((resolve, reject) => {
       const transaction = this.db.transaction([storeName], 'readonly');
       const store = transaction.objectStore(storeName);
@@ -133,21 +133,21 @@ export const useIndexedDB = () => {
 
   return {
     isReady,
-    
+
     // Canais
     async getChannels() {
       return await dbManager.getAllFromStore(STORES.CHANNELS);
     },
-    
+
     async saveChannel(channel) {
       return await dbManager.putToStore(STORES.CHANNELS, channel);
     },
-    
+
     async saveChannels(channels) {
       const promises = channels.map(channel => dbManager.putToStore(STORES.CHANNELS, channel));
       return await Promise.all(promises);
     },
-    
+
     async deleteChannel(id) {
       return await dbManager.deleteFromStore(STORES.CHANNELS, id);
     },
@@ -156,11 +156,11 @@ export const useIndexedDB = () => {
     async getPlaylists() {
       return await dbManager.getAllFromStore(STORES.PLAYLISTS);
     },
-    
+
     async savePlaylist(playlist) {
       return await dbManager.putToStore(STORES.PLAYLISTS, playlist);
     },
-    
+
     async deletePlaylist(id) {
       return await dbManager.deleteFromStore(STORES.PLAYLISTS, id);
     },
@@ -168,7 +168,7 @@ export const useIndexedDB = () => {
     // Configurações
     async getSetting(key) {
       if (!dbManager.db) await dbManager.init();
-      
+
       return new Promise((resolve, reject) => {
         const transaction = dbManager.db.transaction([STORES.SETTINGS], 'readonly');
         const store = transaction.objectStore(STORES.SETTINGS);
@@ -178,7 +178,7 @@ export const useIndexedDB = () => {
         request.onsuccess = () => resolve(request.result?.value);
       });
     },
-    
+
     async setSetting(key, value) {
       return await dbManager.putToStore(STORES.SETTINGS, { key, value });
     },
@@ -191,18 +191,18 @@ export const useIndexedDB = () => {
         timestamp
       });
     },
-    
+
     async getHistory(limit = 10) {
       if (!dbManager.db) await dbManager.init();
-      
+
       return new Promise((resolve, reject) => {
         const transaction = dbManager.db.transaction([STORES.HISTORY], 'readonly');
         const store = transaction.objectStore(STORES.HISTORY);
         const index = store.index('timestamp');
         const request = index.openCursor(null, 'prev');
-        
+
         const results = [];
-        
+
         request.onerror = () => reject(request.error);
         request.onsuccess = (event) => {
           const cursor = event.target.result;
@@ -217,10 +217,12 @@ export const useIndexedDB = () => {
     },
 
     async getLastWatchedChannel() {
-      const history = await this.getHistory(1);
+      const history = await dbManager.getAllFromStore(STORES.HISTORY);
       if (history.length > 0) {
-        const channels = await this.getChannels();
-        return channels.find(ch => ch.id === history[0].channelId);
+        // Ordenar por timestamp (mais recente primeiro)
+        const sortedHistory = history.sort((a, b) => b.timestamp - a.timestamp);
+        const channels = await dbManager.getAllFromStore(STORES.CHANNELS);
+        return channels.find(ch => ch.id === sortedHistory[0].channelId);
       }
       return null;
     }
