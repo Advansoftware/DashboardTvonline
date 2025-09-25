@@ -526,7 +526,7 @@ export default function ChannelsPage() {
               <Close />
             </IconButton>
           </DialogTitle>
-                    <DialogContent sx={{ p: 0 }}>
+          <DialogContent sx={{ p: 0 }}>
             {selectedChannel && (
               <UniversalPlayer
                 url={selectedChannel.url || selectedChannel.link}

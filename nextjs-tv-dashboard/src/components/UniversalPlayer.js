@@ -13,57 +13,57 @@ import HlsPlayer from './HlsPlayer';
 // Função para detectar tipo de conteúdo baseado na URL
 const detectContentType = (url) => {
   if (!url) return 'unknown';
-  
+
   const urlLower = url.toLowerCase();
-  
+
   // Extensões de arquivo VOD (arquivos diretos)
   const vodExtensions = [
     '.mp4', '.mkv', '.avi', '.mov', '.wmv', '.flv', '.webm', '.m4v',
     '.3gp', '.ts', '.mpg', '.mpeg', '.f4v', '.asf', '.divx', '.xvid'
   ];
-  
+
   // Indicadores de streaming HLS
   const hlsIndicators = [
     '.m3u8', '/playlist.m3u8', '/live/', '/stream/'
   ];
-  
+
   // Indicadores de streaming DASH
   const dashIndicators = [
     '.mpd', '/manifest.mpd'
   ];
-  
+
   // Verificar HLS primeiro (mais comum em IPTV)
   if (hlsIndicators.some(indicator => urlLower.includes(indicator))) {
     return 'hls';
   }
-  
+
   // Verificar DASH
   if (dashIndicators.some(indicator => urlLower.includes(indicator))) {
     return 'dash';
   }
-  
+
   // Verificar VOD por extensão
   if (vodExtensions.some(ext => urlLower.includes(ext))) {
     return 'vod';
   }
-  
+
   // Se não detectar, tentar HLS por padrão (comum em IPTV)
   return 'hls';
 };
 
 // Player de vídeo HTML5 nativo para VOD
-const NativeVideoPlayer = ({ 
-  url, 
-  title, 
-  poster, 
-  autoPlay = false, 
-  controls = true, 
-  width = '100%', 
-  height = 'auto' 
+const NativeVideoPlayer = ({
+  url,
+  title,
+  poster,
+  autoPlay = false,
+  controls = true,
+  width = '100%',
+  height = 'auto'
 }) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   const handleLoadStart = () => setIsLoading(true);
   const handleLoadedData = () => setIsLoading(false);
   const handleError = (e) => {
@@ -86,7 +86,7 @@ const NativeVideoPlayer = ({
           <CircularProgress />
         </Box>
       )}
-      
+
       {error ? (
         <Alert severity="error" sx={{ m: 2 }}>
           {error}
@@ -144,24 +144,24 @@ const UniversalPlayer = ({
     }
 
     setIsDetecting(true);
-    
+
     // Usar tipo manual se fornecido, senão detectar
     const type = contentType || detectContentType(url);
     setDetectedType(type);
     setIsDetecting(false);
-    
+
     console.log(`🎥 Player Universal - URL: ${url}`);
     console.log(`🎯 Tipo detectado: ${type}`);
-    
+
   }, [url, contentType]);
 
   if (isDetecting) {
     return (
-      <Box 
-        sx={{ 
-          display: 'flex', 
-          justifyContent: 'center', 
-          alignItems: 'center', 
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
           height: height === 'auto' ? '200px' : height,
           backgroundColor: theme.palette.background.paper
         }}
@@ -196,7 +196,7 @@ const UniversalPlayer = ({
           height={height}
         />
       );
-      
+
     case 'vod':
       return (
         <>
@@ -216,7 +216,7 @@ const UniversalPlayer = ({
           />
         </>
       );
-      
+
     case 'dash':
       return (
         <Alert severity="info" sx={{ m: 2 }}>
@@ -225,7 +225,7 @@ const UniversalPlayer = ({
           URL: {url}
         </Alert>
       );
-      
+
     default:
       return (
         <Box>
