@@ -33,12 +33,14 @@ import {
   LightMode,
   Home
 } from '@mui/icons-material';
+import { useRouter } from 'next/navigation';
 import { useTheme as useCustomTheme } from '../theme/ThemeProvider';
 
 const DRAWER_WIDTH = 280;
 
 const MainLayout = ({ children, currentPage = 'dashboard' }) => {
   const theme = useTheme();
+  const router = useRouter();
   const { isDarkMode, toggleTheme } = useCustomTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -47,15 +49,22 @@ const MainLayout = ({ children, currentPage = 'dashboard' }) => {
     setMobileOpen(!mobileOpen);
   };
 
+  const handleNavigation = (href) => {
+    router.push(href);
+    if (isMobile) {
+      setMobileOpen(false);
+    }
+  };
+
   const menuItems = [
     { id: 'home', label: 'Início', icon: <Home />, href: '/' },
     { id: 'dashboard', label: 'Dashboard', icon: <DashboardIcon />, href: '/dashboard' },
-    { id: 'channels', label: 'Canais IPTV', icon: <Tv />, href: '/channels' },
-    { id: 'playlists', label: 'Playlists', icon: <PlaylistPlay />, href: '/playlists', badge: 3 },
-    { id: 'favorites', label: 'Favoritos', icon: <Favorite />, href: '/favorites' },
-    { id: 'upload', label: 'Upload M3U8', icon: <CloudUpload />, href: '/upload' },
-    { id: 'analytics', label: 'Estatísticas', icon: <Analytics />, href: '/analytics' },
-    { id: 'settings', label: 'Configurações', icon: <Settings />, href: '/settings' },
+    { id: 'channels', label: 'Canais IPTV', icon: <Tv />, href: '/dashboard/channels' },
+    { id: 'playlists', label: 'Playlists', icon: <PlaylistPlay />, href: '/dashboard/playlists' },
+    { id: 'favorites', label: 'Favoritos', icon: <Favorite />, href: '/dashboard/favorites' },
+    { id: 'upload', label: 'Upload M3U8', icon: <CloudUpload />, href: '/dashboard/upload' },
+    { id: 'analytics', label: 'Estatísticas', icon: <Analytics />, href: '/dashboard/analytics' },
+    { id: 'settings', label: 'Configurações', icon: <Settings />, href: '/dashboard/settings' },
   ];
 
   const drawer = (
@@ -102,6 +111,7 @@ const MainLayout = ({ children, currentPage = 'dashboard' }) => {
           <ListItem key={item.id} disablePadding sx={{ px: 1 }}>
             <ListItemButton
               selected={currentPage === item.id}
+              onClick={() => handleNavigation(item.href)}
               sx={{
                 borderRadius: 2,
                 mx: 1,

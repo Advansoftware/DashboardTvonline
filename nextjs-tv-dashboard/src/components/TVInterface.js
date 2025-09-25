@@ -8,8 +8,11 @@ import {
   Backdrop,
   LinearProgress,
   Stack,
-  Chip
+  Chip,
+  ThemeProvider,
+  CssBaseline
 } from '@mui/material';
+import { darkTheme } from '../theme/theme';
 import {
   VolumeUp,
   VolumeDown,
@@ -228,210 +231,217 @@ const TVInterface = ({ channels = [] }) => {
   }
 
   return (
-    <Box
-      sx={{
-        width: '100vw',
-        height: '100vh',
-        bgcolor: 'black',
-        position: 'relative',
-        overflow: 'hidden',
-        cursor: showControls ? 'default' : 'none'
-      }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={showControlsTemporarily}
-    >
-      {/* Player de vídeo */}
-      <HlsPlayer
-        ref={playerRef}
-        url={currentChannel.url}
-        title={currentChannel.name}
-        autoPlay
-        controls={false}
-        width="100%"
-        height="100vh"
-      />
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Box
+        sx={{
+          width: '100vw',
+          height: '100vh',
+          bgcolor: '#000000', // Força fundo preto
+          position: 'fixed', // Garante posição fixa na tela
+          top: 0,
+          left: 0,
+          overflow: 'hidden',
+          cursor: showControls ? 'default' : 'none',
+          zIndex: 1000, // Garante que fique por cima de tudo
+          color: '#ffffff' // Força texto branco
+        }}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={showControlsTemporarily}
+      >
+        {/* Player de vídeo */}
+        <HlsPlayer
+          ref={playerRef}
+          url={currentChannel.url}
+          title={currentChannel.name}
+          autoPlay
+          controls={false}
+          width="100%"
+          height="100vh"
+        />
 
-      {/* Barra de canais */}
-      <Fade in={showChannelBar} timeout={300}>
-        <Box
-          sx={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            background: 'linear-gradient(to bottom, rgba(0,0,0,0.8), transparent)',
-            p: 2,
-            zIndex: 2
-          }}
-        >
-          <Stack direction="row" spacing={1} sx={{ overflowX: 'auto', pb: 1 }}>
-            {channels.map((channel, index) => (
-              <Chip
-                key={channel.id}
-                label={channel.name}
-                variant={index === currentChannelIndex ? 'filled' : 'outlined'}
-                color={index === currentChannelIndex ? 'primary' : 'default'}
-                sx={{
-                  color: 'white',
-                  borderColor: 'rgba(255,255,255,0.3)',
-                  minWidth: '120px',
-                  '&.MuiChip-filled': {
-                    bgcolor: 'primary.main'
-                  }
-                }}
-                onClick={() => {
-                  setCurrentChannelIndex(index);
-                  setCurrentChannel(channel);
-                  if (isReady) {
-                    addToHistory(channel.id, channel.name);
-                  }
-                }}
-              />
-            ))}
-          </Stack>
-        </Box>
-      </Fade>
-
-      {/* Informações do canal */}
-      <Fade in={showChannelInfo} timeout={300}>
-        <Box
-          sx={{
-            position: 'absolute',
-            bottom: 100,
-            left: 20,
-            right: 20,
-            bgcolor: 'rgba(0,0,0,0.8)',
-            backdropFilter: 'blur(10px)',
-            borderRadius: 2,
-            p: 3,
-            zIndex: 3
-          }}
-        >
-          <Typography variant="h4" color="white" gutterBottom>
-            {currentChannel.name}
-          </Typography>
-          {currentChannel.group && (
-            <Typography variant="h6" color="primary.main" gutterBottom>
-              {currentChannel.group}
-            </Typography>
-          )}
-          <Typography variant="body1" color="grey.300">
-            Canal {currentChannelIndex + 1} de {channels.length}
-          </Typography>
-        </Box>
-      </Fade>
-
-      {/* Controles */}
-      <Fade in={showControls} timeout={300}>
-        <Box
-          sx={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)',
-            p: 2,
-            zIndex: 2
-          }}
-        >
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
+        {/* Barra de canais */}
+        <Fade in={showChannelBar} timeout={300}>
+          <Box
+            sx={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              background: 'linear-gradient(to bottom, rgba(0,0,0,0.8), transparent)',
+              p: 2,
+              zIndex: 2
+            }}
           >
-            {/* Controles do lado esquerdo */}
-            <Stack direction="row" spacing={1} alignItems="center">
-              <IconButton
-                onClick={() => changeChannel(-1)}
-                sx={{ color: 'white' }}
-              >
-                <KeyboardArrowDown />
-              </IconButton>
-              <IconButton
-                onClick={() => changeChannel(1)}
-                sx={{ color: 'white' }}
-              >
-                <KeyboardArrowUp />
-              </IconButton>
-              <Typography variant="body2" color="white" sx={{ ml: 1 }}>
-                {currentChannel.name}
-              </Typography>
-            </Stack>
-
-            {/* Controles do centro - Volume */}
-            <Stack direction="row" spacing={1} alignItems="center">
-              <IconButton
-                onClick={() => setIsMuted(!isMuted)}
-                sx={{ color: 'white' }}
-              >
-                {isMuted ? <VolumeOff /> : volume > 50 ? <VolumeUp /> : <VolumeDown />}
-              </IconButton>
-              <Box sx={{ width: 100 }}>
-                <LinearProgress
-                  variant="determinate"
-                  value={isMuted ? 0 : volume}
+            <Stack direction="row" spacing={1} sx={{ overflowX: 'auto', pb: 1 }}>
+              {channels.map((channel, index) => (
+                <Chip
+                  key={channel.id}
+                  label={channel.name}
+                  variant={index === currentChannelIndex ? 'filled' : 'outlined'}
+                  color={index === currentChannelIndex ? 'primary' : 'default'}
                   sx={{
-                    height: 4,
-                    borderRadius: 2,
-                    bgcolor: 'rgba(255,255,255,0.3)',
-                    '& .MuiLinearProgress-bar': {
-                      bgcolor: 'white'
+                    color: 'white',
+                    borderColor: 'rgba(255,255,255,0.3)',
+                    minWidth: '120px',
+                    '&.MuiChip-filled': {
+                      bgcolor: 'primary.main'
+                    }
+                  }}
+                  onClick={() => {
+                    setCurrentChannelIndex(index);
+                    setCurrentChannel(channel);
+                    if (isReady) {
+                      addToHistory(channel.id, channel.name);
                     }
                   }}
                 />
-              </Box>
+              ))}
             </Stack>
+          </Box>
+        </Fade>
 
-            {/* Controles do lado direito */}
-            <Stack direction="row" spacing={1}>
-              <IconButton
-                onClick={() => setShowChannelInfo(true)}
-                sx={{ color: 'white' }}
-              >
-                <Info />
-              </IconButton>
-              <IconButton
-                onClick={() => setShowChannelBar(true)}
-                sx={{ color: 'white' }}
-              >
-                <Menu />
-              </IconButton>
-              <IconButton
-                onClick={() => router.push('/dashboard')}
-                sx={{ color: 'white' }}
-              >
-                <Dashboard />
-              </IconButton>
+        {/* Informações do canal */}
+        <Fade in={showChannelInfo} timeout={300}>
+          <Box
+            sx={{
+              position: 'absolute',
+              bottom: 100,
+              left: 20,
+              right: 20,
+              bgcolor: 'rgba(0,0,0,0.8)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: 2,
+              p: 3,
+              zIndex: 3
+            }}
+          >
+            <Typography variant="h4" color="white" gutterBottom>
+              {currentChannel.name}
+            </Typography>
+            {currentChannel.group && (
+              <Typography variant="h6" color="primary.main" gutterBottom>
+                {currentChannel.group}
+              </Typography>
+            )}
+            <Typography variant="body1" color="grey.300">
+              Canal {currentChannelIndex + 1} de {channels.length}
+            </Typography>
+          </Box>
+        </Fade>
+
+        {/* Controles */}
+        <Fade in={showControls} timeout={300}>
+          <Box
+            sx={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)',
+              p: 2,
+              zIndex: 2
+            }}
+          >
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              {/* Controles do lado esquerdo */}
+              <Stack direction="row" spacing={1} alignItems="center">
+                <IconButton
+                  onClick={() => changeChannel(-1)}
+                  sx={{ color: 'white' }}
+                >
+                  <KeyboardArrowDown />
+                </IconButton>
+                <IconButton
+                  onClick={() => changeChannel(1)}
+                  sx={{ color: 'white' }}
+                >
+                  <KeyboardArrowUp />
+                </IconButton>
+                <Typography variant="body2" color="white" sx={{ ml: 1 }}>
+                  {currentChannel.name}
+                </Typography>
+              </Stack>
+
+              {/* Controles do centro - Volume */}
+              <Stack direction="row" spacing={1} alignItems="center">
+                <IconButton
+                  onClick={() => setIsMuted(!isMuted)}
+                  sx={{ color: 'white' }}
+                >
+                  {isMuted ? <VolumeOff /> : volume > 50 ? <VolumeUp /> : <VolumeDown />}
+                </IconButton>
+                <Box sx={{ width: 100 }}>
+                  <LinearProgress
+                    variant="determinate"
+                    value={isMuted ? 0 : volume}
+                    sx={{
+                      height: 4,
+                      borderRadius: 2,
+                      bgcolor: 'rgba(255,255,255,0.3)',
+                      '& .MuiLinearProgress-bar': {
+                        bgcolor: 'white'
+                      }
+                    }}
+                  />
+                </Box>
+              </Stack>
+
+              {/* Controles do lado direito */}
+              <Stack direction="row" spacing={1}>
+                <IconButton
+                  onClick={() => setShowChannelInfo(true)}
+                  sx={{ color: 'white' }}
+                >
+                  <Info />
+                </IconButton>
+                <IconButton
+                  onClick={() => setShowChannelBar(true)}
+                  sx={{ color: 'white' }}
+                >
+                  <Menu />
+                </IconButton>
+                <IconButton
+                  onClick={() => router.push('/dashboard')}
+                  sx={{ color: 'white' }}
+                >
+                  <Dashboard />
+                </IconButton>
+              </Stack>
             </Stack>
-          </Stack>
-        </Box>
-      </Fade>
+          </Box>
+        </Fade>
 
-      {/* Instruções (apenas no primeiro uso) */}
-      <Fade in={showControls && currentChannelIndex === 0} timeout={300}>
-        <Box
-          sx={{
-            position: 'absolute',
-            top: 20,
-            right: 20,
-            bgcolor: 'rgba(0,0,0,0.7)',
-            borderRadius: 1,
-            p: 2,
-            zIndex: 2
-          }}
-        >
-          <Typography variant="caption" color="white" display="block">
-            ↑↓ Mudar canal
-          </Typography>
-          <Typography variant="caption" color="white" display="block">
-            ←→ Volume
-          </Typography>
-          <Typography variant="caption" color="white" display="block">
-            M = Mudo | I = Info | D = Dashboard
-          </Typography>
-        </Box>
-      </Fade>
-    </Box>
+        {/* Instruções (apenas no primeiro uso) */}
+        <Fade in={showControls && currentChannelIndex === 0} timeout={300}>
+          <Box
+            sx={{
+              position: 'absolute',
+              top: 20,
+              right: 20,
+              bgcolor: 'rgba(0,0,0,0.7)',
+              borderRadius: 1,
+              p: 2,
+              zIndex: 2
+            }}
+          >
+            <Typography variant="caption" color="white" display="block">
+              ↑↓ Mudar canal
+            </Typography>
+            <Typography variant="caption" color="white" display="block">
+              ←→ Volume
+            </Typography>
+            <Typography variant="caption" color="white" display="block">
+              M = Mudo | I = Info | D = Dashboard
+            </Typography>
+          </Box>
+        </Fade>
+      </Box>
+    </ThemeProvider>
   );
 };
 
