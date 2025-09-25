@@ -16,7 +16,14 @@ import {
   Avatar,
   useTheme,
   Fade,
-  Skeleton
+  Skeleton,
+  TextField,
+  InputAdornment,
+  Menu,
+  MenuItem,
+  FormControl,
+  Select,
+  InputLabel
 } from '@mui/material';
 import {
   PlayArrow,
@@ -28,7 +35,12 @@ import {
   LiveTv,
   Movie,
   Sports,
-  NewReleases
+  NewReleases,
+  Search,
+  Clear,
+  FilterList,
+  ViewModule,
+  ExpandMore
 } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import { useOptimizedIndexedDB } from '../hooks/useOptimizedIndexedDB';
@@ -43,6 +55,10 @@ const StreamingHomeInterface = ({ channels = [], onChannelSelect, onNavigateToDa
   const [favoriteChannels, setFavoriteChannels] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [visibleChannels, setVisibleChannels] = useState(24);
+  const [filteredChannels, setFilteredChannels] = useState([]);
 
   // Carregar dados iniciais
   useEffect(() => {
@@ -103,6 +119,62 @@ const StreamingHomeInterface = ({ channels = [], onChannelSelect, onNavigateToDa
       setFavorites(prev => [...prev, { channelId: channel.id, name: channel.name }]);
     }
   }, [favorites, addToFavorites, removeFromFavorites]);
+
+  // Filtrar e pesquisar canais
+  useEffect(() => {
+    let filtered = channels;
+
+    // Filtro por pesquisa
+    if (searchTerm) {
+      filtered = filtered.filter(channel =>
+        channel.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (channel.group && channel.group.toLowerCase().includes(searchTerm.toLowerCase()))
+      );
+    }
+
+    // Filtro por categoria
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(channel => {
+        if (selectedCategory === 'vod') {
+          return channel.type === 'vod' ||
+            channel.url?.toLowerCase().includes('.mp4') ||
+            channel.url?.toLowerCase().includes('.mkv') ||
+            channel.url?.toLowerCase().includes('.avi');
+        }
+        if (selectedCategory === 'live') {
+          return channel.type !== 'vod' &&
+            (channel.url?.toLowerCase().includes('.m3u8') ||
+              !channel.url?.match(/\.(mp4|mkv|avi|mov|wmv)$/i));
+        }
+        if (selectedCategory === 'movies') {
+          return channel.group?.toLowerCase().includes('movie') ||
+            channel.group?.toLowerCase().includes('filme') ||
+            channel.name.toLowerCase().includes('movie') ||
+            channel.name.toLowerCase().includes('filme');
+        }
+        if (selectedCategory === 'sports') {
+          return channel.group?.toLowerCase().includes('sport') ||
+            channel.group?.toLowerCase().includes('esporte') ||
+            channel.name.toLowerCase().includes('sport') ||
+            channel.name.toLowerCase().includes('esporte');
+        }
+        return true;
+      });
+    }
+
+    setFilteredChannels(filtered);
+  }, [channels, searchTerm, selectedCategory]);
+
+  // Obter categorias únicas
+  const getCategories = () => {
+    const categories = new Set();
+    channels.forEach(channel => {
+      if (channel.group) {
+        categories.add(channel.group);
+      }
+    });
+    return Array.from(categories);
+  };
 
   // Componente de Card do Canal
   const ChannelCard = ({ channel, size = 'medium', showFavorite = true }) => {
@@ -435,15 +507,127 @@ const StreamingHomeInterface = ({ channels = [], onChannelSelect, onNavigateToDa
           </Box>
         )}
 
+        {/* Barra de Pesquisa e Filtros */}
+        <Box sx={{ mb: 4 }}>
+          <Typography
+            variant="h4"
+            color="white"
+            gutterBottom
+            sx={{ fontWeight: 600, mb: 3 }}
+          >
+            Explorar Conteúdo
+          </Typography>
+
+          <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} sx={{ mb: 3 }}>
+            {/* Barra de Pesquisa */}
+            <TextField
+              fullWidth
+              placeholder="Pesquisar canais, filmes, séries..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Search sx={{ color: 'white' }} />
+                  </InputAdornment>
+                ),
+                endAdornment: searchTerm && (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setSearchTerm('')}
+                      sx={{ color: 'white' }}
+                    >
+                      <Clear />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+                sx: {
+                  color: 'white',
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'rgba(255, 255, 255, 0.3)',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'rgba(255, 255, 255, 0.5)',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: 'primary.main',
+                    },
+                  },
+                }
+              }}
+              sx={{
+                '& .MuiInputBase-input::placeholder': {
+                  color: 'rgba(255, 255, 255, 0.7)',
+                }
+              }}
+            />
+
+            {/* Filtro por Categoria */}
+            <FormControl sx={{ minWidth: 200 }}>
+              <Select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                displayEmpty
+                sx={{
+                  color: 'white',
+                  '& .MuiOutlinedInput-notchedOutline': {
+                    borderColor: 'rgba(255, 255, 255, 0.3)',
+                  },
+                  '&:hover .MuiOutlinedInput-notchedOutline': {
+                    borderColor: 'rgba(255, 255, 255, 0.5)',
+                  },
+                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                    borderColor: 'primary.main',
+                  },
+                  '& .MuiSelect-icon': {
+                    color: 'white',
+                  },
+                }}
+              >
+                <MenuItem value="all">Todos os Conteúdos</MenuItem>
+                <MenuItem value="live">📺 TV Ao Vivo</MenuItem>
+                <MenuItem value="vod">🎬 Filmes/Séries</MenuItem>
+                <MenuItem value="movies">🍿 Filmes</MenuItem>
+                <MenuItem value="sports">⚽ Esportes</MenuItem>
+              </Select>
+            </FormControl>
+          </Stack>
+
+          {/* Estatísticas */}
+          <Stack direction="row" spacing={2} sx={{ mb: 3 }}>
+            <Chip
+              label={`${filteredChannels.length} itens encontrados`}
+              sx={{
+                bgcolor: 'primary.main',
+                color: 'white'
+              }}
+            />
+            {searchTerm && (
+              <Chip
+                label={`Pesquisando: "${searchTerm}"`}
+                onDelete={() => setSearchTerm('')}
+                sx={{
+                  bgcolor: 'rgba(255, 255, 255, 0.1)',
+                  color: 'white',
+                  '& .MuiChip-deleteIcon': {
+                    color: 'white'
+                  }
+                }}
+              />
+            )}
+          </Stack>
+        </Box>
+
         {/* Todos os Canais */}
         <Box sx={{ mb: 6 }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
             <Typography
-              variant="h4"
+              variant="h5"
               color="white"
               sx={{ fontWeight: 600 }}
             >
-              Todos os Canais
+              {searchTerm || selectedCategory !== 'all' ? 'Resultados da Busca' : 'Todos os Canais'}
             </Typography>
             <Button
               variant="outlined"
@@ -462,31 +646,55 @@ const StreamingHomeInterface = ({ channels = [], onChannelSelect, onNavigateToDa
             </Button>
           </Box>
 
-          <Grid container spacing={2}>
-            {channels.slice(0, 24).map((channel) => (
-              <Grid item xs={6} sm={4} md={3} lg={2} key={channel.id}>
-                <ChannelCard channel={channel} size="small" />
+          {filteredChannels.length > 0 ? (
+            <>
+              <Grid container spacing={2}>
+                {filteredChannels.slice(0, visibleChannels).map((channel) => (
+                  <Grid item xs={6} sm={4} md={3} lg={2} key={channel.id}>
+                    <ChannelCard channel={channel} size="small" />
+                  </Grid>
+                ))}
               </Grid>
-            ))}
-          </Grid>
 
-          {channels.length > 24 && (
-            <Box sx={{ textAlign: 'center', mt: 4 }}>
-              <Button
-                variant="outlined"
-                size="large"
-                sx={{
-                  color: 'white',
-                  borderColor: 'white',
-                  px: 4,
-                  '&:hover': {
-                    borderColor: 'primary.main',
-                    color: 'primary.main'
-                  }
-                }}
-              >
-                Ver Mais Canais ({channels.length - 24} restantes)
-              </Button>
+              {filteredChannels.length > visibleChannels && (
+                <Box sx={{ textAlign: 'center', mt: 4 }}>
+                  <Button
+                    variant="outlined"
+                    size="large"
+                    startIcon={<ExpandMore />}
+                    onClick={() => setVisibleChannels(prev => prev + 24)}
+                    sx={{
+                      color: 'white',
+                      borderColor: 'white',
+                      px: 4,
+                      '&:hover': {
+                        borderColor: 'primary.main',
+                        color: 'primary.main'
+                      }
+                    }}
+                  >
+                    Carregar Mais ({filteredChannels.length - visibleChannels} restantes)
+                  </Button>
+                </Box>
+              )}
+            </>
+          ) : (
+            <Box sx={{ textAlign: 'center', py: 8 }}>
+              <Typography variant="h6" color="grey.400" gutterBottom>
+                Nenhum canal encontrado
+              </Typography>
+              <Typography variant="body2" color="grey.500">
+                Tente ajustar os filtros ou pesquisar por outro termo
+              </Typography>
+              {searchTerm && (
+                <Button
+                  variant="outlined"
+                  onClick={() => setSearchTerm('')}
+                  sx={{ mt: 2, color: 'white', borderColor: 'white' }}
+                >
+                  Limpar Pesquisa
+                </Button>
+              )}
             </Box>
           )}
         </Box>
