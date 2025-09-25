@@ -49,7 +49,7 @@ import {
   Close
 } from '@mui/icons-material';
 import { useIndexedDB } from '../hooks/useIndexedDB';
-import { parseM3U8List } from '../utils/m3u8Utils';
+import { parseM3U8List, validateCategorization, reclassifyChannels } from '../utils/m3u8Utils';
 
 export default function UploadModal({ open, onClose, onPlaylistAdded }) {
   const { isReady, getChannels, saveChannels, getPlaylists, savePlaylist, deletePlaylist } = useIndexedDB();
@@ -159,12 +159,15 @@ export default function UploadModal({ open, onClose, onPlaylistAdded }) {
 
       const content = await response.text();
 
-      // Fazer parse dos canais
+      // Fazer parse dos canais com categorização inteligente
       const parsedChannels = parseM3U8List(content);
       if (parsedChannels.length === 0) {
         setError('Nenhum canal encontrado na URL');
         return;
       }
+
+      // Validar categorização
+      const categorizationStats = validateCategorization(parsedChannels);
 
       // Verificar se já existe playlist com mesmo nome
       const existingPlaylist = playlists.find(p => p.name === playlistName);
@@ -186,7 +189,7 @@ export default function UploadModal({ open, onClose, onPlaylistAdded }) {
       const liveChannels = channelsWithIds.filter(ch => ch.type === 'live').length;
       const vodChannels = channelsWithIds.filter(ch => ch.type === 'vod').length;
 
-      // Informações da playlist
+      // Informações da playlist com estatísticas de categorização
       const playlistInfo = {
         id: playlistId,
         name: playlistName,
@@ -199,7 +202,13 @@ export default function UploadModal({ open, onClose, onPlaylistAdded }) {
         updatedAt: new Date().toISOString(),
         status: 'active',
         source: 'url',
-        fileSize: content.length
+        fileSize: content.length,
+        categorization: {
+          confidence: categorizationStats.confidence,
+          withExtensions: categorizationStats.withExtensions,
+          withGroups: categorizationStats.withGroups,
+          quality: categorizationStats.confidence.high / channelsWithIds.length
+        }
       };
 
       // Salvar canais e playlist
@@ -232,9 +241,14 @@ export default function UploadModal({ open, onClose, onPlaylistAdded }) {
       setShowPreview(false);
       setError('');
 
+      const confidencePercent = Math.round(playlistInfo.categorization.quality * 100);
+      const confidenceText = confidencePercent >= 80 ? 'Alta'
+        : confidencePercent >= 60 ? 'Média'
+          : 'Baixa';
+
       setSnackbar({
         open: true,
-        message: `Playlist "${playlistInfo.name}" carregada e salva com ${channelsWithIds.length} canais (${liveChannels} TV + ${vodChannels} VOD)!`,
+        message: `Playlist "${playlistInfo.name}" carregada com ${channelsWithIds.length} canais (${liveChannels} TV + ${vodChannels} VOD). Categorização: ${confidenceText} (${confidencePercent}%)`,
         severity: 'success'
       });
 

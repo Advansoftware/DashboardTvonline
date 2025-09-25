@@ -3,29 +3,87 @@ export const channelTypes = {
   Channel: 'Channel'
 };
 
-// Identificar tipo de conteúdo (VOD ou canal de TV)
-const identifyContentType = (name, group) => {
+// Identificar tipo de conteúdo (VOD ou canal de TV) - Versão melhorada
+const identifyContentType = (name, group, url) => {
   const name_lower = name.toLowerCase();
   const group_lower = group?.toLowerCase() || '';
+  const url_lower = url?.toLowerCase() || '';
 
-  // Palavras-chave para identificar VOD (filmes e séries)
+  // 1. PRIORIDADE MÁXIMA: Extensões de arquivo (indicam VOD)
+  const vodExtensions = [
+    '.mp4', '.mkv', '.avi', '.mov', '.wmv', '.flv', '.webm', '.m4v',
+    '.3gp', '.ts', '.mpg', '.mpeg', '.f4v', '.asf', '.divx', '.xvid'
+  ];
+
+  // Verificar se a URL contém extensão de arquivo VOD
+  const hasVodExtension = vodExtensions.some(ext =>
+    url_lower.includes(ext) || url_lower.endsWith(ext)
+  );
+
+  // 2. Indicadores de streaming ao vivo (têm prioridade sobre keywords)
+  const liveIndicators = [
+    '.m3u8', '/live/', '/stream/', '/playlist.m3u8',
+    'live=1', 'type=live', '/tv/', '/channel/'
+  ];
+
+  const hasLiveIndicator = liveIndicators.some(indicator =>
+    url_lower.includes(indicator)
+  );
+
+  // 3. Palavras-chave para identificar VOD (filmes e séries)
   const vodKeywords = [
     'filme', 'movie', 'cinema', 'serie', 'series', 'show', 'drama', 'reality',
     'documentario', 'documentary', 'cartoon', 'desenho', 'anime', 'novela',
-    'miniserie', 'temporada', 'season', 'episode', 'episodio'
+    'miniserie', 'temporada', 'season', 'episode', 'episodio', 'ep.', 'ep ',
+    'dublado', 'legendado', 'hd', '720p', '1080p', '4k', 'bluray', 'dvdrip'
   ];
 
-  // Grupos típicos de VOD
+  // 4. Grupos típicos de VOD
   const vodGroups = [
     'filmes', 'movies', 'cinema', 'series', 'desenhos', 'cartoons', 'anime',
-    'documentarios', 'documentaries', 'novelas', 'reality', 'shows'
+    'documentarios', 'documentaries', 'novelas', 'reality', 'shows', 'vod',
+    'on demand', 'replay', 'catchup'
   ];
 
-  // Verificar se é VOD por nome ou grupo
-  const isVodByName = vodKeywords.some(keyword => name_lower.includes(keyword));
-  const isVodByGroup = vodGroups.some(keyword => group_lower.includes(keyword));
+  // 5. Grupos típicos de TV ao vivo
+  const liveGroups = [
+    'tv', 'channels', 'canais', 'televisao', 'television', 'live', 'ao vivo',
+    'news', 'noticias', 'sport', 'esporte', 'kids', 'infantil', 'music', 'musica'
+  ];
 
-  return (isVodByName || isVodByGroup) ? 'vod' : 'live';
+  // LÓGICA DE DECISÃO (em ordem de prioridade):
+
+  // Se tem extensão de arquivo VOD, é definitivamente VOD
+  if (hasVodExtension) {
+    return 'vod';
+  }
+
+  // Se tem indicador de live streaming, é provavelmente live
+  if (hasLiveIndicator) {
+    return 'live';
+  }
+
+  // Verificar grupos (mais confiável que nomes)
+  const isVodByGroup = vodGroups.some(keyword => group_lower.includes(keyword));
+  const isLiveByGroup = liveGroups.some(keyword => group_lower.includes(keyword));
+
+  if (isVodByGroup && !isLiveByGroup) {
+    return 'vod';
+  }
+
+  if (isLiveByGroup && !isVodByGroup) {
+    return 'live';
+  }
+
+  // Verificar por nome (menos confiável)
+  const isVodByName = vodKeywords.some(keyword => name_lower.includes(keyword));
+
+  if (isVodByName) {
+    return 'vod';
+  }
+
+  // Por padrão, assumir que é canal de TV ao vivo
+  return 'live';
 };
 
 // Utilitário para parser de listas M3U8 (baseado no helper Svelte)
@@ -68,16 +126,18 @@ export const parseM3U8List = (content) => {
       }
 
       if (nome && link) {
-        // Identificar tipo de conteúdo
-        const type = identifyContentType(nome, grupo);
+        // Identificar tipo de conteúdo usando URL para análise mais precisa
+        const type = identifyContentType(nome, grupo, link);
 
         channels.push({
           name: nome.trim(),
           image: img,
           group: grupo,
           link: link,
+          url: link, // Alias para compatibilidade
           type: type, // 'live' para canais de TV, 'vod' para filmes/séries
-          id: `${nome.trim()}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+          id: `${nome.trim()}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+          addedAt: new Date().toISOString()
         });
       }
     });
@@ -177,4 +237,136 @@ export const formatDuration = (seconds) => {
     return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   }
   return `${minutes}:${secs.toString().padStart(2, '0')}`;
+};
+
+// Reclassificar canais existentes com base na nova lógica
+export const reclassifyChannels = (channels) => {
+  return channels.map(channel => ({
+    ...channel,
+    type: identifyContentType(channel.name, channel.group, channel.url || channel.link),
+    updatedAt: new Date().toISOString()
+  }));
+};
+
+// Atualização inteligente de playlist
+export const updatePlaylistIntelligently = async (playlistUrl, existingChannels = []) => {
+  try {
+    // Buscar nova versão da playlist
+    const newChannels = await fetchM3U8FromUrl(playlistUrl);
+
+    // Criar mapa de canais existentes por nome e URL
+    const existingChannelsMap = new Map();
+    existingChannels.forEach(channel => {
+      const key = `${channel.name}-${channel.url || channel.link}`;
+      existingChannelsMap.set(key, channel);
+    });
+
+    // Processar novos canais
+    const updatedChannels = [];
+    const addedChannels = [];
+    const removedChannels = [...existingChannels]; // Começar com todos como removidos
+
+    newChannels.forEach(newChannel => {
+      const key = `${newChannel.name}-${newChannel.url || newChannel.link}`;
+      const existingChannel = existingChannelsMap.get(key);
+
+      if (existingChannel) {
+        // Canal já existe - manter ID e favoritos, mas atualizar dados
+        const updatedChannel = {
+          ...newChannel,
+          id: existingChannel.id, // Manter ID original
+          addedAt: existingChannel.addedAt, // Manter data original
+          updatedAt: new Date().toISOString(),
+          // Reaplicar categorização inteligente
+          type: identifyContentType(newChannel.name, newChannel.group, newChannel.url || newChannel.link)
+        };
+
+        updatedChannels.push(updatedChannel);
+
+        // Remover da lista de removidos
+        const indexToRemove = removedChannels.findIndex(ch => ch.id === existingChannel.id);
+        if (indexToRemove > -1) {
+          removedChannels.splice(indexToRemove, 1);
+        }
+      } else {
+        // Canal novo
+        addedChannels.push({
+          ...newChannel,
+          updatedAt: new Date().toISOString()
+        });
+      }
+    });
+
+    // Combinar canais atualizados e novos
+    const finalChannels = [...updatedChannels, ...addedChannels];
+
+    // Estatísticas da atualização
+    const updateStats = {
+      total: finalChannels.length,
+      added: addedChannels.length,
+      updated: updatedChannels.length,
+      removed: removedChannels.length,
+      addedChannels,
+      removedChannels,
+      reclassified: {
+        live: finalChannels.filter(ch => ch.type === 'live').length,
+        vod: finalChannels.filter(ch => ch.type === 'vod').length
+      }
+    };
+
+    return {
+      channels: finalChannels,
+      stats: updateStats
+    };
+
+  } catch (error) {
+    console.error('Erro na atualização inteligente:', error);
+    throw error;
+  }
+};
+
+// Validar qualidade de categorização
+export const validateCategorization = (channels) => {
+  const validation = {
+    total: channels.length,
+    withExtensions: 0,
+    withLiveIndicators: 0,
+    withGroups: 0,
+    uncategorized: 0,
+    confidence: {
+      high: 0,  // Baseado em extensão ou indicadores específicos
+      medium: 0, // Baseado em grupos
+      low: 0     // Baseado apenas em keywords de nome
+    }
+  };
+
+  channels.forEach(channel => {
+    const url = (channel.url || channel.link || '').toLowerCase();
+    const name = channel.name.toLowerCase();
+    const group = (channel.group || '').toLowerCase();
+
+    // Verificar confiança da categorização
+    const vodExtensions = ['.mp4', '.mkv', '.avi', '.mov', '.wmv', '.flv', '.webm', '.m4v'];
+    const liveIndicators = ['.m3u8', '/live/', '/stream/', '/playlist.m3u8'];
+
+    const hasVodExtension = vodExtensions.some(ext => url.includes(ext));
+    const hasLiveIndicator = liveIndicators.some(indicator => url.includes(indicator));
+
+    if (hasVodExtension || hasLiveIndicator) {
+      validation.confidence.high++;
+      if (hasVodExtension) validation.withExtensions++;
+      if (hasLiveIndicator) validation.withLiveIndicators++;
+    } else if (group) {
+      validation.confidence.medium++;
+      validation.withGroups++;
+    } else {
+      validation.confidence.low++;
+    }
+
+    if (!group && !hasVodExtension && !hasLiveIndicator) {
+      validation.uncategorized++;
+    }
+  });
+
+  return validation;
 };

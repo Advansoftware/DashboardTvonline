@@ -53,7 +53,9 @@ import {
   Visibility,
   Download,
   Upload,
-  Search
+  Search,
+  Sync,
+  AutorenewRounded
 } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 
@@ -62,7 +64,7 @@ import ChannelGrid from '../../src/components/ChannelGrid';
 import HlsPlayer from '../../src/components/HlsPlayer';
 import UploadModal from '../../src/components/UploadModal';
 import { useIndexedDB } from '../../src/hooks/useIndexedDB';
-import { parseM3U8List } from '../../src/utils/m3u8Utils';
+import { parseM3U8List, updatePlaylistIntelligently, reclassifyChannels } from '../../src/utils/m3u8Utils';
 
 export default function Dashboard() {
   const theme = useTheme();
@@ -75,6 +77,7 @@ export default function Dashboard() {
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
   const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false);
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+  const [updatingPlaylist, setUpdatingPlaylist] = useState(null);
 
   // Paginação e filtros
   const [playlistPage, setPlaylistPage] = useState(0);
@@ -165,6 +168,116 @@ export default function Dashboard() {
       });
     } catch (error) {
       console.error('Erro ao atualizar dados:', error);
+    }
+  };
+
+  const handleUpdatePlaylist = async (playlist) => {
+    if (!playlist.url) {
+      setSnackbar({
+        open: true,
+        message: 'Esta playlist não possui URL para atualização',
+        severity: 'warning'
+      });
+      return;
+    }
+
+    setUpdatingPlaylist(playlist.id);
+
+    try {
+      // Buscar canais atuais da playlist
+      const currentChannels = channels.filter(ch => ch.playlistId === playlist.id);
+
+      // Fazer atualização inteligente
+      const updateResult = await updatePlaylistIntelligently(playlist.url, currentChannels);
+
+      // Atualizar canais no estado
+      const otherChannels = channels.filter(ch => ch.playlistId !== playlist.id);
+      const newChannels = [...otherChannels, ...updateResult.channels.map(ch => ({ ...ch, playlistId: playlist.id }))];
+
+      // Atualizar playlist info
+      const updatedPlaylist = {
+        ...playlist,
+        channelCount: updateResult.channels.length,
+        liveChannels: updateResult.stats.reclassified.live,
+        vodChannels: updateResult.stats.reclassified.vod,
+        updatedAt: new Date().toISOString(),
+        lastUpdate: {
+          timestamp: new Date().toISOString(),
+          stats: updateResult.stats
+        }
+      };
+
+      // Salvar no IndexedDB
+      await Promise.all([
+        saveChannels(newChannels),
+        savePlaylist(updatedPlaylist)
+      ]);
+
+      // Atualizar estados
+      setChannels(newChannels);
+      setPlaylists(prev => prev.map(p => p.id === playlist.id ? updatedPlaylist : p));
+
+      const { stats } = updateResult;
+      setSnackbar({
+        open: true,
+        message: `Playlist "${playlist.name}" atualizada! ${stats.added} novos, ${stats.updated} modificados, ${stats.removed} removidos. Recategorizados: ${stats.reclassified.live} TV + ${stats.reclassified.vod} VOD`,
+        severity: 'success'
+      });
+
+    } catch (error) {
+      console.error('Erro ao atualizar playlist:', error);
+      setSnackbar({
+        open: true,
+        message: `Erro ao atualizar playlist: ${error.message}`,
+        severity: 'error'
+      });
+    } finally {
+      setUpdatingPlaylist(null);
+    }
+  };
+
+  const handleReclassifyChannels = async () => {
+    try {
+      // Reclassificar todos os canais
+      const reclassifiedChannels = reclassifyChannels(channels);
+
+      // Contar mudanças
+      let changesCount = 0;
+      reclassifiedChannels.forEach((newChannel, index) => {
+        if (newChannel.type !== channels[index].type) {
+          changesCount++;
+        }
+      });
+
+      // Salvar canais reclassificados
+      await saveChannels(reclassifiedChannels);
+      setChannels(reclassifiedChannels);
+
+      // Atualizar contadores nas playlists
+      const updatedPlaylists = playlists.map(playlist => {
+        const playlistChannels = reclassifiedChannels.filter(ch => ch.playlistId === playlist.id);
+        return {
+          ...playlist,
+          liveChannels: playlistChannels.filter(ch => ch.type === 'live').length,
+          vodChannels: playlistChannels.filter(ch => ch.type === 'vod').length
+        };
+      });
+
+      setPlaylists(updatedPlaylists);
+
+      setSnackbar({
+        open: true,
+        message: `Reclassificação concluída! ${changesCount} canais tiveram sua categoria alterada com base na análise de URL e extensões.`,
+        severity: 'success'
+      });
+
+    } catch (error) {
+      console.error('Erro ao reclassificar canais:', error);
+      setSnackbar({
+        open: true,
+        message: 'Erro ao reclassificar canais',
+        severity: 'error'
+      });
     }
   };
 
@@ -402,12 +515,44 @@ export default function Dashboard() {
                           </Typography>
                         </TableCell>
                         <TableCell align="center">
-                          <Chip
-                            label={playlist.channelCount}
-                            size="small"
-                            color="primary"
-                            variant="outlined"
-                          />
+                          <Stack spacing={1} alignItems="center">
+                            <Chip
+                              label={playlist.channelCount}
+                              size="small"
+                              color="primary"
+                              variant="outlined"
+                            />
+                            {playlist.liveChannels !== undefined && playlist.vodChannels !== undefined && (
+                              <Box sx={{ display: 'flex', gap: 0.5 }}>
+                                <Chip
+                                  label={`${playlist.liveChannels} TV`}
+                                  size="small"
+                                  variant="outlined"
+                                  sx={{ fontSize: '0.7rem', height: 20 }}
+                                />
+                                <Chip
+                                  label={`${playlist.vodChannels} VOD`}
+                                  size="small"
+                                  variant="outlined"
+                                  color="secondary"
+                                  sx={{ fontSize: '0.7rem', height: 20 }}
+                                />
+                              </Box>
+                            )}
+                            {playlist.categorization?.quality && (
+                              <Chip
+                                label={`${Math.round(playlist.categorization.quality * 100)}% conf.`}
+                                size="small"
+                                variant="filled"
+                                color={
+                                  playlist.categorization.quality >= 0.8 ? 'success'
+                                    : playlist.categorization.quality >= 0.6 ? 'warning'
+                                      : 'error'
+                                }
+                                sx={{ fontSize: '0.6rem', height: 18 }}
+                              />
+                            )}
+                          </Stack>
                         </TableCell>
                         <TableCell align="center">
                           <Chip
@@ -424,23 +569,43 @@ export default function Dashboard() {
                         </TableCell>
                         <TableCell align="center">
                           <Box sx={{ display: 'flex', gap: 1, justifyContent: 'center' }}>
-                            <IconButton size="small" color="primary">
-                              <Visibility />
-                            </IconButton>
-                            <IconButton size="small" color="default">
-                              <Edit />
-                            </IconButton>
-                            <IconButton
-                              size="small"
-                              color="error"
-                              onClick={() => {
-                                if (confirm(`Deseja excluir a playlist "${playlist.name}"?`)) {
-                                  handleDeletePlaylist(playlist.id);
-                                }
-                              }}
-                            >
-                              <Delete />
-                            </IconButton>
+                            <Tooltip title="Visualizar canais">
+                              <IconButton size="small" color="primary">
+                                <Visibility />
+                              </IconButton>
+                            </Tooltip>
+                            <Tooltip title="Atualizar playlist (categorização inteligente)">
+                              <IconButton
+                                size="small"
+                                color="secondary"
+                                disabled={!playlist.url || updatingPlaylist === playlist.id}
+                                onClick={() => handleUpdatePlaylist(playlist)}
+                              >
+                                {updatingPlaylist === playlist.id ? (
+                                  <AutorenewRounded className="animate-spin" />
+                                ) : (
+                                  <Sync />
+                                )}
+                              </IconButton>
+                            </Tooltip>
+                            <Tooltip title="Editar playlist">
+                              <IconButton size="small" color="default">
+                                <Edit />
+                              </IconButton>
+                            </Tooltip>
+                            <Tooltip title="Excluir playlist">
+                              <IconButton
+                                size="small"
+                                color="error"
+                                onClick={() => {
+                                  if (confirm(`Deseja excluir a playlist "${playlist.name}"?`)) {
+                                    handleDeletePlaylist(playlist.id);
+                                  }
+                                }}
+                              >
+                                <Delete />
+                              </IconButton>
+                            </Tooltip>
                           </Box>
                         </TableCell>
                       </TableRow>
@@ -585,6 +750,14 @@ export default function Dashboard() {
                     fullWidth
                   >
                     Relatório de Uso
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    startIcon={<Sync />}
+                    fullWidth
+                    onClick={handleReclassifyChannels}
+                  >
+                    Reclassificar Canais (VOD/TV)
                   </Button>
                 </Box>
               </CardContent>
