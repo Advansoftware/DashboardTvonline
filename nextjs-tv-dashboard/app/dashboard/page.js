@@ -29,7 +29,9 @@ import {
   TableRow,
   Paper,
   Alert,
-  Snackbar
+  Snackbar,
+  TablePagination,
+  InputAdornment
 } from '@mui/material';
 import {
   PlayArrow,
@@ -50,7 +52,8 @@ import {
   Storage,
   Visibility,
   Download,
-  Upload
+  Upload,
+  Search
 } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 
@@ -72,6 +75,14 @@ export default function Dashboard() {
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
   const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false);
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+
+  // Paginação e filtros
+  const [playlistPage, setPlaylistPage] = useState(0);
+  const [playlistRowsPerPage, setPlaylistRowsPerPage] = useState(5);
+  const [playlistSearchTerm, setPlaylistSearchTerm] = useState('');
+  const [channelPage, setChannelPage] = useState(0);
+  const [channelRowsPerPage, setChannelRowsPerPage] = useState(12);
+  const [channelSearchTerm, setChannelSearchTerm] = useState('');
 
   // Carregar dados
   useEffect(() => {
@@ -156,6 +167,27 @@ export default function Dashboard() {
       console.error('Erro ao atualizar dados:', error);
     }
   };
+
+  // Filtros e paginação
+  const filteredPlaylists = playlists.filter(playlist =>
+    playlist.name.toLowerCase().includes(playlistSearchTerm.toLowerCase()) ||
+    (playlist.url && playlist.url.toLowerCase().includes(playlistSearchTerm.toLowerCase()))
+  );
+
+  const filteredChannels = channels.filter(channel =>
+    channel.name.toLowerCase().includes(channelSearchTerm.toLowerCase()) ||
+    (channel.group && channel.group.toLowerCase().includes(channelSearchTerm.toLowerCase()))
+  );
+
+  const paginatedPlaylists = filteredPlaylists.slice(
+    playlistPage * playlistRowsPerPage,
+    playlistPage * playlistRowsPerPage + playlistRowsPerPage
+  );
+
+  const paginatedChannels = filteredChannels.slice(
+    channelPage * channelRowsPerPage,
+    channelPage * channelRowsPerPage + channelRowsPerPage
+  );
 
   // Estatísticas
   const totalChannels = channels.length;
@@ -319,8 +351,25 @@ export default function Dashboard() {
           <CardContent>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
               <Typography variant="h5" component="h2" sx={{ fontWeight: 600 }}>
-                Gerenciar Playlists
+                Gerenciar Playlists ({filteredPlaylists.length})
               </Typography>
+              <TextField
+                size="small"
+                placeholder="Pesquisar playlists..."
+                value={playlistSearchTerm}
+                onChange={(e) => {
+                  setPlaylistSearchTerm(e.target.value);
+                  setPlaylistPage(0); // Reset to first page on search
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Search />
+                    </InputAdornment>
+                  ),
+                }}
+                sx={{ width: 250 }}
+              />
             </Box>
 
             <TableContainer component={Paper} variant="outlined">
@@ -336,67 +385,93 @@ export default function Dashboard() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {playlists.map((playlist) => (
-                    <TableRow key={playlist.id} hover>
-                      <TableCell>
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                          <PlaylistPlay sx={{ mr: 1, color: theme.palette.primary.main }} />
-                          <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                            {playlist.name}
+                  {paginatedPlaylists.length > 0 ? (
+                    paginatedPlaylists.map((playlist) => (
+                      <TableRow key={playlist.id} hover>
+                        <TableCell>
+                          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <PlaylistPlay sx={{ mr: 1, color: theme.palette.primary.main }} />
+                            <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                              {playlist.name}
+                            </Typography>
+                          </Box>
+                        </TableCell>
+                        <TableCell>
+                          <Typography variant="body2" sx={{ maxWidth: 200, overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                            {playlist.url}
                           </Typography>
-                        </Box>
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant="body2" sx={{ maxWidth: 200, overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                          {playlist.url}
-                        </Typography>
-                      </TableCell>
-                      <TableCell align="center">
-                        <Chip
-                          label={playlist.channelCount}
-                          size="small"
-                          color="primary"
-                          variant="outlined"
-                        />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Chip
-                          label={playlist.status === 'active' ? 'Ativo' : 'Inativo'}
-                          size="small"
-                          color={playlist.status === 'active' ? 'success' : 'error'}
-                          variant="filled"
-                        />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Typography variant="body2" color="text.secondary">
-                          {new Date(playlist.updatedAt || playlist.createdAt).toLocaleDateString('pt-BR')}
-                        </Typography>
-                      </TableCell>
-                      <TableCell align="center">
-                        <Box sx={{ display: 'flex', gap: 1, justifyContent: 'center' }}>
-                          <IconButton size="small" color="primary">
-                            <Visibility />
-                          </IconButton>
-                          <IconButton size="small" color="default">
-                            <Edit />
-                          </IconButton>
-                          <IconButton
+                        </TableCell>
+                        <TableCell align="center">
+                          <Chip
+                            label={playlist.channelCount}
                             size="small"
-                            color="error"
-                            onClick={() => {
-                              if (confirm(`Deseja excluir a playlist "${playlist.name}"?`)) {
-                                handleDeletePlaylist(playlist.id);
-                              }
-                            }}
-                          >
-                            <Delete />
-                          </IconButton>
-                        </Box>
+                            color="primary"
+                            variant="outlined"
+                          />
+                        </TableCell>
+                        <TableCell align="center">
+                          <Chip
+                            label={playlist.status === 'active' ? 'Ativo' : 'Inativo'}
+                            size="small"
+                            color={playlist.status === 'active' ? 'success' : 'error'}
+                            variant="filled"
+                          />
+                        </TableCell>
+                        <TableCell align="center">
+                          <Typography variant="body2" color="text.secondary">
+                            {new Date(playlist.updatedAt || playlist.createdAt).toLocaleDateString('pt-BR')}
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="center">
+                          <Box sx={{ display: 'flex', gap: 1, justifyContent: 'center' }}>
+                            <IconButton size="small" color="primary">
+                              <Visibility />
+                            </IconButton>
+                            <IconButton size="small" color="default">
+                              <Edit />
+                            </IconButton>
+                            <IconButton
+                              size="small"
+                              color="error"
+                              onClick={() => {
+                                if (confirm(`Deseja excluir a playlist "${playlist.name}"?`)) {
+                                  handleDeletePlaylist(playlist.id);
+                                }
+                              }}
+                            >
+                              <Delete />
+                            </IconButton>
+                          </Box>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={6} align="center" sx={{ py: 4 }}>
+                        <Typography color="text.secondary">
+                          {playlistSearchTerm ? 'Nenhuma playlist encontrada' : 'Nenhuma playlist adicionada'}
+                        </Typography>
                       </TableCell>
                     </TableRow>
-                  ))}
+                  )}
                 </TableBody>
               </Table>
+              {filteredPlaylists.length > 0 && (
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 25]}
+                  component="div"
+                  count={filteredPlaylists.length}
+                  rowsPerPage={playlistRowsPerPage}
+                  page={playlistPage}
+                  onPageChange={(event, newPage) => setPlaylistPage(newPage)}
+                  onRowsPerPageChange={(event) => {
+                    setPlaylistRowsPerPage(parseInt(event.target.value, 10));
+                    setPlaylistPage(0);
+                  }}
+                  labelRowsPerPage="Itens por página:"
+                  labelDisplayedRows={({ from, to, count }) => `${from}-${to} de ${count !== -1 ? count : `mais de ${to}`}`}
+                />
+              )}
             </TableContainer>
           </CardContent>
         </Card>
@@ -404,14 +479,31 @@ export default function Dashboard() {
         {/* Channels Section */}
         <Card sx={{ mb: 4 }}>
           <CardContent>
-            <Box sx={{ mb: 3 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
               <Typography variant="h5" component="h2" sx={{ fontWeight: 600 }}>
-                Canais IPTV ({channels.length})
+                Canais IPTV ({filteredChannels.length})
               </Typography>
+              <TextField
+                size="small"
+                placeholder="Pesquisar canais..."
+                value={channelSearchTerm}
+                onChange={(e) => {
+                  setChannelSearchTerm(e.target.value);
+                  setChannelPage(0); // Reset to first page on search
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Search />
+                    </InputAdornment>
+                  ),
+                }}
+                sx={{ width: 250 }}
+              />
             </Box>
 
             <ChannelGrid
-              channels={channels}
+              channels={paginatedChannels}
               onChannelSelect={handleChannelSelect}
               showOptions={true}
               onChannelOptions={(channel, action) => {
@@ -428,6 +520,38 @@ export default function Dashboard() {
                 }
               }}
             />
+
+            {filteredChannels.length > channelRowsPerPage && (
+              <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+                <TablePagination
+                  component="div"
+                  count={filteredChannels.length}
+                  page={channelPage}
+                  onPageChange={(event, newPage) => setChannelPage(newPage)}
+                  rowsPerPage={channelRowsPerPage}
+                  onRowsPerPageChange={(event) => {
+                    setChannelRowsPerPage(parseInt(event.target.value, 10));
+                    setChannelPage(0);
+                  }}
+                  rowsPerPageOptions={[12, 24, 48, 96]}
+                  labelRowsPerPage="Canais por página:"
+                  labelDisplayedRows={({ from, to, count }) => `${from}-${to} de ${count !== -1 ? count : `mais de ${to}`}`}
+                  showFirstButton
+                  showLastButton
+                />
+              </Box>
+            )}
+
+            {paginatedChannels.length === 0 && channelSearchTerm && (
+              <Box sx={{ textAlign: 'center', py: 4 }}>
+                <Typography variant="h6" color="text.secondary" gutterBottom>
+                  Nenhum canal encontrado
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Tente ajustar os termos de pesquisa
+                </Typography>
+              </Box>
+            )}
           </CardContent>
         </Card>
 

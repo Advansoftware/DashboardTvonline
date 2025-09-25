@@ -26,7 +26,10 @@ import {
   MenuItem,
   ListItemIcon,
   ListItemText,
-  Skeleton
+  Skeleton,
+  Pagination,
+  FormControl,
+  Select
 } from '@mui/material';
 import {
   Search,
@@ -82,6 +85,11 @@ export default function TVHomeInterface({
   const [hoveredChannel, setHoveredChannel] = useState(null);
   const [sortMenuAnchor, setSortMenuAnchor] = useState(null);
   const [filterMenuAnchor, setFilterMenuAnchor] = useState(null);
+
+  // Paginação
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(24);
+  const [showPagination, setShowPagination] = useState(true);
 
   // Carregar dados iniciais
   useEffect(() => {
@@ -152,6 +160,22 @@ export default function TVHomeInterface({
 
     return filtered;
   }, [channels, selectedType, selectedCategory, searchTerm, sortBy, favorites]);
+
+  // Paginação
+  const paginatedChannels = useMemo(() => {
+    if (!showPagination) return organizedChannels;
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return organizedChannels.slice(startIndex, endIndex);
+  }, [organizedChannels, currentPage, itemsPerPage, showPagination]);
+
+  const totalPages = Math.ceil(organizedChannels.length / itemsPerPage);
+
+  // Reset página quando filtros mudarem
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedCategory, selectedType, sortBy]);
 
   // Obter categorias únicas
   const categories = useMemo(() => {
@@ -662,13 +686,74 @@ export default function TVHomeInterface({
               </Typography>
             </Box>
           ) : (
-            <Grid container spacing={3}>
-              {organizedChannels.map(channel => (
-                <Grid key={channel.id} size={{ xs: 12, sm: 6, md: 4, lg: 3, xl: 2 }}>
-                  {renderChannelCard(channel)}
-                </Grid>
-              ))}
-            </Grid>
+            <>
+              <Grid container spacing={3}>
+                {paginatedChannels.map(channel => (
+                  <Grid key={channel.id} size={{ xs: 12, sm: 6, md: 4, lg: 3, xl: 2 }}>
+                    {renderChannelCard(channel)}
+                  </Grid>
+                ))}
+              </Grid>
+
+              {/* Controles de Paginação */}
+              {organizedChannels.length > 0 && showPagination && (
+                <Box sx={{
+                  display: 'flex',
+                  flexDirection: { xs: 'column', sm: 'row' },
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  mt: 4,
+                  gap: 2,
+                  p: 2,
+                  backgroundColor: alpha(theme.palette.background.paper, 0.5),
+                  borderRadius: 2,
+                  border: 1,
+                  borderColor: 'divider'
+                }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Typography variant="body2" color="text.secondary">
+                      Mostrando {((currentPage - 1) * itemsPerPage) + 1}-{Math.min(currentPage * itemsPerPage, organizedChannels.length)} de {organizedChannels.length} canais
+                    </Typography>
+
+                    <FormControl size="small" sx={{ minWidth: 120 }}>
+                      <Select
+                        value={itemsPerPage}
+                        onChange={(e) => {
+                          setItemsPerPage(Number(e.target.value));
+                          setCurrentPage(1);
+                        }}
+                        displayEmpty
+                      >
+                        <MenuItem value={12}>12 por página</MenuItem>
+                        <MenuItem value={24}>24 por página</MenuItem>
+                        <MenuItem value={48}>48 por página</MenuItem>
+                        <MenuItem value={96}>96 por página</MenuItem>
+                      </Select>
+                    </FormControl>
+
+                    <Button
+                      size="small"
+                      variant="outlined"
+                      onClick={() => setShowPagination(!showPagination)}
+                    >
+                      {showPagination ? 'Ver Todos' : 'Paginar'}
+                    </Button>
+                  </Box>
+
+                  {totalPages > 1 && (
+                    <Pagination
+                      count={totalPages}
+                      page={currentPage}
+                      onChange={(event, page) => setCurrentPage(page)}
+                      color="primary"
+                      showFirstButton
+                      showLastButton
+                      size="medium"
+                    />
+                  )}
+                </Box>
+              )}
+            </>
           )}
         </Box>
       </Container>

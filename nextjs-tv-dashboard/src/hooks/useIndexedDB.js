@@ -66,39 +66,72 @@ class IndexedDBManager {
   async getAllFromStore(storeName) {
     if (!this.db) await this.init();
 
-    return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([storeName], 'readonly');
-      const store = transaction.objectStore(storeName);
-      const request = store.getAll();
+    // Verificar se o store existe
+    if (!this.db.objectStoreNames.contains(storeName)) {
+      console.warn(`Store ${storeName} não existe, retornando array vazio`);
+      return [];
+    }
 
-      request.onerror = () => reject(request.error);
-      request.onsuccess = () => resolve(request.result);
+    return new Promise((resolve, reject) => {
+      try {
+        const transaction = this.db.transaction([storeName], 'readonly');
+        const store = transaction.objectStore(storeName);
+        const request = store.getAll();
+
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => resolve(request.result);
+      } catch (error) {
+        console.error(`Erro ao acessar store ${storeName}:`, error);
+        resolve([]);
+      }
     });
   }
 
   async addToStore(storeName, data) {
     if (!this.db) await this.init();
 
-    return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([storeName], 'readwrite');
-      const store = transaction.objectStore(storeName);
-      const request = store.add(data);
+    // Verificar se o store existe
+    if (!this.db.objectStoreNames.contains(storeName)) {
+      console.warn(`Store ${storeName} não existe`);
+      return null;
+    }
 
-      request.onerror = () => reject(request.error);
-      request.onsuccess = () => resolve(request.result);
+    return new Promise((resolve, reject) => {
+      try {
+        const transaction = this.db.transaction([storeName], 'readwrite');
+        const store = transaction.objectStore(storeName);
+        const request = store.add(data);
+
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => resolve(request.result);
+      } catch (error) {
+        console.error(`Erro ao adicionar no store ${storeName}:`, error);
+        reject(error);
+      }
     });
   }
 
   async putToStore(storeName, data) {
     if (!this.db) await this.init();
 
-    return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([storeName], 'readwrite');
-      const store = transaction.objectStore(storeName);
-      const request = store.put(data);
+    // Verificar se o store existe
+    if (!this.db.objectStoreNames.contains(storeName)) {
+      console.warn(`Store ${storeName} não existe`);
+      return null;
+    }
 
-      request.onerror = () => reject(request.error);
-      request.onsuccess = () => resolve(request.result);
+    return new Promise((resolve, reject) => {
+      try {
+        const transaction = this.db.transaction([storeName], 'readwrite');
+        const store = transaction.objectStore(storeName);
+        const request = store.put(data);
+
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => resolve(request.result);
+      } catch (error) {
+        console.error(`Erro ao atualizar no store ${storeName}:`, error);
+        reject(error);
+      }
     });
   }
 

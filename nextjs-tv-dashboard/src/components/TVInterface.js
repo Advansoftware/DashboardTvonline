@@ -94,6 +94,49 @@ const TVInterface = ({ channels = [], initialChannel = null, onBack = null }) =>
     }
   }, [isReady, channels, initialChannel, getLastWatchedChannel, getFavorites]);
 
+  // Mostrar controles temporariamente
+  const showControlsTemporarily = useCallback(() => {
+    setShowControls(true);
+    if (controlsTimeoutRef.current) {
+      clearTimeout(controlsTimeoutRef.current);
+    }
+    controlsTimeoutRef.current = setTimeout(() => {
+      setShowControls(false);
+    }, 3000);
+  }, []);
+
+  // Mostrar barra de canais temporariamente
+  const showChannelBarTemporarily = useCallback(() => {
+    setShowChannelBar(true);
+    if (channelBarTimeoutRef.current) {
+      clearTimeout(channelBarTimeoutRef.current);
+    }
+    channelBarTimeoutRef.current = setTimeout(() => {
+      setShowChannelBar(false);
+    }, 5000);
+  }, []);
+
+  // Mudar canal
+  const changeChannel = useCallback((direction) => {
+    if (channels.length === 0) return;
+
+    const newIndex = direction > 0
+      ? (currentChannelIndex + 1) % channels.length
+      : currentChannelIndex === 0
+        ? channels.length - 1
+        : currentChannelIndex - 1;
+
+    setCurrentChannelIndex(newIndex);
+    setCurrentChannel(channels[newIndex]);
+
+    // Adicionar ao histórico
+    if (isReady) {
+      addToHistory(channels[newIndex].id, channels[newIndex].name);
+    }
+
+    showChannelBarTemporarily();
+  }, [channels, currentChannelIndex, isReady, addToHistory, showChannelBarTemporarily]);
+
   // Controles de teclado
   useEffect(() => {
     const handleKeyPress = (event) => {
@@ -164,49 +207,6 @@ const TVInterface = ({ channels = [], initialChannel = null, onBack = null }) =>
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [router, onBack, changeChannel, showControlsTemporarily]);
-
-  // Mostrar controles temporariamente
-  const showControlsTemporarily = useCallback(() => {
-    setShowControls(true);
-    if (controlsTimeoutRef.current) {
-      clearTimeout(controlsTimeoutRef.current);
-    }
-    controlsTimeoutRef.current = setTimeout(() => {
-      setShowControls(false);
-    }, 3000);
-  }, []);
-
-  // Mostrar barra de canais temporariamente
-  const showChannelBarTemporarily = useCallback(() => {
-    setShowChannelBar(true);
-    if (channelBarTimeoutRef.current) {
-      clearTimeout(channelBarTimeoutRef.current);
-    }
-    channelBarTimeoutRef.current = setTimeout(() => {
-      setShowChannelBar(false);
-    }, 5000);
-  }, []);
-
-  // Mudar canal
-  const changeChannel = useCallback((direction) => {
-    if (channels.length === 0) return;
-
-    const newIndex = direction > 0
-      ? (currentChannelIndex + 1) % channels.length
-      : currentChannelIndex === 0
-        ? channels.length - 1
-        : currentChannelIndex - 1;
-
-    setCurrentChannelIndex(newIndex);
-    setCurrentChannel(channels[newIndex]);
-
-    // Adicionar ao histórico
-    if (isReady) {
-      addToHistory(channels[newIndex].id, channels[newIndex].name);
-    }
-
-    showChannelBarTemporarily();
-  }, [channels, currentChannelIndex, isReady, addToHistory, showChannelBarTemporarily]);
 
   // Controle de mouse
   const handleMouseMove = useCallback(() => {
