@@ -4,8 +4,12 @@ import { useState, useEffect, useCallback } from 'react';
 import { Box, CircularProgress, ThemeProvider, CssBaseline } from '@mui/material';
 import TVInterface from '../src/components/TVInterface';
 import TVHomeInterface from '../src/components/TVHomeInterface';
+import OptimizedTVHomeInterface from '../src/components/OptimizedTVHomeInterface';
 import { useIndexedDB } from '../src/hooks/useIndexedDB';
 import { darkTheme } from '../src/theme/theme';
+
+// Limite para decidir quando usar a interface otimizada
+const OPTIMIZATION_THRESHOLD = 1000;
 
 export default function Home() {
   const [channels, setChannels] = useState([]);
@@ -92,15 +96,26 @@ export default function Home() {
     );
   }
 
+  // Decidir qual interface usar baseado na quantidade de canais
+  const useOptimizedInterface = channels.length >= OPTIMIZATION_THRESHOLD;
+
   // Show Home Interface (Netflix/Globo Play style)
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <TVHomeInterface
-        channels={channels}
-        onChannelSelect={handleChannelSelect}
-        onStartTV={handleStartTV}
-      />
+      {useOptimizedInterface ? (
+        <OptimizedTVHomeInterface
+          channels={channels}
+          onChannelSelect={handleChannelSelect}
+          onStartTV={handleStartTV}
+        />
+      ) : (
+        <TVHomeInterface
+          channels={channels}
+          onChannelSelect={handleChannelSelect}
+          onStartTV={handleStartTV}
+        />
+      )}
     </ThemeProvider>
   );
 }
