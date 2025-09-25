@@ -53,7 +53,7 @@ import {
   ViewList
 } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
-import { useIndexedDB } from '../hooks/useIndexedDB';
+import { useOptimizedIndexedDB } from '../hooks/useOptimizedIndexedDB';
 
 export default function TVHomeInterface({
   channels = [],
@@ -62,7 +62,7 @@ export default function TVHomeInterface({
 }) {
   const theme = useTheme();
   const router = useRouter();
-  const { isReady, getFavorites, addToFavorites, removeFromFavorites, getHistory } = useIndexedDB();
+  const { isReady, getFavorites, addToFavorites, removeFromFavorites, getHistory } = useOptimizedIndexedDB();
 
   // Função para redirecionamento seguro
   const handleDashboardRedirect = () => {

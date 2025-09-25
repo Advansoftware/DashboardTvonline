@@ -41,11 +41,11 @@ import { useRouter } from 'next/navigation';
 import MainLayout from '../../../src/components/MainLayout';
 import ChannelGrid from '../../../src/components/ChannelGrid';
 import UniversalPlayer from '../../../src/components/UniversalPlayer';
-import { useIndexedDB } from '../../../src/hooks/useIndexedDB';
+import { useOptimizedIndexedDB } from '../../../src/hooks/useOptimizedIndexedDB';
 
 export default function FavoritesPage() {
   const router = useRouter();
-  const { isReady, getChannels, getFavorites, addToFavorites, removeFromFavorites } = useIndexedDB();
+  const { isReady, getChannels, getFavorites, addToFavorites, removeFromFavorites } = useOptimizedIndexedDB();
 
   const [channels, setChannels] = useState([]);
   const [favorites, setFavorites] = useState([]);

@@ -29,11 +29,11 @@ import {
 import { useRouter } from 'next/navigation';
 import UniversalPlayer from './UniversalPlayer';
 import TVChannelSelector from './TVChannelSelector';
-import { useIndexedDB } from '../hooks/useIndexedDB';
+import { useOptimizedIndexedDB } from '../hooks/useOptimizedIndexedDB';
 
 const TVInterface = ({ channels = [], initialChannel = null, onBack = null }) => {
   const router = useRouter();
-  const { isReady, addToHistory, getLastWatchedChannel, getFavorites, addToFavorites, removeFromFavorites } = useIndexedDB();
+  const { isReady, addToHistory, getFavorites, addToFavorites, removeFromFavorites, getHistory } = useOptimizedIndexedDB();
 
   const [currentChannel, setCurrentChannel] = useState(null);
   const [currentChannelIndex, setCurrentChannelIndex] = useState(0);
@@ -55,8 +55,8 @@ const TVInterface = ({ channels = [], initialChannel = null, onBack = null }) =>
     if (isReady && channels.length > 0) {
       const loadInitialData = async () => {
         try {
-          const [lastChannel, savedFavorites] = await Promise.all([
-            getLastWatchedChannel(),
+          const [history, savedFavorites] = await Promise.all([
+            getHistory(1), // Pegar o último canal do histórico
             getFavorites()
           ]);
 
@@ -71,8 +71,9 @@ const TVInterface = ({ channels = [], initialChannel = null, onBack = null }) =>
             } else {
               setCurrentChannel(channels[0]);
             }
-          } else if (lastChannel) {
-            const index = channels.findIndex(ch => ch.id === lastChannel.id);
+          } else if (history.length > 0) {
+            const lastChannel = history[0];
+            const index = channels.findIndex(ch => ch.id === lastChannel.channelId);
             if (index !== -1) {
               setCurrentChannelIndex(index);
               setCurrentChannel(channels[index]);
@@ -92,7 +93,7 @@ const TVInterface = ({ channels = [], initialChannel = null, onBack = null }) =>
 
       loadInitialData();
     }
-  }, [isReady, channels, initialChannel, getLastWatchedChannel, getFavorites]);
+  }, [isReady, channels, initialChannel, getHistory, getFavorites]);
 
   // Mostrar controles temporariamente
   const showControlsTemporarily = useCallback(() => {

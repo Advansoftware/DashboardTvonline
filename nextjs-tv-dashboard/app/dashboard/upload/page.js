@@ -60,12 +60,12 @@ import {
 } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import MainLayout from '../../../src/components/MainLayout';
-import { useIndexedDB } from '../../../src/hooks/useIndexedDB';
+import { useOptimizedIndexedDB } from '../../../src/hooks/useOptimizedIndexedDB';
 import { parseM3U8List } from '../../../src/utils/m3u8Utils';
 
 export default function UploadPage() {
   const router = useRouter();
-  const { isReady, getChannels, saveChannels, getPlaylists, savePlaylist, deletePlaylist } = useIndexedDB();
+  const { isReady, getChannels, saveChannels, getPlaylists, savePlaylist, deletePlaylist } = useOptimizedIndexedDB();
 
   const [currentTab, setCurrentTab] = useState(0); // 0: URL, 1: Upload, 2: Histórico
   const [playlistUrl, setPlaylistUrl] = useState('');

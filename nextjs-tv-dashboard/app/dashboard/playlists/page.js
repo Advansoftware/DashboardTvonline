@@ -60,11 +60,11 @@ import {
 } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import MainLayout from '../../../src/components/MainLayout';
-import { useIndexedDB } from '../../../src/hooks/useIndexedDB';
+import { useOptimizedIndexedDB } from '../../../src/hooks/useOptimizedIndexedDB';
 
 export default function PlaylistsPage() {
   const router = useRouter();
-  const { isReady, getPlaylists, getChannels, deletePlaylist, savePlaylist } = useIndexedDB();
+  const { isReady, getPlaylists, getChannels, deletePlaylist, savePlaylist } = useOptimizedIndexedDB();
 
   const [playlists, setPlaylists] = useState([]);
   const [channels, setChannels] = useState([]);

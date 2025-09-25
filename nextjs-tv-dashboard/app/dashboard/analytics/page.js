@@ -46,10 +46,10 @@ import {
   DateRange
 } from '@mui/icons-material';
 import MainLayout from '../../../src/components/MainLayout';
-import { useIndexedDB } from '../../../src/hooks/useIndexedDB';
+import { useOptimizedIndexedDB } from '../../../src/hooks/useOptimizedIndexedDB';
 
 export default function AnalyticsPage() {
-  const { isReady, getChannels, getFavorites, getHistory, getPlaylists } = useIndexedDB();
+  const { isReady, getChannels, getFavorites, getHistory, getPlaylists } = useOptimizedIndexedDB();
 
   const [channels, setChannels] = useState([]);
   const [favorites, setFavorites] = useState([]);

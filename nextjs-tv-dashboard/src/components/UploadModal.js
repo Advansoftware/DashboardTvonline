@@ -48,11 +48,11 @@ import {
   AccessTime,
   Close
 } from '@mui/icons-material';
-import { useIndexedDB } from '../hooks/useIndexedDB';
+import { useOptimizedIndexedDB } from '../hooks/useOptimizedIndexedDB';
 import { parseM3U8List, validateCategorization, reclassifyChannels } from '../utils/m3u8Utils';
 
 export default function UploadModal({ open, onClose, onPlaylistAdded }) {
-  const { isReady, getChannels, saveChannels, getPlaylists, savePlaylist, deletePlaylist } = useIndexedDB();
+  const { isReady, getChannels, saveChannels, getPlaylists, savePlaylist, deletePlaylist } = useOptimizedIndexedDB();
 
   const [currentTab, setCurrentTab] = useState(0); // 0: URL, 1: Upload, 2: Histórico
   const [playlistUrl, setPlaylistUrl] = useState('');

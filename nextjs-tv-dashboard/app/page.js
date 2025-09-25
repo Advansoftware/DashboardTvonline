@@ -5,7 +5,7 @@ import { Box, CircularProgress, ThemeProvider, CssBaseline } from '@mui/material
 import TVInterface from '../src/components/TVInterface';
 import TVHomeInterface from '../src/components/TVHomeInterface';
 import OptimizedTVHomeInterface from '../src/components/OptimizedTVHomeInterface';
-import { useIndexedDB } from '../src/hooks/useIndexedDB';
+import { useOptimizedIndexedDB } from '../src/hooks/useOptimizedIndexedDB';
 import { darkTheme } from '../src/theme/theme';
 
 // Limite para decidir quando usar a interface otimizada
@@ -17,7 +17,7 @@ export default function Home() {
   const [isMounted, setIsMounted] = useState(false);
   const [showTVInterface, setShowTVInterface] = useState(false);
   const [selectedChannel, setSelectedChannel] = useState(null);
-  const { isReady, getChannels, saveChannels } = useIndexedDB();
+  const { isReady, getChannels, saveChannels } = useOptimizedIndexedDB();
 
   // Garantir hidratação correta
   useEffect(() => {

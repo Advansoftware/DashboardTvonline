@@ -63,13 +63,13 @@ import MainLayout from '../../src/components/MainLayout';
 import ChannelGrid from '../../src/components/ChannelGrid';
 import UniversalPlayer from '../../src/components/UniversalPlayer';
 import UploadModal from '../../src/components/UploadModal';
-import { useIndexedDB } from '../../src/hooks/useIndexedDB';
+import { useOptimizedIndexedDB } from '../../src/hooks/useOptimizedIndexedDB';
 import { parseM3U8List, updatePlaylistIntelligently, reclassifyChannels } from '../../src/utils/m3u8Utils';
 
 export default function Dashboard() {
   const theme = useTheme();
   const router = useRouter();
-  const { isReady, getChannels, saveChannels, getPlaylists, savePlaylist, deletePlaylist } = useIndexedDB();
+  const { isReady, getChannels, saveChannels, getPlaylists, savePlaylist, deletePlaylist } = useOptimizedIndexedDB();
 
   const [channels, setChannels] = useState([]);
   const [playlists, setPlaylists] = useState([]);

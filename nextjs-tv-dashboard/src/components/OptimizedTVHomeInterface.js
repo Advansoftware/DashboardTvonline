@@ -55,6 +55,7 @@ import { VirtualizedChannelGrid, PerformanceMonitor } from './VirtualizedCompone
 import PerformanceSettings from './PerformanceSettings';
 
 export default function OptimizedTVHomeInterface({
+  channels: initialChannels = [],
   onChannelSelect,
   onStartTV
 }) {
@@ -128,10 +129,27 @@ export default function OptimizedTVHomeInterface({
 
         // Processar histórico para canais recentes
         const recentChannelIds = savedHistory.map(h => h.channelId);
-        // Carregar canais recentes será feito na próxima operação
+        const recentChannelsData = initialChannels.filter(ch => recentChannelIds.includes(ch.id));
+        setRecentChannels(recentChannelsData);
 
-        // Carregar primeira página de canais
-        await loadChannels(1);
+        // Se há canais iniciais (da prop), usar eles
+        if (initialChannels && initialChannels.length > 0) {
+          setAllChannels(initialChannels);
+          setChannels(initialChannels.slice(0, itemsPerPage));
+          setTotalChannels(initialChannels.length);
+          setTotalPages(Math.ceil(initialChannels.length / itemsPerPage));
+
+          // Extrair categorias únicas
+          const uniqueCategories = ['Todos', ...new Set(initialChannels
+            .map(ch => ch.group || ch.category)
+            .filter(Boolean)
+            .sort()
+          )];
+          setCategories(uniqueCategories);
+        } else {
+          // Fallback para carregar do IndexedDB
+          await loadChannels(1);
+        }
 
       } catch (error) {
         console.error('Erro ao carregar dados iniciais:', error);
@@ -141,44 +159,64 @@ export default function OptimizedTVHomeInterface({
     };
 
     loadInitialData();
-  }, [isReady]);
+  }, [isReady, initialChannels, itemsPerPage]);
 
   // Função para carregar canais com paginação
   const loadChannels = useCallback(async (page = 1, reset = false) => {
-    if (!isReady) return;
-
     setIsLoading(true);
     try {
-      const filters = {};
-      if (selectedCategory !== 'Todos') {
-        filters.group = selectedCategory;
-      }
-      if (selectedType !== 'all') {
-        filters.type = selectedType;
+      let channelsToProcess = [];
+
+      // Se há canais iniciais, usar eles; senão usar IndexedDB
+      if (initialChannels && initialChannels.length > 0) {
+        channelsToProcess = [...initialChannels];
+      } else if (isReady) {
+        // Fallback para IndexedDB quando não há canais na prop
+        const filters = {};
+        if (selectedCategory !== 'Todos') {
+          filters.group = selectedCategory;
+        }
+        if (selectedType !== 'all') {
+          filters.type = selectedType;
+        }
+
+        if (searchTerm) {
+          channelsToProcess = await searchChannels(searchTerm, 1000); // Buscar muitos para filtrar localmente
+        } else {
+          const result = await getChannelsPaginated(1, 1000, filters); // Carregar tudo de uma vez para otimização local
+          channelsToProcess = result.data;
+        }
       }
 
-      let result;
+      // Aplicar filtros locais
+      let filteredChannels = channelsToProcess;
+
+      if (selectedCategory !== 'Todos') {
+        filteredChannels = filteredChannels.filter(ch =>
+          (ch.group || ch.category) === selectedCategory
+        );
+      }
+
+      if (selectedType !== 'all') {
+        filteredChannels = filteredChannels.filter(ch => ch.type === selectedType);
+      }
+
       if (searchTerm) {
-        // Para busca, usar método de busca otimizado
-        const searchResults = await searchChannels(searchTerm, itemsPerPage * page);
-        result = {
-          data: searchResults.slice((page - 1) * itemsPerPage, page * itemsPerPage),
-          total: searchResults.length,
-          hasMore: searchResults.length > page * itemsPerPage
-        };
-      } else {
-        // Para listagem normal, usar paginação
-        result = await getChannelsPaginated(page, itemsPerPage, filters);
+        const searchLower = searchTerm.toLowerCase();
+        filteredChannels = filteredChannels.filter(ch =>
+          ch.name?.toLowerCase().includes(searchLower) ||
+          ch.group?.toLowerCase().includes(searchLower) ||
+          ch.category?.toLowerCase().includes(searchLower)
+        );
       }
 
       // Aplicar ordenação
-      let sortedChannels = [...result.data];
-      sortedChannels.sort((a, b) => {
+      filteredChannels.sort((a, b) => {
         switch (sortBy) {
           case 'name':
             return a.name.localeCompare(b.name);
           case 'group':
-            return (a.group || '').localeCompare(b.group || '');
+            return (a.group || a.category || '').localeCompare(b.group || b.category || '');
           case 'recent':
             return new Date(b.addedAt || 0) - new Date(a.addedAt || 0);
           case 'popular':
@@ -190,21 +228,30 @@ export default function OptimizedTVHomeInterface({
         }
       });
 
+      // Aplicar paginação local
+      const startIndex = (page - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      const paginatedChannels = filteredChannels.slice(startIndex, endIndex);
+
       if (reset || page === 1) {
-        setChannels(sortedChannels);
-        setAllChannels(sortedChannels);
+        setChannels(paginatedChannels);
+        setAllChannels(filteredChannels);
       } else {
-        setChannels(prev => [...prev, ...sortedChannels]);
-        setAllChannels(prev => [...prev, ...sortedChannels]);
+        setChannels(prev => [...prev, ...paginatedChannels]);
       }
 
-      setTotalChannels(result.total);
-      setTotalPages(Math.ceil(result.total / itemsPerPage));
-      setHasMore(result.hasMore);
+      setTotalChannels(filteredChannels.length);
+      setTotalPages(Math.ceil(filteredChannels.length / itemsPerPage));
+      setHasMore(endIndex < filteredChannels.length);
       setCurrentPage(page);
 
       // Extrair categorias únicas
-      const uniqueCategories = ['Todos', ...new Set(sortedChannels.map(ch => ch.group).filter(Boolean))];
+      const uniqueCategories = ['Todos', ...new Set(
+        channelsToProcess
+          .map(ch => ch.group || ch.category)
+          .filter(Boolean)
+          .sort()
+      )];
       setCategories(uniqueCategories);
 
     } catch (error) {
@@ -212,7 +259,7 @@ export default function OptimizedTVHomeInterface({
     } finally {
       setIsLoading(false);
     }
-  }, [isReady, selectedCategory, selectedType, searchTerm, sortBy, itemsPerPage, favorites, getChannelsPaginated, searchChannels]);
+  }, [initialChannels, isReady, selectedCategory, selectedType, searchTerm, sortBy, itemsPerPage, favorites, getChannelsPaginated, searchChannels]);
 
   // Recarregar quando filtros mudarem
   useEffect(() => {

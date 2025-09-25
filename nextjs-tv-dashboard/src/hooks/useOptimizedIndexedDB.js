@@ -386,6 +386,33 @@ class OptimizedIndexedDBManager {
     });
   }
 
+  async deleteFromStore(storeName, key) {
+    if (!this.db) await this.init();
+
+    if (!this.db.objectStoreNames.contains(storeName)) {
+      console.warn(`Store ${storeName} não existe`);
+      return null;
+    }
+
+    return new Promise((resolve, reject) => {
+      try {
+        const transaction = this.db.transaction([storeName], 'readwrite');
+        const store = transaction.objectStore(storeName);
+        const request = store.delete(key);
+
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => {
+          // Invalidar cache relacionado
+          this.invalidateCache(storeName);
+          resolve(request.result);
+        };
+      } catch (error) {
+        console.error(`Erro ao deletar do store ${storeName}:`, error);
+        reject(error);
+      }
+    });
+  }
+
   // Invalidar cache específico
   invalidateCache(storeName) {
     const keysToDelete = [];
@@ -607,6 +634,36 @@ export const useOptimizedIndexedDB = () => {
     memoryCache.clear();
   }, []);
 
+  // Métodos para configurações
+  const getSetting = useCallback(async (key) => {
+    try {
+      if (!dbManager.db.objectStoreNames.contains(STORES.SETTINGS)) {
+        return null;
+      }
+
+      const transaction = dbManager.db.transaction([STORES.SETTINGS], 'readonly');
+      const store = transaction.objectStore(STORES.SETTINGS);
+      const request = store.get(key);
+
+      return new Promise((resolve, reject) => {
+        request.onsuccess = () => resolve(request.result?.value || null);
+        request.onerror = () => reject(request.error);
+      });
+    } catch (err) {
+      console.error('Erro ao buscar configuração:', err);
+      return null;
+    }
+  }, []);
+
+  const setSetting = useCallback(async (key, value) => {
+    try {
+      return await dbManager.putToStore(STORES.SETTINGS, { key, value });
+    } catch (err) {
+      console.error('Erro ao salvar configuração:', err);
+      throw err;
+    }
+  }, []);
+
   return {
     isReady,
     error,
@@ -622,6 +679,10 @@ export const useOptimizedIndexedDB = () => {
     removeFromFavorites,
     getHistory,
     addToHistory,
+
+    // Métodos de configurações
+    getSetting,
+    setSetting,
 
     // Métodos otimizados
     getChannelsPaginated,

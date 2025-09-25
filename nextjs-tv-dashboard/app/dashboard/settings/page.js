@@ -49,11 +49,11 @@ import {
 } from '@mui/icons-material';
 import MainLayout from '../../../src/components/MainLayout';
 import { useTheme as useCustomTheme } from '../../../src/theme/ThemeProvider';
-import { useIndexedDB } from '../../../src/hooks/useIndexedDB';
+import { useOptimizedIndexedDB } from '../../../src/hooks/useOptimizedIndexedDB';
 
 export default function SettingsPage() {
   const { isDarkMode, toggleTheme } = useCustomTheme();
-  const { isReady, getSetting, setSetting } = useIndexedDB();
+  const { isReady, getSetting, setSetting } = useOptimizedIndexedDB();
 
   const [settings, setSettings] = useState({
     // Aparência
