@@ -53,7 +53,7 @@ import { useIndexedDB } from '../../../src/hooks/useIndexedDB';
 
 export default function SettingsPage() {
   const { isDarkMode, toggleTheme } = useCustomTheme();
-  const { isReady, getSettings, saveSettings } = useIndexedDB();
+  const { isReady, getSetting, setSetting } = useIndexedDB();
 
   const [settings, setSettings] = useState({
     // Aparência
@@ -92,9 +92,19 @@ export default function SettingsPage() {
       if (!isReady) return;
 
       try {
-        const savedSettings = await getSettings();
-        if (savedSettings) {
-          setSettings({ ...settings, ...savedSettings });
+        // Carregar cada configuração individualmente
+        const settingsKeys = Object.keys(settings);
+        const loadedSettings = {};
+
+        for (const key of settingsKeys) {
+          const value = await getSetting(key);
+          if (value !== undefined) {
+            loadedSettings[key] = value;
+          }
+        }
+
+        if (Object.keys(loadedSettings).length > 0) {
+          setSettings(prev => ({ ...prev, ...loadedSettings }));
         }
       } catch (error) {
         console.error('Erro ao carregar configurações:', error);
@@ -111,7 +121,11 @@ export default function SettingsPage() {
 
   const handleSaveSettings = async () => {
     try {
-      await saveSettings(settings);
+      // Salvar cada configuração individualmente
+      for (const [key, value] of Object.entries(settings)) {
+        await setSetting(key, value);
+      }
+
       setHasChanges(false);
       setSnackbar({ open: true, message: 'Configurações salvas!', severity: 'success' });
     } catch (error) {
@@ -234,7 +248,7 @@ export default function SettingsPage() {
 
         <Grid container spacing={3}>
           {/* Aparência */}
-          <Grid item xs={12} md={6}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <Card>
               <CardContent>
                 <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
@@ -293,7 +307,7 @@ export default function SettingsPage() {
           </Grid>
 
           {/* Player */}
-          <Grid item xs={12} md={6}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <Card>
               <CardContent>
                 <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
@@ -362,7 +376,7 @@ export default function SettingsPage() {
           </Grid>
 
           {/* Qualidade e Performance */}
-          <Grid item xs={12} md={6}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <Card>
               <CardContent>
                 <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
@@ -429,7 +443,7 @@ export default function SettingsPage() {
           </Grid>
 
           {/* Privacidade */}
-          <Grid item xs={12} md={6}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <Card>
               <CardContent>
                 <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
@@ -482,7 +496,7 @@ export default function SettingsPage() {
           </Grid>
 
           {/* Sistema */}
-          <Grid item xs={12}>
+          <Grid size={{ xs: 12 }}>
             <Card>
               <CardContent>
                 <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
@@ -491,7 +505,7 @@ export default function SettingsPage() {
                 </Typography>
 
                 <Grid container spacing={3}>
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <FormControl fullWidth>
                       <InputLabel>Idioma</InputLabel>
                       <Select
@@ -506,7 +520,7 @@ export default function SettingsPage() {
                     </FormControl>
                   </Grid>
 
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <FormControlLabel
                       control={
                         <Switch
@@ -518,7 +532,7 @@ export default function SettingsPage() {
                     />
                   </Grid>
 
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <Box>
                       <Typography variant="body2" gutterBottom>
                         Tamanho do Cache: {settings.cacheSize} MB

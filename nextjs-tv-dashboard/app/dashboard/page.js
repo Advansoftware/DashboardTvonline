@@ -385,13 +385,6 @@ export default function Dashboard() {
               <Typography variant="h5" component="h2" sx={{ fontWeight: 600 }}>
                 Gerenciar Playlists
               </Typography>
-              <Button
-                variant="contained"
-                startIcon={<Add />}
-                onClick={() => setIsUploadDialogOpen(true)}
-              >
-                Nova Playlist
-              </Button>
             </Box>
 
             <TableContainer component={Paper} variant="outlined">
@@ -440,7 +433,7 @@ export default function Dashboard() {
                       </TableCell>
                       <TableCell align="center">
                         <Typography variant="body2" color="text.secondary">
-                          {new Date(playlist.lastUpdated).toLocaleDateString('pt-BR')}
+                          {new Date(playlist.updatedAt || playlist.createdAt).toLocaleDateString('pt-BR')}
                         </Typography>
                       </TableCell>
                       <TableCell align="center">
@@ -522,7 +515,7 @@ export default function Dashboard() {
                     variant="outlined"
                     startIcon={<Upload />}
                     fullWidth
-                    onClick={() => setIsAddPlaylistOpen(true)}
+                    onClick={() => setIsUploadDialogOpen(true)}
                   >
                     Importar Nova Playlist
                   </Button>

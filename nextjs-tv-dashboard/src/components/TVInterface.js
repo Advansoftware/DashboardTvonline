@@ -23,15 +23,17 @@ import {
   KeyboardArrowUp,
   KeyboardArrowDown,
   ArrowBack,
-  Dashboard
+  Dashboard,
+  List
 } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import HlsPlayer from './HlsPlayer';
+import TVChannelSelector from './TVChannelSelector';
 import { useIndexedDB } from '../hooks/useIndexedDB';
 
-const TVInterface = ({ channels = [] }) => {
+const TVInterface = ({ channels = [], initialChannel = null, onBack = null }) => {
   const router = useRouter();
-  const { isReady, addToHistory, getLastWatchedChannel } = useIndexedDB();
+  const { isReady, addToHistory, getLastWatchedChannel, getFavorites, addToFavorites, removeFromFavorites } = useIndexedDB();
 
   const [currentChannel, setCurrentChannel] = useState(null);
   const [currentChannelIndex, setCurrentChannelIndex] = useState(0);
@@ -41,18 +43,35 @@ const TVInterface = ({ channels = [] }) => {
   const [isMuted, setIsMuted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [showChannelBar, setShowChannelBar] = useState(false);
+  const [showChannelSelector, setShowChannelSelector] = useState(false);
+  const [favorites, setFavorites] = useState([]);
 
   const controlsTimeoutRef = useRef(null);
   const channelBarTimeoutRef = useRef(null);
   const playerRef = useRef(null);
 
-  // Carregar último canal assistido
+  // Carregar dados iniciais
   useEffect(() => {
     if (isReady && channels.length > 0) {
-      const loadLastChannel = async () => {
+      const loadInitialData = async () => {
         try {
-          const lastChannel = await getLastWatchedChannel();
-          if (lastChannel) {
+          const [lastChannel, savedFavorites] = await Promise.all([
+            getLastWatchedChannel(),
+            getFavorites()
+          ]);
+
+          setFavorites(savedFavorites);
+
+          // Priorizar canal inicial se fornecido
+          if (initialChannel) {
+            const index = channels.findIndex(ch => ch.id === initialChannel.id);
+            if (index !== -1) {
+              setCurrentChannelIndex(index);
+              setCurrentChannel(channels[index]);
+            } else {
+              setCurrentChannel(channels[0]);
+            }
+          } else if (lastChannel) {
             const index = channels.findIndex(ch => ch.id === lastChannel.id);
             if (index !== -1) {
               setCurrentChannelIndex(index);
@@ -64,16 +83,16 @@ const TVInterface = ({ channels = [] }) => {
             setCurrentChannel(channels[0]);
           }
         } catch (error) {
-          console.error('Erro ao carregar último canal:', error);
+          console.error('Erro ao carregar dados iniciais:', error);
           setCurrentChannel(channels[0]);
         } finally {
           setIsLoading(false);
         }
       };
 
-      loadLastChannel();
+      loadInitialData();
     }
-  }, [isReady, channels, getLastWatchedChannel]);
+  }, [isReady, channels, initialChannel, getLastWatchedChannel, getFavorites]);
 
   // Controles de teclado
   useEffect(() => {
@@ -119,18 +138,32 @@ const TVInterface = ({ channels = [] }) => {
           setTimeout(() => setShowChannelInfo(false), 5000);
           break;
         case 'Escape':
-          router.push('/dashboard');
+          if (onBack) {
+            onBack();
+          } else {
+            router.push('/dashboard');
+          }
           break;
         case 'd':
         case 'D':
           router.push('/dashboard');
+          break;
+        case 'l':
+        case 'L':
+          setShowChannelSelector(true);
+          break;
+        case 'h':
+        case 'H':
+          if (onBack) {
+            onBack();
+          }
           break;
       }
     };
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [router]);
+  }, [router, onBack, changeChannel, showControlsTemporarily]);
 
   // Mostrar controles temporariamente
   const showControlsTemporarily = useCallback(() => {
@@ -179,6 +212,45 @@ const TVInterface = ({ channels = [] }) => {
   const handleMouseMove = useCallback(() => {
     showControlsTemporarily();
   }, [showControlsTemporarily]);
+
+  // Selecionar canal específico
+  const handleChannelSelect = useCallback((channel) => {
+    const index = channels.findIndex(ch => ch.id === channel.id);
+    if (index !== -1) {
+      setCurrentChannelIndex(index);
+      setCurrentChannel(channel);
+
+      // Adicionar ao histórico
+      if (isReady) {
+        addToHistory(channel.id, channel.name);
+      }
+
+      setShowChannelSelector(false);
+      showChannelBarTemporarily();
+    }
+  }, [channels, isReady, addToHistory, showChannelBarTemporarily]);
+
+  // Toggle favorito
+  const handleToggleFavorite = useCallback(async (channel) => {
+    try {
+      const favoriteIds = new Set(favorites.map(fav => fav.channelId));
+
+      if (favoriteIds.has(channel.id)) {
+        await removeFromFavorites(channel.id);
+        setFavorites(prev => prev.filter(fav => fav.channelId !== channel.id));
+      } else {
+        await addToFavorites(channel.id, channel.name, channel.link || channel.url);
+        setFavorites(prev => [...prev, {
+          channelId: channel.id,
+          channelName: channel.name,
+          channelUrl: channel.link || channel.url,
+          timestamp: Date.now()
+        }]);
+      }
+    } catch (error) {
+      console.error('Erro ao alterar favorito:', error);
+    }
+  }, [favorites, addToFavorites, removeFromFavorites]);
 
   if (isLoading) {
     return (
@@ -393,6 +465,21 @@ const TVInterface = ({ channels = [] }) => {
 
               {/* Controles do lado direito */}
               <Stack direction="row" spacing={1}>
+                {onBack && (
+                  <IconButton
+                    onClick={onBack}
+                    sx={{ color: 'white' }}
+                    title="Voltar para a seleção"
+                  >
+                    <ArrowBack />
+                  </IconButton>
+                )}
+                <IconButton
+                  onClick={() => setShowChannelSelector(true)}
+                  sx={{ color: 'white' }}
+                >
+                  <List />
+                </IconButton>
                 <IconButton
                   onClick={() => setShowChannelInfo(true)}
                   sx={{ color: 'white' }}
@@ -436,10 +523,21 @@ const TVInterface = ({ channels = [] }) => {
               ←→ Volume
             </Typography>
             <Typography variant="caption" color="white" display="block">
-              M = Mudo | I = Info | D = Dashboard
+              M = Mudo | I = Info | D = Dashboard | L = Lista
             </Typography>
           </Box>
         </Fade>
+
+        {/* Seletor de Canais */}
+        <TVChannelSelector
+          channels={channels}
+          onChannelSelect={handleChannelSelect}
+          selectedChannel={currentChannel}
+          favorites={favorites}
+          onToggleFavorite={handleToggleFavorite}
+          isOpen={showChannelSelector}
+          onClose={() => setShowChannelSelector(false)}
+        />
       </Box>
     </ThemeProvider>
   );

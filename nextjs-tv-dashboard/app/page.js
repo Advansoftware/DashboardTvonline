@@ -1,14 +1,18 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Box } from '@mui/material';
+import { useState, useEffect, useCallback } from 'react';
+import { Box, CircularProgress, ThemeProvider, CssBaseline } from '@mui/material';
 import TVInterface from '../src/components/TVInterface';
+import TVHomeInterface from '../src/components/TVHomeInterface';
 import { useIndexedDB } from '../src/hooks/useIndexedDB';
+import { darkTheme } from '../src/theme/theme';
 
 export default function Home() {
   const [channels, setChannels] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
+  const [showTVInterface, setShowTVInterface] = useState(false);
+  const [selectedChannel, setSelectedChannel] = useState(null);
   const { isReady, getChannels, saveChannels } = useIndexedDB();
 
   // Garantir hidratação correta
@@ -16,87 +20,87 @@ export default function Home() {
     setIsMounted(true);
   }, []);
 
+  // Função memoizada para carregar canais
+  const loadChannelsCallback = useCallback(async () => {
+    try {
+      const savedChannels = await getChannels();
+      setChannels(savedChannels || []);
+    } catch (error) {
+      console.error('Erro ao carregar canais:', error);
+      setChannels([]);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [getChannels]);
+
   // Carregar canais do IndexedDB
   useEffect(() => {
-    const loadChannels = async () => {
-      if (!isReady) return;
-
-      try {
-        const savedChannels = await getChannels();
-
-        // Se não tiver canais no IndexedDB, tentar carregar do localStorage (migração)
-        if (savedChannels.length === 0) {
-          const localStorageChannels = localStorage.getItem('tv-dashboard-channels') ||
-            localStorage.getItem('tvChannels');
-          if (localStorageChannels) {
-            const parsedChannels = JSON.parse(localStorageChannels);
-            setChannels(parsedChannels);
-
-            // Migrar para IndexedDB
-            await saveChannels(parsedChannels);
-          } else {
-            // Canais de exemplo para demonstração
-            const sampleChannels = [
-              {
-                id: 'sample-1',
-                name: 'Canal Exemplo 1',
-                url: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4',
-                group: 'Entretenimento',
-                logo: 'https://via.placeholder.com/100x100/6750A4/FFFFFF?text=C1'
-              },
-              {
-                id: 'sample-2',
-                name: 'Canal Exemplo 2',
-                url: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4',
-                group: 'Esportes',
-                logo: 'https://via.placeholder.com/100x100/625B71/FFFFFF?text=C2'
-              },
-              {
-                id: 'sample-3',
-                name: 'Canal Exemplo 3',
-                url: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_5mb.mp4',
-                group: 'Notícias',
-                logo: 'https://via.placeholder.com/100x100/7D5260/FFFFFF?text=C3'
-              }
-            ];
-            setChannels(sampleChannels);
-            await saveChannels(sampleChannels);
-          }
-        } else {
-          setChannels(savedChannels);
-        }
-      } catch (error) {
-        console.error('Erro ao carregar canais:', error);
-        // Fallback para localStorage
-        const localStorageChannels = localStorage.getItem('tv-dashboard-channels') ||
-          localStorage.getItem('tvChannels');
-        if (localStorageChannels) {
-          setChannels(JSON.parse(localStorageChannels));
-        }
-      } finally {
+    if (!isMounted || !isReady) {
+      if (isMounted && !isReady) {
         setIsLoading(false);
       }
-    };
+      return;
+    }
 
-    loadChannels();
-  }, [isReady, getChannels, saveChannels]);
+    loadChannelsCallback();
+  }, [isReady, isMounted, loadChannelsCallback]);
 
+  // Handlers
+  const handleChannelSelect = (channel) => {
+    setSelectedChannel(channel);
+    setShowTVInterface(true);
+  };
+
+  const handleStartTV = () => {
+    setShowTVInterface(true);
+  };
+
+  const handleBackToHome = () => {
+    setShowTVInterface(false);
+    setSelectedChannel(null);
+  };
+
+  // Loading state
   if (!isMounted || isLoading) {
     return (
-      <Box
-        sx={{
-          width: '100vw',
-          height: '100vh',
-          bgcolor: 'black',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-      >
-        {/* Loading será mostrado pelo TVInterface */}
-      </Box>
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <Box
+          sx={{
+            width: '100vw',
+            height: '100vh',
+            bgcolor: 'background.default',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          <CircularProgress size={60} />
+        </Box>
+      </ThemeProvider>
     );
   }
 
-  return <TVInterface channels={channels} />;
+  // Show TV Interface
+  if (showTVInterface) {
+    return (
+      <TVInterface
+        channels={channels}
+        initialChannel={selectedChannel}
+        onBack={handleBackToHome}
+      />
+    );
+  }
+
+  // Show Home Interface (Netflix/Globo Play style)
+  return (
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <TVHomeInterface
+        channels={channels}
+        onChannelSelect={handleChannelSelect}
+        onStartTV={handleStartTV}
+      />
+    </ThemeProvider>
+  );
 }

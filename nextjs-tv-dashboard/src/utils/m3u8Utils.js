@@ -3,6 +3,31 @@ export const channelTypes = {
   Channel: 'Channel'
 };
 
+// Identificar tipo de conteúdo (VOD ou canal de TV)
+const identifyContentType = (name, group) => {
+  const name_lower = name.toLowerCase();
+  const group_lower = group?.toLowerCase() || '';
+
+  // Palavras-chave para identificar VOD (filmes e séries)
+  const vodKeywords = [
+    'filme', 'movie', 'cinema', 'serie', 'series', 'show', 'drama', 'reality',
+    'documentario', 'documentary', 'cartoon', 'desenho', 'anime', 'novela',
+    'miniserie', 'temporada', 'season', 'episode', 'episodio'
+  ];
+
+  // Grupos típicos de VOD
+  const vodGroups = [
+    'filmes', 'movies', 'cinema', 'series', 'desenhos', 'cartoons', 'anime',
+    'documentarios', 'documentaries', 'novelas', 'reality', 'shows'
+  ];
+
+  // Verificar se é VOD por nome ou grupo
+  const isVodByName = vodKeywords.some(keyword => name_lower.includes(keyword));
+  const isVodByGroup = vodGroups.some(keyword => group_lower.includes(keyword));
+
+  return (isVodByName || isVodByGroup) ? 'vod' : 'live';
+};
+
 // Utilitário para parser de listas M3U8 (baseado no helper Svelte)
 export const parseM3U8List = (content) => {
   if (!content.includes("#EXTM3U")) {
@@ -43,11 +68,15 @@ export const parseM3U8List = (content) => {
       }
 
       if (nome && link) {
+        // Identificar tipo de conteúdo
+        const type = identifyContentType(nome, grupo);
+
         channels.push({
           name: nome.trim(),
           image: img,
           group: grupo,
           link: link,
+          type: type, // 'live' para canais de TV, 'vod' para filmes/séries
           id: `${nome.trim()}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
         });
       }
@@ -93,6 +122,28 @@ export const organizeChannelsByGroup = (channels) => {
   });
 
   return groupedChannels;
+};
+
+// Utilitário para organizar por tipo de conteúdo
+export const organizeChannelsByType = (channels) => {
+  const organized = {
+    live: channels.filter(ch => ch.type === 'live'),
+    vod: channels.filter(ch => ch.type === 'vod')
+  };
+
+  return organized;
+};
+
+// Utilitário para obter estatísticas de conteúdo
+export const getContentStats = (channels) => {
+  const live = channels.filter(ch => ch.type === 'live').length;
+  const vod = channels.filter(ch => ch.type === 'vod').length;
+
+  return {
+    live,
+    vod,
+    total: channels.length
+  };
 };
 
 // Utilitário para filtrar canais

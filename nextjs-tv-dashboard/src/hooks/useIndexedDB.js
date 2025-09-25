@@ -7,7 +7,8 @@ const STORES = {
   CHANNELS: 'channels',
   PLAYLISTS: 'playlists',
   SETTINGS: 'settings',
-  HISTORY: 'history'
+  HISTORY: 'history',
+  FAVORITES: 'favorites'
 };
 
 class IndexedDBManager {
@@ -51,6 +52,12 @@ class IndexedDBManager {
           const historyStore = db.createObjectStore(STORES.HISTORY, { keyPath: 'id', autoIncrement: true });
           historyStore.createIndex('channelId', 'channelId', { unique: false });
           historyStore.createIndex('timestamp', 'timestamp', { unique: false });
+        }
+
+        // Store para favoritos
+        if (!db.objectStoreNames.contains(STORES.FAVORITES)) {
+          const favoritesStore = db.createObjectStore(STORES.FAVORITES, { keyPath: 'channelId' });
+          favoritesStore.createIndex('timestamp', 'timestamp', { unique: false });
         }
       };
     });
@@ -225,6 +232,56 @@ export const useIndexedDB = () => {
         return channels.find(ch => ch.id === sortedHistory[0].channelId);
       }
       return null;
+    },
+
+    // Favoritos
+    async getFavorites() {
+      return await dbManager.getAllFromStore(STORES.FAVORITES);
+    },
+
+    async addToFavorites(channelId, channelName, channelUrl) {
+      return await dbManager.putToStore(STORES.FAVORITES, {
+        channelId,
+        channelName,
+        channelUrl,
+        timestamp: Date.now()
+      });
+    },
+
+    async removeFromFavorites(channelId) {
+      return await dbManager.deleteFromStore(STORES.FAVORITES, channelId);
+    },
+
+    async isFavorite(channelId) {
+      if (!dbManager.db) await dbManager.init();
+
+      return new Promise((resolve, reject) => {
+        const transaction = dbManager.db.transaction([STORES.FAVORITES], 'readonly');
+        const store = transaction.objectStore(STORES.FAVORITES);
+        const request = store.get(channelId);
+
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => resolve(!!request.result);
+      });
+    },
+
+    // Funções utilitárias para diferenciação VOD/Canais
+    async getChannelsByType(type = 'live') {
+      const allChannels = await dbManager.getAllFromStore(STORES.CHANNELS);
+      return allChannels.filter(channel => channel.type === type);
+    },
+
+    async getChannelsStats() {
+      const allChannels = await dbManager.getAllFromStore(STORES.CHANNELS);
+      const live = allChannels.filter(ch => ch.type === 'live').length;
+      const vod = allChannels.filter(ch => ch.type === 'vod').length;
+      return { live, vod, total: allChannels.length };
+    },
+
+    // Limpeza de dados
+    async clearAllData() {
+      const promises = Object.values(STORES).map(store => dbManager.clearStore(store));
+      return await Promise.all(promises);
     }
   };
 };

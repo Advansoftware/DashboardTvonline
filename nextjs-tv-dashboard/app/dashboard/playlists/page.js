@@ -280,7 +280,7 @@ export default function PlaylistsPage() {
 
         {/* Estatísticas */}
         <Grid container spacing={3} sx={{ mb: 4 }}>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <Card>
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -300,7 +300,7 @@ export default function PlaylistsPage() {
             </Card>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <Card>
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -320,7 +320,7 @@ export default function PlaylistsPage() {
             </Card>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <Card>
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -340,7 +340,7 @@ export default function PlaylistsPage() {
             </Card>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <Card>
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -364,8 +364,8 @@ export default function PlaylistsPage() {
         {/* Filtros e Controles */}
         <Card sx={{ mb: 3 }}>
           <CardContent>
-            <Grid container spacing={2} alignItems="center">
-              <Grid item xs={12} md={4}>
+            <Grid container spacing={2}>
+              <Grid size={{ xs: 12, md: 4 }}>
                 <TextField
                   fullWidth
                   placeholder="Buscar playlists..."
@@ -373,7 +373,7 @@ export default function PlaylistsPage() {
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </Grid>
-              <Grid item xs={12} md={3}>
+              <Grid size={{ xs: 12, md: 3 }}>
                 <FormControl fullWidth>
                   <InputLabel>Status</InputLabel>
                   <Select
@@ -388,7 +388,7 @@ export default function PlaylistsPage() {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={12} md={3}>
+              <Grid size={{ xs: 12, md: 3 }}>
                 <FormControl fullWidth>
                   <InputLabel>Ordenar por</InputLabel>
                   <Select
@@ -403,7 +403,7 @@ export default function PlaylistsPage() {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={12} md={2}>
+              <Grid size={{ xs: 12, md: 2 }}>
                 <Button
                   fullWidth
                   variant="outlined"

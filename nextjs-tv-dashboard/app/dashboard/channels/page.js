@@ -243,8 +243,8 @@ export default function ChannelsPage() {
         {/* Filtros e Controles */}
         <Card sx={{ mb: 3 }}>
           <CardContent>
-            <Grid container spacing={2} alignItems="center">
-              <Grid item xs={12} md={4}>
+            <Grid container spacing={2}>
+              <Grid size={{ xs: 12, md: 4 }}>
                 <TextField
                   fullWidth
                   placeholder="Buscar canais..."
@@ -259,7 +259,7 @@ export default function ChannelsPage() {
                   }}
                 />
               </Grid>
-              <Grid item xs={12} md={3}>
+              <Grid size={{ xs: 12, md: 3 }}>
                 <FormControl fullWidth>
                   <InputLabel>Grupo</InputLabel>
                   <Select
@@ -274,7 +274,7 @@ export default function ChannelsPage() {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={12} md={5}>
+              <Grid size={{ xs: 12, md: 5 }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <Tabs
                     value={currentTab}

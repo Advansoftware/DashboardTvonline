@@ -163,7 +163,12 @@ export default function UploadPage() {
         const parsedChannels = parseM3U8List(content);
         setPreviewChannels(parsedChannels);
         setShowPreview(true);
-        setSuccess(`${parsedChannels.length} canais encontrados na playlist`);
+
+        // Contar VOD vs Canais
+        const liveChannels = parsedChannels.filter(ch => ch.type === 'live').length;
+        const vodChannels = parsedChannels.filter(ch => ch.type === 'vod').length;
+
+        setSuccess(`${parsedChannels.length} itens encontrados: ${liveChannels} canais TV e ${vodChannels} VODs`);
       } catch (parseError) {
         setError('Conteúdo carregado, mas erro ao fazer parse: ' + parseError.message);
       }
@@ -210,6 +215,120 @@ export default function UploadPage() {
     reader.readAsText(file);
   };
 
+  const handleLoadAndSave = async () => {
+    if (!playlistUrl.trim()) {
+      setError('Por favor, insira uma URL válida');
+      return;
+    }
+
+    if (!playlistName.trim()) {
+      setError('Por favor, insira um nome para a playlist');
+      return;
+    }
+
+    setIsLoading(true);
+    setError('');
+    setSuccess('');
+
+    try {
+      // Carregar playlist da URL
+      const response = await fetch(playlistUrl);
+      if (!response.ok) {
+        throw new Error(`Erro HTTP: ${response.status}`);
+      }
+
+      const content = await response.text();
+
+      // Fazer parse dos canais
+      const parsedChannels = parseM3U8List(content);
+      if (parsedChannels.length === 0) {
+        setError('Nenhum canal encontrado na URL');
+        return;
+      }
+
+      // Verificar se já existe playlist com mesmo nome
+      const existingPlaylist = playlists.find(p => p.name === playlistName);
+      if (existingPlaylist && !overwriteExisting) {
+        setError('Já existe uma playlist com este nome. Marque "Sobrescrever" para substituir.');
+        return;
+      }
+
+      // Adicionar IDs únicos e metadata
+      const playlistId = existingPlaylist?.id || `playlist_${Date.now()}`;
+      const channelsWithIds = parsedChannels.map((channel, index) => ({
+        ...channel,
+        id: `channel_${Date.now()}_${index}`,
+        playlistId,
+        addedAt: new Date().toISOString()
+      }));
+
+      // Contar VOD vs Canais
+      const liveChannels = channelsWithIds.filter(ch => ch.type === 'live').length;
+      const vodChannels = channelsWithIds.filter(ch => ch.type === 'vod').length;
+
+      // Informações da playlist
+      const playlistInfo = {
+        id: playlistId,
+        name: playlistName,
+        url: playlistUrl,
+        channelCount: channelsWithIds.length,
+        liveChannels,
+        vodChannels,
+        type: selectedFormat === 'auto' ? (playlistUrl.includes('hls') ? 'HLS' : 'M3U') : selectedFormat.toUpperCase(),
+        createdAt: existingPlaylist?.createdAt || new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        status: 'active',
+        source: 'url',
+        fileSize: content.length
+      };
+
+      // Salvar canais e playlist
+      let updatedChannels;
+      if (overwriteExisting && existingPlaylist) {
+        // Remover canais da playlist anterior
+        updatedChannels = channels.filter(ch => ch.playlistId !== playlistId);
+        updatedChannels.push(...channelsWithIds);
+      } else {
+        updatedChannels = [...channels, ...channelsWithIds];
+      }
+
+      await Promise.all([
+        saveChannels(channelsWithIds),
+        savePlaylist(playlistInfo)
+      ]);
+
+      setChannels(updatedChannels);
+      setPlaylists(prev => {
+        const filtered = prev.filter(p => p.id !== playlistId);
+        return [...filtered, playlistInfo];
+      });
+
+      // Limpar formulário
+      setPlaylistUrl('');
+      setPlaylistName('');
+      setM3u8Content('');
+      setUploadFile(null);
+      setPreviewChannels([]);
+      setShowPreview(false);
+      setError('');
+
+      setSnackbar({
+        open: true,
+        message: `Playlist "${playlistInfo.name}" carregada e salva com ${channelsWithIds.length} canais (${liveChannels} TV + ${vodChannels} VOD)!`,
+        severity: 'success'
+      });
+
+      // Resetar input de arquivo
+      const fileInput = document.getElementById('file-upload');
+      if (fileInput) fileInput.value = '';
+
+    } catch (error) {
+      setError('Erro ao carregar e salvar playlist: ' + error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleSavePlaylist = async () => {
     if (!m3u8Content.trim()) {
       setError('Nenhum conteúdo para salvar');
@@ -247,12 +366,18 @@ export default function UploadPage() {
         addedAt: new Date().toISOString()
       }));
 
+      // Contar VOD vs Canais
+      const liveChannels = channelsWithIds.filter(ch => ch.type === 'live').length;
+      const vodChannels = channelsWithIds.filter(ch => ch.type === 'vod').length;
+
       // Informações da playlist
       const playlistInfo = {
         id: playlistId,
         name: playlistName,
         url: playlistUrl || 'upload',
         channelCount: channelsWithIds.length,
+        liveChannels,
+        vodChannels,
         type: selectedFormat === 'auto' ? (playlistUrl.includes('hls') ? 'HLS' : 'M3U') : selectedFormat.toUpperCase(),
         createdAt: existingPlaylist?.createdAt || new Date().toISOString(),
         updatedAt: new Date().toISOString(),
@@ -475,12 +600,12 @@ export default function UploadPage() {
 
                 <Button
                   variant="contained"
-                  onClick={handleUrlLoad}
-                  disabled={isLoading || !playlistUrl.trim()}
-                  startIcon={<Download />}
+                  onClick={handleLoadAndSave}
+                  disabled={isLoading || !playlistUrl.trim() || !playlistName.trim()}
+                  startIcon={<Add />}
                   size="large"
                 >
-                  {isLoading ? 'Carregando...' : 'Carregar Playlist'}
+                  {isLoading ? 'Salvando...' : 'Carregar e Salvar Playlist'}
                 </Button>
               </Stack>
             </CardContent>

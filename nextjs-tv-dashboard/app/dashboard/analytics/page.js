@@ -248,7 +248,7 @@ export default function AnalyticsPage() {
 
         {/* Cards de Estatísticas Principais */}
         <Grid container spacing={3} sx={{ mb: 4 }}>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <Card>
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -274,7 +274,7 @@ export default function AnalyticsPage() {
             </Card>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <Card>
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -460,7 +460,7 @@ export default function AnalyticsPage() {
           </Grid>
 
           {/* Uso Diário */}
-          <Grid item xs={12} md={8}>
+          <Grid size={{ xs: 12, md: 8 }}>
             <Card>
               <CardContent>
                 <Typography variant="h6" gutterBottom sx={{ fontWeight: 600 }}>
@@ -505,7 +505,7 @@ export default function AnalyticsPage() {
           </Grid>
 
           {/* Atividade Recente */}
-          <Grid item xs={12} md={4}>
+          <Grid size={{ xs: 12, md: 4 }}>
             <Card>
               <CardContent>
                 <Typography variant="h6" gutterBottom sx={{ fontWeight: 600 }}>
@@ -542,7 +542,7 @@ export default function AnalyticsPage() {
 
           {/* Canal Mais Popular */}
           {stats.mostWatchedChannel && (
-            <Grid item xs={12}>
+            <Grid size={{ xs: 12 }}>
               <Card sx={{ bgcolor: 'primary.50', border: 1, borderColor: 'primary.200' }}>
                 <CardContent>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
