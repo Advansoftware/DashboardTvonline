@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { Box, CircularProgress, ThemeProvider, CssBaseline } from '@mui/material';
-import TVInterface from '../src/components/TVInterface';
+import { useRouter } from 'next/navigation';
 import TVHomeInterface from '../src/components/TVHomeInterface';
 import OptimizedTVHomeInterface from '../src/components/OptimizedTVHomeInterface';
 import { useOptimizedIndexedDB } from '../src/hooks/useOptimizedIndexedDB';
@@ -12,11 +12,10 @@ import { darkTheme } from '../src/theme/theme';
 const OPTIMIZATION_THRESHOLD = 1000;
 
 export default function Home() {
+  const router = useRouter();
   const [channels, setChannels] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
-  const [showTVInterface, setShowTVInterface] = useState(false);
-  const [selectedChannel, setSelectedChannel] = useState(null);
   const { isReady, getChannels, saveChannels } = useOptimizedIndexedDB();
 
   // Garantir hidratação correta
@@ -51,17 +50,26 @@ export default function Home() {
 
   // Handlers
   const handleChannelSelect = (channel) => {
-    setSelectedChannel(channel);
-    setShowTVInterface(true);
+    console.log('Selecionando canal:', channel);
+    try {
+      if (!channel) {
+        console.error('Canal inválido recebido:', channel);
+        return;
+      }
+
+      // Navegar para rota do player usando Next.js router
+      const channelId = encodeURIComponent(channel.id);
+      router.push(`/tv/${channelId}`);
+    } catch (error) {
+      console.error('Erro ao selecionar canal:', error);
+    }
   };
 
   const handleStartTV = () => {
-    setShowTVInterface(true);
-  };
-
-  const handleBackToHome = () => {
-    setShowTVInterface(false);
-    setSelectedChannel(null);
+    // Navegar para primeiro canal disponível
+    if (channels.length > 0) {
+      handleChannelSelect(channels[0]);
+    }
   };
 
   // Loading state
@@ -82,17 +90,6 @@ export default function Home() {
           <CircularProgress size={60} />
         </Box>
       </ThemeProvider>
-    );
-  }
-
-  // Show TV Interface
-  if (showTVInterface) {
-    return (
-      <TVInterface
-        channels={channels}
-        initialChannel={selectedChannel}
-        onBack={handleBackToHome}
-      />
     );
   }
 

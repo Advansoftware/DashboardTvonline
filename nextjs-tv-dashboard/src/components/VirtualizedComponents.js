@@ -57,7 +57,20 @@ export const VirtualizedChannelGrid = ({
   const theme = useTheme();
   const gridRef = useRef();
 
-  const columnCount = Math.floor(window.innerWidth / itemWidth) || 4;
+  const [columnCount, setColumnCount] = useState(4);
+
+  useEffect(() => {
+    const calculateColumns = () => {
+      if (typeof window !== 'undefined') {
+        const columns = Math.floor(window.innerWidth / itemWidth) || 4;
+        setColumnCount(columns);
+      }
+    };
+
+    calculateColumns();
+    window.addEventListener('resize', calculateColumns);
+    return () => window.removeEventListener('resize', calculateColumns);
+  }, [itemWidth]);
   const rowCount = Math.ceil(channels.length / columnCount);
 
   const Cell = useCallback(({ columnIndex, rowIndex, style }) => {
@@ -117,6 +130,14 @@ export const VirtualizedChannelGrid = ({
         <Typography variant="h6" color="text.secondary">
           Nenhum canal encontrado
         </Typography>
+      </Box>
+    );
+  }
+
+  if (typeof window === 'undefined') {
+    return (
+      <Box sx={{ height: containerHeight, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Typography>Carregando...</Typography>
       </Box>
     );
   }

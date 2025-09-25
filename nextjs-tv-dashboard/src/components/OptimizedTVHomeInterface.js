@@ -284,7 +284,9 @@ export default function OptimizedTVHomeInterface({
     return { live, vod, favorites: favCount, total: totalChannels };
   }, [channels, favorites, totalChannels]);
 
-  const favoriteIds = new Set(favorites.map(fav => fav.channelId));
+  const favoriteIds = useMemo(() => {
+    return new Set(favorites.map(fav => fav.channelId));
+  }, [favorites]);
 
   // Toggle favorito otimizado
   const handleToggleFavorite = useCallback(async (channel, event) => {
@@ -331,7 +333,7 @@ export default function OptimizedTVHomeInterface({
             zIndex: 2
           }
         }}
-        onClick={() => onChannelSelect(channel)}
+        onClick={() => onChannelSelect?.(channel)}
         onMouseEnter={() => setHoveredChannel(channel.id)}
         onMouseLeave={() => setHoveredChannel(null)}
       >
@@ -366,7 +368,10 @@ export default function OptimizedTVHomeInterface({
             <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
               <IconButton
                 size="small"
-                onClick={(e) => handleToggleFavorite(channel, e)}
+                onClick={(e) => {
+                  e.stopPropagation(); // Impede que o clique se propague para o container pai
+                  handleToggleFavorite(channel, e);
+                }}
                 sx={{
                   backgroundColor: alpha('#fff', 0.9),
                   '&:hover': {
@@ -385,6 +390,13 @@ export default function OptimizedTVHomeInterface({
             {/* Botão de play */}
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
               <IconButton
+                onClick={(e) => {
+                  e.stopPropagation(); // Impede propagação
+                  console.log('Clique no botão play do canal:', channel);
+                  if (onChannelSelect && channel) {
+                    onChannelSelect(channel);
+                  }
+                }}
                 sx={{
                   backgroundColor: alpha(theme.palette.primary.main, 0.9),
                   color: 'white',
@@ -598,7 +610,7 @@ export default function OptimizedTVHomeInterface({
               Tente ajustar os filtros ou termos de busca
             </Typography>
           </Box>
-        ) : useVirtualization && channels.length > 48 ? (
+        ) : useVirtualization && channels.length > 100 ? (
           <VirtualizedChannelGrid
             channels={channels}
             onChannelSelect={onChannelSelect}

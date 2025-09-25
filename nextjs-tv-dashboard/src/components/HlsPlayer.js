@@ -26,7 +26,8 @@ const HlsPlayer = ({
   autoPlay = false,
   controls = true,
   width = '100%',
-  height = 'auto'
+  height = 'auto',
+  onError = null
 }) => {
   const videoRef = useRef(null);
   const hlsRef = useRef(null);
@@ -70,20 +71,53 @@ const HlsPlayer = ({
         console.log('HLS: Manifest parsed');
         setIsLoading(false);
         if (autoPlay) {
-          video.play().catch(console.error);
+          video.play().catch((error) => {
+            console.warn('Autoplay bloqueado pelo navegador - requer interação do usuário:', error);
+          });
         }
       });
 
       hls.on(Hls.Events.ERROR, (event, data) => {
         console.error('HLS Error:', data);
         if (data.fatal) {
-          setError(`Erro ao carregar stream: ${data.details}`);
+          let errorMessage = 'Erro desconhecido';
+          switch (data.details) {
+            case 'manifestParsingError':
+              errorMessage = 'URL do stream inválida ou inacessível';
+              break;
+            case 'networkError':
+              errorMessage = 'Erro de conexão com o stream';
+              break;
+            case 'mediaError':
+              errorMessage = 'Erro no formato do vídeo';
+              break;
+            default:
+              errorMessage = `Erro no stream: ${data.details}`;
+          }
+          setError(errorMessage);
           setIsLoading(false);
+          if (onError) onError(errorMessage);
         }
       });
 
+      // Validar URL antes de carregar
+      if (!url || typeof url !== 'string' || !url.trim()) {
+        setError('URL do stream não fornecida');
+        setIsLoading(false);
+        if (onError) onError('URL do stream não fornecida');
+        return;
+      }
+
       hls.attachMedia(video);
-      hls.loadSource(url);
+
+      try {
+        hls.loadSource(url);
+      } catch (error) {
+        console.error('Erro ao carregar URL:', error);
+        setError('URL do stream inválida');
+        setIsLoading(false);
+        if (onError) onError('URL do stream inválida');
+      }
 
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
       // Safari suporte nativo
@@ -92,6 +126,7 @@ const HlsPlayer = ({
     } else {
       setError('Navegador não suporta reprodução HLS');
       setIsLoading(false);
+      if (onError) onError('Navegador não suporta reprodução HLS');
     }
 
     // Event listeners do vídeo
@@ -102,8 +137,10 @@ const HlsPlayer = ({
     const handleTimeUpdate = () => setCurrentTime(video.currentTime);
     const handleDurationChange = () => setDuration(video.duration);
     const handleError = (e) => {
-      setError('Erro ao carregar vídeo');
+      const errorMsg = 'Erro ao carregar vídeo';
+      setError(errorMsg);
       setIsLoading(false);
+      if (onError) onError(errorMsg);
     };
 
     video.addEventListener('play', handlePlay);
@@ -136,7 +173,9 @@ const HlsPlayer = ({
     if (isPlaying) {
       video.pause();
     } else {
-      video.play().catch(console.error);
+      video.play().catch((error) => {
+        console.warn('Play manual bloqueado - requer interação do usuário:', error);
+      });
     }
   };
 

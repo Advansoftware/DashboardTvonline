@@ -45,6 +45,7 @@ const TVInterface = ({ channels = [], initialChannel = null, onBack = null }) =>
   const [showChannelBar, setShowChannelBar] = useState(false);
   const [showChannelSelector, setShowChannelSelector] = useState(false);
   const [favorites, setFavorites] = useState([]);
+  const [hasUserInteracted, setHasUserInteracted] = useState(false);
 
   const controlsTimeoutRef = useRef(null);
   const channelBarTimeoutRef = useRef(null);
@@ -95,6 +96,27 @@ const TVInterface = ({ channels = [], initialChannel = null, onBack = null }) =>
     }
   }, [isReady, channels, initialChannel, getHistory, getFavorites]);
 
+  // Efeito para capturar primeira interação do usuário
+  useEffect(() => {
+    const handleUserInteraction = () => {
+      if (!hasUserInteracted) {
+        setHasUserInteracted(true);
+        console.log('🎯 Primeira interação detectada - autoplay habilitado');
+      }
+    };
+
+    // Adicionar listeners para vários tipos de interação
+    document.addEventListener('click', handleUserInteraction, { once: true });
+    document.addEventListener('keydown', handleUserInteraction, { once: true });
+    document.addEventListener('touchstart', handleUserInteraction, { once: true });
+
+    return () => {
+      document.removeEventListener('click', handleUserInteraction);
+      document.removeEventListener('keydown', handleUserInteraction);
+      document.removeEventListener('touchstart', handleUserInteraction);
+    };
+  }, [hasUserInteracted]);
+
   // Mostrar controles temporariamente
   const showControlsTemporarily = useCallback(() => {
     setShowControls(true);
@@ -136,7 +158,36 @@ const TVInterface = ({ channels = [], initialChannel = null, onBack = null }) =>
     }
 
     showChannelBarTemporarily();
+
+    // Tentar reproduzir automaticamente após um pequeno delay
+    setTimeout(() => {
+      if (playerRef.current) {
+        const video = playerRef.current.querySelector('video');
+        if (video && video.paused) {
+          video.play().catch((error) => {
+            console.log('Autoplay bloqueado pelo navegador:', error.message);
+          });
+        }
+      }
+    }, 1000);
   }, [channels, currentChannelIndex, isReady, addToHistory, showChannelBarTemporarily]);
+
+  // Iniciar reprodução manual
+  const handlePlayClick = useCallback(() => {
+    if (playerRef.current) {
+      // Tentar reproduzir o vídeo
+      const video = playerRef.current.querySelector('video');
+      if (video) {
+        video.play()
+          .then(() => {
+            console.log('Vídeo iniciado com sucesso');
+          })
+          .catch((error) => {
+            console.error('Erro ao iniciar reprodução:', error);
+          });
+      }
+    }
+  }, []);
 
   // Controles de teclado
   useEffect(() => {
@@ -230,6 +281,13 @@ const TVInterface = ({ channels = [], initialChannel = null, onBack = null }) =>
       showChannelBarTemporarily();
     }
   }, [channels, isReady, addToHistory, showChannelBarTemporarily]);
+
+  // Função para lidar com primeira interação do usuário
+  const handleFirstInteraction = useCallback(() => {
+    if (!hasUserInteracted) {
+      setHasUserInteracted(true);
+    }
+  }, [hasUserInteracted]);
 
   // Toggle favorito
   const handleToggleFavorite = useCallback(async (channel) => {
@@ -327,12 +385,14 @@ const TVInterface = ({ channels = [], initialChannel = null, onBack = null }) =>
           ref={playerRef}
           url={currentChannel.url}
           title={currentChannel.name}
-          autoPlay
+          autoPlay={true}
           controls={false}
           width="100%"
           height="100vh"
           contentType={currentChannel.type === 'vod' ? 'vod' : null}
         />
+
+
 
         {/* Barra de canais */}
         <Fade in={showChannelBar} timeout={300}>

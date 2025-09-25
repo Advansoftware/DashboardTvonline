@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
   Box,
   Typography,
@@ -59,7 +59,8 @@ const NativeVideoPlayer = ({
   autoPlay = false,
   controls = true,
   width = '100%',
-  height = 'auto'
+  height = 'auto',
+  onError = null
 }) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -68,7 +69,9 @@ const NativeVideoPlayer = ({
   const handleLoadedData = () => setIsLoading(false);
   const handleError = (e) => {
     setIsLoading(false);
-    setError(`Erro ao carregar vídeo: ${e.target.error?.message || 'Formato não suportado'}`);
+    const errorMsg = `Erro ao carregar vídeo: ${e.target.error?.message || 'Formato não suportado'}`;
+    setError(errorMsg);
+    if (onError) onError(errorMsg);
   };
 
   return (
@@ -135,6 +138,8 @@ const UniversalPlayer = ({
   const theme = useTheme();
   const [detectedType, setDetectedType] = useState('unknown');
   const [isDetecting, setIsDetecting] = useState(true);
+  const [hasError, setHasError] = useState(false);
+  const [fallbackMode, setFallbackMode] = useState(false);
 
   useEffect(() => {
     if (!url) {
@@ -154,6 +159,18 @@ const UniversalPlayer = ({
     console.log(`🎯 Tipo detectado: ${type}`);
 
   }, [url, contentType]);
+
+  // Função para lidar com erros e tentar fallback
+  const handlePlayerError = useCallback((error) => {
+    console.error('Erro no player:', error);
+    setHasError(true);
+
+    if (!fallbackMode && detectedType === 'hls') {
+      console.log('🔄 Tentando fallback para player nativo...');
+      setFallbackMode(true);
+      setDetectedType('video');
+    }
+  }, [fallbackMode, detectedType]);
 
   if (isDetecting) {
     return (
@@ -183,6 +200,38 @@ const UniversalPlayer = ({
   }
 
   // Renderizar player baseado no tipo detectado
+  if (hasError && !fallbackMode) {
+    return (
+      <Alert severity="error" sx={{ m: 2 }}>
+        ❌ Stream indisponível
+        <br />
+        <Typography variant="caption">
+          Não foi possível carregar: {title || url}
+        </Typography>
+      </Alert>
+    );
+  }
+
+  if (fallbackMode) {
+    return (
+      <Box sx={{ position: 'relative' }}>
+        <Alert severity="warning" sx={{ mb: 1 }}>
+          ⚠️ Modo Fallback - Usando player nativo
+        </Alert>
+        <NativeVideoPlayer
+          url={url}
+          title={title}
+          poster={poster}
+          autoPlay={autoPlay}
+          controls={controls}
+          width={width}
+          height={height}
+          onError={handlePlayerError}
+        />
+      </Box>
+    );
+  }
+
   switch (detectedType) {
     case 'hls':
       return (
@@ -194,6 +243,7 @@ const UniversalPlayer = ({
           controls={controls}
           width={width}
           height={height}
+          onError={handlePlayerError}
         />
       );
 
@@ -213,6 +263,7 @@ const UniversalPlayer = ({
             controls={controls}
             width={width}
             height={height}
+            onError={handlePlayerError}
           />
         </>
       );
@@ -242,6 +293,7 @@ const UniversalPlayer = ({
             controls={controls}
             width={width}
             height={height}
+            onError={handlePlayerError}
           />
         </Box>
       );
