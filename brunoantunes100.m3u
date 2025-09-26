@@ -1,6 +1,0 @@
-#EXTM3U
-
-#PLAYLISTV: pltv-logo="https://minhalista-files.nyc3.digitaloceanspaces.com/iptv-list.jpg" pltv-name="Bruno" pltv-description="Lista IPTV" pltv-cover="https://minhalista-files.nyc3.digitaloceanspaces.com/iptv-list.jpg" pltv-author="Bruno" pltv-email="brunoantunes100@gmail.com"
-
-#EXTINF:-1 tvg-id="" tvg-logo="https://minhalista-files.nyc3.digitaloceanspaces.com/iptv-list.jpg" group-title="Desenhos 24 Horas",SpongeBob Squarepants Dublado
-http://maxptv.ddns.net:25461/live/MA020/0706/147.ts
