@@ -1,1 +1,0 @@
-http://atmosbr.online:80/get.php?username={27975757}&password={52609276}&type=m3u_plus&output=m3u8
