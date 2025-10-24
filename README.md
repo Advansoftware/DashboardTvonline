@@ -1,10 +1,25 @@
 # TV Dashboard - IPTV Player & Manager
 
+<<<<<<< HEAD
+Um dashboard moderno e completo para gerenciamento e reprodução de canais IPTV com suporte a listas M3U8, desenvolvido com Next.js, Material-UI e tema Material You personalizado.
+=======
 Um dashboard moderno e completo para gerenciamento e reprodução de canais IPTV, desenvolvido com Next.js 15, Material-UI v7 e React 19. Suporte nativo a streams HLS/M3U8 com interface otimizada inspirada em plataformas de streaming.
+>>>>>>> 5cdc455 (feat: Atualizar README.md com documentação completa do projeto)
 
 ## 🚀 Características
 
 ### 🎯 Funcionalidades Principais
+<<<<<<< HEAD
+- **Player HLS Avançado**: Reprodução de streams M3U8 com controles personalizados
+- **Interface Netflix-style**: Grid de canais com design moderno inspirado em serviços de streaming
+- **Dashboard Administrativo**: Gerenciamento completo de playlists e canais
+- **Tema Material You**: Interface moderna com suporte a modo claro/escuro
+- **Responsivo**: Funciona perfeitamente em desktops, tablets e dispositivos móveis
+- **Upload de Listas**: Importação fácil de listas M3U8 via URL
+- **Categorização**: Organização automática de canais por grupos
+- **Busca e Filtros**: Sistema de pesquisa e filtros por categoria
+- **Estatísticas**: Dashboard com métricas de uso e performance
+=======
 - **Player HLS Universal**: Reprodução otimizada de streams M3U8 com HLS.js
 - **Interface Streaming Moderna**: Design inspirado no Globoplay e Netflix
 - **Dashboard Administrativo**: Gerenciamento completo de playlists e canais
@@ -14,6 +29,7 @@ Um dashboard moderno e completo para gerenciamento e reprodução de canais IPTV
 - **Responsive Design**: Interface totalmente responsiva para todos os dispositivos
 - **Upload de Listas**: Importação de listas M3U8 via URL ou arquivo
 - **Analytics**: Estatísticas de uso e performance em tempo real
+>>>>>>> 5cdc455 (feat: Atualizar README.md com documentação completa do projeto)
 
 ### 🎨 Design e UI/UX
 - **Material You Design System**: Tema personalizado seguindo as diretrizes do Google

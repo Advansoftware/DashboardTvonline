@@ -86,14 +86,30 @@ const StreamingHomeInterface = ({ channels = [], onChannelSelect, onNavigateToDa
         const recentChList = recentChannelIds
           .map(id => channels.find(ch => ch.id === id))
           .filter(Boolean);
-        setRecentChannels(recentChList);
+
+        // Remover duplicatas por ID
+        const uniqueRecentChannels = recentChList.reduce((acc, channel) => {
+          if (!acc.some(ch => ch.id === channel.id)) {
+            acc.push(channel);
+          }
+          return acc;
+        }, []);
+        setRecentChannels(uniqueRecentChannels);
 
         // Canais favoritos
         const favoriteChList = savedFavorites
           .map(fav => channels.find(ch => ch.id === fav.channelId))
           .filter(Boolean)
           .slice(0, 8);
-        setFavoriteChannels(favoriteChList);
+
+        // Remover duplicatas por ID
+        const uniqueFavoriteChannels = favoriteChList.reduce((acc, channel) => {
+          if (!acc.some(ch => ch.id === channel.id)) {
+            acc.push(channel);
+          }
+          return acc;
+        }, []);
+        setFavoriteChannels(uniqueFavoriteChannels);
 
       } catch (error) {
         console.error('Erro ao carregar dados:', error);
@@ -122,7 +138,15 @@ const StreamingHomeInterface = ({ channels = [], onChannelSelect, onNavigateToDa
 
   // Filtrar e pesquisar canais
   useEffect(() => {
-    let filtered = channels;
+    // Remover duplicatas por ID (caso existam)
+    const uniqueChannels = channels.reduce((acc, channel) => {
+      if (!acc.some(ch => ch.id === channel.id)) {
+        acc.push(channel);
+      }
+      return acc;
+    }, []);
+
+    let filtered = uniqueChannels;
 
     // Filtro por pesquisa
     if (searchTerm) {

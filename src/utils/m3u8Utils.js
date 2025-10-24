@@ -98,9 +98,11 @@ export const parseM3U8List = (content) => {
 
   const channels = [];
   const listaEmArray = lista.match(/EXTINF([\S\s]*?)SENYDE/g);
+  let channelCounter = 0; // Contador para garantir IDs únicos
 
   if (listaEmArray) {
     listaEmArray.forEach((ch) => {
+      channelCounter++;
       let img = null;
       const logoMatch = ch.match(/tvg-logo="([\S\s]*?)"/i);
       if (logoMatch) {
@@ -140,7 +142,7 @@ export const parseM3U8List = (content) => {
           url: link, // Alias para compatibilidade
           type: type, // 'live' para canais de TV, 'vod' para filmes/séries
           format: format, // 'hls', 'vod', 'dash', 'unknown'
-          id: `${nome.trim()}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+          id: `channel_${Date.now()}_${channelCounter}_${Math.random().toString(36).substr(2, 9)}`,
           addedAt: new Date().toISOString()
         });
       }
